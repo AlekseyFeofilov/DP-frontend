@@ -59,6 +59,16 @@
       "style": "less",
       "standalone": true,
       "changeDetection": "OnPush",
+      "skipTests": true,
+      "prefix": "dp"
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "prefix": "dp",
+      "style": "less",
+      "standalone": true,
+      "changeDetection": "OnPush",
       "skipTests": true
     }
   }

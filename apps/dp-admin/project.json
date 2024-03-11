@@ -1,39 +1,33 @@
 {
-  "name": "bank-employee",
+  "name": "dp-admin",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "bank-employee",
-  "sourceRoot": "apps/bank-employee/src",
+  "prefix": "dp-admin",
+  "sourceRoot": "apps/dp-admin/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/bank-employee",
-        "index": "apps/bank-employee/src/index.html",
-        "main": "apps/bank-employee/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
-        "tsConfig": "apps/bank-employee/tsconfig.app.json",
+        "outputPath": "dist/apps/dp-admin",
+        "index": "apps/dp-admin/src/index.html",
+        "main": "apps/dp-admin/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/dp-admin/tsconfig.app.json",
         "inlineStyleLanguage": "less",
         "assets": [
-          "apps/bank-employee/src/favicon.ico",
-          "apps/bank-employee/src/assets",
           {
             "glob": "**/*",
             "input": "node_modules/@taiga-ui/icons/src",
             "output": "assets/taiga-ui/icons"
-          }
+          },
+          "apps/dp-admin/src/assets"
         ],
         "styles": [
           "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
           "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
-          "node_modules/@taiga-ui/styles/taiga-ui-global.less",
-          "apps/bank-employee/src/styles.less"
+          "apps/dp-admin/src/styles.less"
         ],
         "scripts": []
       },
@@ -68,10 +62,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "bank-employee:build:production"
+          "buildTarget": "dp-admin:build:production"
         },
         "development": {
-          "buildTarget": "bank-employee:build:development"
+          "buildTarget": "dp-admin:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -79,13 +73,13 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "bank-employee:build"
+        "buildTarget": "dp-admin:build"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "bank-employee:build"
+        "buildTarget": "dp-admin:build"
       }
     }
   }

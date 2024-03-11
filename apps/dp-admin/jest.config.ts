@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'bank-employee',
+  displayName: 'dp-admin',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/bank-employee',
+  coverageDirectory: '../../coverage/apps/dp-admin',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
