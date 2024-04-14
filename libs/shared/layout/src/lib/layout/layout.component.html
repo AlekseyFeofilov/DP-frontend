@@ -1,0 +1,34 @@
+<aside class="sidebar">
+  <div class="sidebar__logo">DP</div>
+  <div class="sidebar__nav">
+    <div>
+      @for (item of items; track $index) {
+        <div
+          class="sidebar__nav__item"
+          [routerLink]="item.path"
+          routerLinkActive="sidebar__nav__item_active"
+        >
+          <tui-svg [src]="item.icon"></tui-svg>{{ item.name }}
+        </div>
+      }
+    </div>
+    <div>
+      <div class="sidebar__nav__item">
+        <tui-svg src="tuiIconLogOutLarge"></tui-svg>Выйти
+      </div>
+    </div>
+  </div>
+</aside>
+
+<header class="header">
+  <a
+    icon="tuiIconArrowLeftCircleLarge"
+    tuiLink
+    tuiMode="onLight"
+    routerLink=".."
+  ></a>
+</header>
+
+<main class="content">
+  <ng-content></ng-content>
+</main>

@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
+      "@dp/admin/shell": ["libs/admin/shell/src/index.ts"],
+      "@dp/shared/layout": ["libs/shared/layout/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
