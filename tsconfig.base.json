@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dp/admin/company/pages": ["libs/admin/company/pages/src/index.ts"],
+      "@dp/admin/company/shell": ["libs/admin/company/shell/src/index.ts"],
+      "@dp/admin/company/ui": ["libs/admin/company/ui/src/index.ts"],
       "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
       "@dp/admin/shell": ["libs/admin/shell/src/index.ts"],
       "@dp/shared/layout": ["libs/shared/layout/src/index.ts"]

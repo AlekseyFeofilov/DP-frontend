@@ -1,23 +1,24 @@
 import { NavigationItem } from '@dp/shared/layout';
+import { PATH_NAME } from './routes';
 
 export const SIDEBAR_NAVIGATION: ReadonlyArray<NavigationItem> = [
   {
-    path: '',
+    path: PATH_NAME.home,
     name: 'Главная',
     icon: 'tuiIconHomeLarge',
   },
   {
-    path: '',
+    path: PATH_NAME.practiceDiary,
     name: 'Дневники практики',
     icon: 'tuiIconFileTextLarge',
   },
   {
-    path: '',
+    path: PATH_NAME.employment,
     name: 'Трудоустройства',
     icon: 'tuiIconClipboardLarge',
   },
   {
-    path: '',
+    path: PATH_NAME.company,
     name: 'Компании',
     icon: 'tuiIconBriefcaseLarge',
   },

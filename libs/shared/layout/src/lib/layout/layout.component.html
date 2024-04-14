@@ -5,8 +5,9 @@
       @for (item of items; track $index) {
         <div
           class="sidebar__nav__item"
-          [routerLink]="item.path"
           routerLinkActive="sidebar__nav__item_active"
+          [routerLink]="item.path"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           <tui-svg [src]="item.icon"></tui-svg>{{ item.name }}
         </div>

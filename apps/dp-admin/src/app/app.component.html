@@ -1,5 +1,7 @@
 <tui-root>
-  <dp-layout [items]="navigationItems"></dp-layout>
+  <dp-layout [items]="navigationItems"
+    ><router-outlet></router-outlet
+  ></dp-layout>
 
   <ng-container ngProjectAs="tuiOverContent">
     <!-- Content over app content -->
