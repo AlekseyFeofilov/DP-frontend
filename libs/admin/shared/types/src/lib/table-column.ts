@@ -4,4 +4,5 @@ export interface TableColumn {
   property: string;
   title: string | null;
   sorter: TuiComparator<any> | null;
+  colSpan?: number | null;
 }

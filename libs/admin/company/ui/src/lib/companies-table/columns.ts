@@ -1,6 +1,6 @@
 import { TableColumn } from '@dp/admin/shared/types';
 
-export const columns: ReadonlyArray<TableColumn> = [
+export const COLUMNS: ReadonlyArray<TableColumn> = [
   {
     property: 'name',
     title: 'Название',

@@ -1,0 +1,50 @@
+@import 'mixins/table';
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+.table {
+  .table();
+
+  [tuiTr] {
+    cursor: pointer;
+
+    td {
+      background: var(--tui-base-02);
+      border-top: 1px solid var(--tui-base-04);
+    }
+
+    &:hover,
+    &.open {
+      td {
+        background: var(--tui-base-04);
+      }
+    }
+
+    &.open .arrow {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.empty-row {
+  visibility: hidden;
+
+  [tuiTd] {
+    width: 200px;
+  }
+}
+
+.employment {
+  * {
+    font-weight: bold;
+  }
+
+  &__status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__approve {
+    font: var(--tui-font-text-s) !important;
+  }
+}

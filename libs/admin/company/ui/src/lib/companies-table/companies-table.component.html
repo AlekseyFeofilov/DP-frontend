@@ -1,4 +1,4 @@
-<table tuiTable [columns]="columnProperties">
+<table tuiTable [columns]="columnProperties" class="table">
   <thead>
     <tr tuiThGroup>
       @for (column of columns; track column.property) {
@@ -32,13 +32,13 @@
 
   <tfoot>
     <tr>
-      <td [colSpan]="columns.length">
+      <th [colSpan]="columns.length">
         <tui-table-pagination
-          class="tui-space_top-4"
+          class="tui-space_top-10"
           [total]="100"
           (pageChange)="onPage($event)"
         ></tui-table-pagination>
-      </td>
+      </th>
     </tr>
   </tfoot>
 </table>

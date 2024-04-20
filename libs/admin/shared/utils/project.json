@@ -1,0 +1,9 @@
+{
+  "name": "admin-shared-utils",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/admin/shared/utils/src",
+  "prefix": "dp",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

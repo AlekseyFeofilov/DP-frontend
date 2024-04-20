@@ -9,6 +9,8 @@ import {
 import { RouterLink } from '@angular/router';
 import { Company } from '@dp/admin/company/types';
 import { PATH_NAME } from '@dp/admin/shared/consts';
+import { TableColumn } from '@dp/admin/shared/types';
+import { TableColumnDirective } from '@dp/admin/shared/utils';
 import {
   TuiTableModule,
   TuiTablePaginationModule,
@@ -16,9 +18,8 @@ import {
 import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
 import { TuiButtonModule } from '@taiga-ui/experimental';
 import { TuiTagModule } from '@taiga-ui/kit';
-import { columns } from './columns';
+import { COLUMNS } from './columns';
 import { companiesMock } from './mock';
-import { TableColumnDirective } from './teble-column.directive';
 
 @Component({
   selector: 'dp-companies-table',
@@ -42,10 +43,10 @@ export class CompaniesTableComponent {
   @ViewChildren(TableColumnDirective)
   columnTemplates?: QueryList<TableColumnDirective>;
 
-  readonly columns = columns;
+  readonly columns = COLUMNS;
   readonly companies = companiesMock;
 
-  getColumnTemplate = (column: any): TemplateRef<any> | null =>
+  getColumnTemplate = (column: TableColumn): TemplateRef<any> | null =>
     this.columnTemplates?.find(
       template => template.columnName === column.property,
     )?.templateRef || null;

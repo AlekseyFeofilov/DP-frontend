@@ -1,0 +1,9 @@
+{
+  "name": "admin-employment-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/admin/employment/ui/src",
+  "prefix": "dp",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

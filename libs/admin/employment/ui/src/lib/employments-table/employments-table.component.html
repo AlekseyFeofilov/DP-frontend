@@ -1,0 +1,135 @@
+<table tuiTable [columns]="columnProperties" class="table">
+  <thead>
+    <tr tuiThGroup>
+      @for (column of columns; track column.property) {
+        <th *tuiHead="column.property" tuiTh [sorter]="column.sorter">
+          {{ column.title }}
+        </th>
+      }
+    </tr>
+  </thead>
+
+  <tbody
+    *tuiLet="studentsWithEmployments | tuiTableSort as sortedStudents"
+    tuiTbody
+    [data]="sortedStudents"
+  >
+    @for (student of sortedStudents; track student.id) {
+      <tr tuiTr [class.open]="open" (click)="onRowClick()">
+        @for (column of columns; track column.property) {
+          <td *tuiCell="column.property" tuiTd>
+            <ng-container
+              *ngTemplateOutlet="
+                column | tuiMapper: getColumnTemplate;
+                context: { $implicit: student }
+              "
+            ></ng-container>
+          </td>
+        }
+      </tr>
+
+      @if (open) {
+        @if (student.employment; as employment) {
+          <tr class="employment">
+            <th tuiTd>1. Трудоустройство</th>
+            <th
+              tuiTd
+              class="employment__status"
+              [style.color]="
+                employment.status | tuiMapper: getEmploymentStatusColor
+              "
+            >
+              {{ employment.status }}
+
+              @if (employment.status) {
+                <button
+                  class="employment__approve"
+                  tuiButton
+                  size="xs"
+                  appearance="flat"
+                  iconLeft="tuiIconCheck"
+                >
+                  Подтвердить
+                </button>
+              }
+            </th>
+            <th tuiTd>
+              {{ employment.companyName }}
+              @if (employment.comment) {
+                <tui-tooltip [content]="employment.comment"></tui-tooltip>
+              }
+            </th>
+            <th tuiTd>{{ employment.vacancy }}</th>
+          </tr>
+        }
+
+        @for (variant of student.employmentVariants; track $index) {
+          <tr>
+            <th tuiTd>
+              {{ variant.priority + (student.employment ? 2 : 1) }}. Приоритет:
+              {{
+                variant.priority
+                  | tuiMapper
+                    : getPriorityText
+                    : student.employmentVariants.length
+              }}
+            </th>
+            <th tuiTd>
+              {{ variant.status }}
+            </th>
+            <th tuiTd>
+              {{ variant.companyName }}
+              @if (variant.comment) {
+                <tui-tooltip [content]="variant.comment"></tui-tooltip>
+              }
+            </th>
+            <th tuiTd>{{ variant.vacancy }}</th>
+          </tr>
+        }
+      }
+
+      @if ($last) {
+        <tr class="empty-row">
+          <th tuiTd></th>
+          <th tuiTd></th>
+          <th tuiTd></th>
+          <th tuiTd></th>
+        </tr>
+      }
+    }
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <th [colSpan]="columns.length">
+        <tui-table-pagination
+          [total]="100"
+          (pageChange)="onPage($event)"
+        ></tui-table-pagination>
+      </th>
+    </tr>
+  </tfoot>
+</table>
+
+<ng-template dpTableColumn="student" let-student>
+  {{ student.name }}
+</ng-template>
+
+<ng-template dpTableColumn="status" let-student>{{
+  student | tuiMapper: getCommonStatusText
+}}</ng-template>
+
+<ng-template dpTableColumn="company" let-student>
+  @if (student.employment) {
+    {{ student.employment.companyName }}
+  }
+</ng-template>
+
+<ng-template dpTableColumn="actions">
+  <tui-svg
+    class="arrow"
+    src="tuiIconChevronDownLarge"
+    tuiWrapper
+    appearance="icon"
+  ></tui-svg>
+</ng-template>

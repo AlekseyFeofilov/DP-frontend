@@ -19,8 +19,19 @@
       "@dp/admin/company/shell": ["libs/admin/company/shell/src/index.ts"],
       "@dp/admin/company/types": ["libs/admin/company/types/src/index.ts"],
       "@dp/admin/company/ui": ["libs/admin/company/ui/src/index.ts"],
+      "@dp/admin/employment/pages": [
+        "libs/admin/employment/pages/src/index.ts"
+      ],
+      "@dp/admin/employment/shell": [
+        "libs/admin/employment/shell/src/index.ts"
+      ],
+      "@dp/admin/employment/types": [
+        "libs/admin/employment/types/src/index.ts"
+      ],
+      "@dp/admin/employment/ui": ["libs/admin/employment/ui/src/index.ts"],
       "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
       "@dp/admin/shared/types": ["libs/admin/shared/types/src/index.ts"],
+      "@dp/admin/shared/utils": ["libs/admin/shared/utils/src/index.ts"],
       "@dp/admin/shell": ["libs/admin/shell/src/index.ts"],
       "@dp/shared/layout": ["libs/shared/layout/src/index.ts"],
       "@dp/shared/styles": ["libs/shared/styles/src/index.ts"],

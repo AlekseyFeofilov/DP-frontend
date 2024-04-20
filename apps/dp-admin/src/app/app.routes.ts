@@ -10,4 +10,9 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       import('@dp/admin/company/shell').then(m => m.CompanyShellModule),
   },
+  {
+    path: PATH_NAME.employment,
+    loadChildren: () =>
+      import('@dp/admin/employment/shell').then(m => m.EmploymentShellModule),
+  },
 ];
