@@ -1,5 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TuiLinkModule, TuiModeModule, TuiSvgModule } from '@taiga-ui/core';
 import { NavigationItem } from '../types/navigation-item';
@@ -19,5 +24,10 @@ import { NavigationItem } from '../types/navigation-item';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {
+  private readonly location = inject(Location);
   @Input({ required: true }) items: ReadonlyArray<NavigationItem> = [];
+
+  navigateBack(): void {
+    this.location.back();
+  }
 }

@@ -7,7 +7,7 @@
           class="sidebar__nav__item"
           routerLinkActive="sidebar__nav__item_active"
           [routerLink]="item.path"
-          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLinkActiveOptions]="{ exact: !!item.pathMatch }"
         >
           <tui-svg [src]="item.icon"></tui-svg>{{ item.name }}
         </div>
@@ -22,12 +22,12 @@
 </aside>
 
 <header class="header">
-  <a
+  <button
     icon="tuiIconArrowLeftCircleLarge"
     tuiLink
     tuiMode="onLight"
-    routerLink=".."
-  ></a>
+    (click)="navigateBack()"
+  ></button>
 </header>
 
 <main class="content">

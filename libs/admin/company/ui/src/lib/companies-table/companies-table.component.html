@@ -1,1 +1,95 @@
-<p>companies-table works!</p>
+<table tuiTable [columns]="columnProperties">
+  <thead>
+    <tr tuiThGroup>
+      @for (column of columns; track column.property) {
+        <th *tuiHead="column.property" tuiTh [sorter]="column.sorter">
+          {{ column.title }}
+        </th>
+      }
+    </tr>
+  </thead>
+
+  <tbody
+    *tuiLet="companies | tuiTableSort as sortedCompanies"
+    tuiTbody
+    [data]="sortedCompanies"
+  >
+    @for (company of sortedCompanies; track company.id) {
+      <tr tuiTr>
+        @for (column of columns; track column.property) {
+          <td *tuiCell="column.property" tuiTd>
+            <ng-container
+              *ngTemplateOutlet="
+                column | tuiMapper: getColumnTemplate;
+                context: { $implicit: company, index: $index }
+              "
+            ></ng-container>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <td [colSpan]="columns.length">
+        <tui-table-pagination
+          class="tui-space_top-4"
+          [total]="100"
+          (pageChange)="onPage($event)"
+        ></tui-table-pagination>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<ng-template dpTableColumn="name" let-company let-index="index">
+  {{ index + 1 }}. {{ company.name }}
+</ng-template>
+
+<ng-template dpTableColumn="spokesman" let-company
+  ><div>{{ company.spokesman }}</div></ng-template
+>
+
+<ng-template dpTableColumn="contact" let-company>
+  @if (company.contact) {
+    <a tuiLink>
+      {{ company.contact }}
+    </a>
+  }
+</ng-template>
+
+<ng-template dpTableColumn="vacancies" let-company>
+  @for (vacancy of company.vacancies; track $index) {
+    <tui-tag
+      class="tui-space_right-1"
+      [autoColor]="true"
+      [value]="vacancy"
+    ></tui-tag>
+  }
+</ng-template>
+
+<ng-template dpTableColumn="vacanciesNumber" let-company>
+  <div>{{ company.vacanciesNumber }}</div></ng-template
+>
+
+<ng-template dpTableColumn="actions" let-company>
+  <button
+    appearance="flat"
+    iconLeft="tuiIconTrash"
+    size="s"
+    title="Remove"
+    tuiIconButton
+    type="button"
+    class="tui-space_right-1"
+  ></button>
+
+  <a
+    appearance="flat"
+    iconLeft="tuiIconEdit"
+    size="s"
+    title="Edit"
+    tuiIconButton
+    [routerLink]="company | tuiMapper: getEditCompanyRoute"
+  ></a>
+</ng-template>

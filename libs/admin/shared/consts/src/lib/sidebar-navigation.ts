@@ -4,6 +4,7 @@ import { PATH_NAME } from './routes';
 export const SIDEBAR_NAVIGATION: ReadonlyArray<NavigationItem> = [
   {
     path: PATH_NAME.home,
+    pathMatch: 'full',
     name: 'Главная',
     icon: 'tuiIconHomeLarge',
   },

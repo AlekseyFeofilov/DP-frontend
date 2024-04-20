@@ -1,1 +1,24 @@
-<p>company-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>Название</label>
+  <tui-input formControlName="name">Введите текст</tui-input>
+
+  <label>Ответственное лицо</label>
+  <tui-input formControlName="spokesman">Введите ФИО</tui-input>
+
+  <label>Контакт</label>
+  <tui-input formControlName="contact"
+    >Например, номер телефона, телеграм или email</tui-input
+  >
+
+  <label>Вакансии</label>
+  <tui-input-tag [tuiTextfieldLabelOutside]="true" formControlName="vacancies"
+    >Например, java-backend разработчик</tui-input-tag
+  >
+
+  <label>Количество мест</label>
+  <tui-input-number [min]="0" [step]="1" formControlName="vacanciesNumber"
+    >Сколько вакансий предоставляет компания</tui-input-number
+  >
+
+  <button class="action" type="submit" tuiButton>Сохранить</button>
+</form>

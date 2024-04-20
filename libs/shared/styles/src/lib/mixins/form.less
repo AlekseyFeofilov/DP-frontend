@@ -1,0 +1,21 @@
+@import '@taiga-ui/core/styles/taiga-ui-local';
+
+.form-block(@size: m) {
+  & when (@size = m) {
+    width: 50rem;
+  }
+
+  ::ng-deep {
+    label {
+      .tui-space(top, 4);
+      .tui-space(bottom, 1);
+      display: block;
+      font: var(--tui-font-text-l);
+      font-weight: bold;
+    }
+
+    .action {
+      .tui-space(top, 6);
+    }
+  }
+}
