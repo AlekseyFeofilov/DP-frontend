@@ -1,22 +1,33 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label>Название</label>
-  <tui-input formControlName="name">Введите текст</tui-input>
+  <tui-input formControlName="name" [tuiTextfieldCleaner]="true"
+    >Введите текст</tui-input
+  >
 
   <label>Ответственное лицо</label>
-  <tui-input formControlName="spokesman">Введите ФИО</tui-input>
+  <tui-input formControlName="spokesman" [tuiTextfieldCleaner]="true"
+    >Введите ФИО</tui-input
+  >
 
   <label>Контакт</label>
-  <tui-input formControlName="contact"
+  <tui-input formControlName="contact" [tuiTextfieldCleaner]="true"
     >Например, номер телефона, телеграм или email</tui-input
   >
 
   <label>Вакансии</label>
-  <tui-input-tag [tuiTextfieldLabelOutside]="true" formControlName="vacancies"
+  <tui-input-tag
+    [tuiTextfieldLabelOutside]="true"
+    formControlName="vacancies"
+    [tuiTextfieldCleaner]="true"
     >Например, java-backend разработчик</tui-input-tag
   >
 
   <label>Количество мест</label>
-  <tui-input-number [min]="0" [step]="1" formControlName="vacanciesNumber"
+  <tui-input-number
+    [min]="0"
+    [step]="1"
+    formControlName="vacanciesNumber"
+    [tuiTextfieldCleaner]="true"
     >Сколько вакансий предоставляет компания</tui-input-number
   >
 

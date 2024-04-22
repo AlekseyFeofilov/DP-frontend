@@ -1,0 +1,9 @@
+{
+  "name": "student-employment-variant-shell",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/student/employment-variant/shell/src",
+  "prefix": "dp",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

@@ -29,6 +29,9 @@
           "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
           "apps/dp-student/src/styles.less"
         ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/styles/src/lib"]
+        },
         "scripts": []
       },
       "configurations": {

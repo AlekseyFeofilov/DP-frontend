@@ -32,10 +32,26 @@
       "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
       "@dp/admin/shared/types": ["libs/admin/shared/types/src/index.ts"],
       "@dp/admin/shared/utils": ["libs/admin/shared/utils/src/index.ts"],
-      "@dp/admin/shell": ["libs/admin/shell/src/index.ts"],
       "@dp/shared/layout": ["libs/shared/layout/src/index.ts"],
       "@dp/shared/styles": ["libs/shared/styles/src/index.ts"],
-      "@dp/shared/types": ["libs/shared/types/src/index.ts"]
+      "@dp/shared/types": ["libs/shared/types/src/index.ts"],
+      "@dp/student/employment-variant/pages": [
+        "libs/student/employment-variant/pages/src/index.ts"
+      ],
+      "@dp/student/employment-variant/shell": [
+        "libs/student/employment-variant/shell/src/index.ts"
+      ],
+      "@dp/student/employment-variant/ui": [
+        "libs/student/employment-variant/ui/src/index.ts"
+      ],
+      "@dp/student/employment/pages": [
+        "libs/student/employment/pages/src/index.ts"
+      ],
+      "@dp/student/employment/shell": [
+        "libs/student/employment/shell/src/index.ts"
+      ],
+      "@dp/student/employment/ui": ["libs/student/employment/ui/src/index.ts"],
+      "@dp/student/shared/consts": ["libs/student/shared/consts/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

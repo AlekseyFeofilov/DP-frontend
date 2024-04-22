@@ -1,20 +1,16 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TUI_SANITIZER, TuiRootModule, TuiSvgModule } from '@taiga-ui/core';
-import { TuiButtonModule } from '@taiga-ui/experimental';
-import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import { LayoutComponent } from '@dp/shared/layout';
+import { SIDEBAR_NAVIGATION } from '@dp/student/shared/consts';
+import { TuiRootModule } from '@taiga-ui/core';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, TuiRootModule, TuiSvgModule, TuiButtonModule],
-  providers: [
-    { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
-    { provide: LOCALE_ID, useValue: 'ru' },
-  ],
+  imports: [RouterModule, TuiRootModule, LayoutComponent],
   selector: 'dp-student-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
 })
 export class AppComponent {
-  title = 'dp-student';
+  readonly navigationItems = SIDEBAR_NAVIGATION;
 }

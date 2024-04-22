@@ -1,9 +1,8 @@
 <tui-root>
-  <!-- content of your app -->
-  DP Student <tui-svg src="tuiIconActivity"></tui-svg>
-  <!--
-         If you need, you can add something between Taiga portal layers:
-        -->
+  <dp-layout [items]="navigationItems"
+    ><router-outlet></router-outlet
+  ></dp-layout>
+
   <ng-container ngProjectAs="tuiOverContent">
     <!-- Content over app content -->
   </ng-container>

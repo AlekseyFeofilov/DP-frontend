@@ -81,19 +81,15 @@ export class EmploymentsTableComponent {
   }
 
   // вынести
-  getPriorityText(priority: number, totalCount: number): string {
-    const middle = Math.ceil(totalCount / 3);
-    console.log(middle);
-
-    if (priority < middle) {
-      return 'Высокий';
+  getPriorityText(priority: number): string {
+    switch (priority) {
+      case 0:
+        return 'Высокий';
+      case 1:
+        return 'Средний';
+      default:
+        return 'Низкий';
     }
-
-    if (priority < 2 * middle) {
-      return 'Средний';
-    }
-
-    return 'Низкий';
   }
 
   // вынести
