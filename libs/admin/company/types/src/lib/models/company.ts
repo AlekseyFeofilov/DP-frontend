@@ -1,8 +1,5 @@
-export interface Company {
+import { NewCompany } from './new-company';
+
+export interface Company extends NewCompany {
   id: string;
-  name: string;
-  spokesman?: string;
-  contact?: string;
-  vacancies: string[];
-  vacanciesNumber: number;
 }

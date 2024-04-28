@@ -1,3 +1,11 @@
 <div class="title"><h1>Редактирование компании</h1></div>
 
-<dp-company-form class="form"></dp-company-form>
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-company-form
+    class="form"
+    [initialValue]="company$ | async"
+    (submitted)="onFormSubmit($event)"
+  ></dp-company-form>
+}

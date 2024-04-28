@@ -1,25 +1,29 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  EventEmitter,
+  ViewChildren,
+  TemplateRef,
   Component,
   QueryList,
-  TemplateRef,
-  ViewChildren,
+  Output,
+  inject,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Company } from '@dp/admin/company/types';
-import { PATH_NAME } from '@dp/admin/shared/consts';
-import { TableColumn } from '@dp/admin/shared/types';
-import { TableColumnDirective } from '@dp/admin/shared/utils';
 import {
-  TuiTableModule,
   TuiTablePaginationModule,
+  TuiTableModule,
 } from '@taiga-ui/addon-table';
 import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
+import { TableColumnDirective } from '@dp/admin/shared/utils';
+import { CompanyStoreFacade } from '@dp/admin/company/store';
 import { TuiButtonModule } from '@taiga-ui/experimental';
+import { TableColumn } from '@dp/admin/shared/types';
+import { PATH_NAME } from '@dp/admin/shared/consts';
+import { Company } from '@dp/admin/company/types';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { TuiTagModule } from '@taiga-ui/kit';
+
 import { COLUMNS } from './columns';
-import { companiesMock } from './mock';
 
 @Component({
   selector: 'dp-companies-table',
@@ -40,11 +44,15 @@ import { companiesMock } from './mock';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompaniesTableComponent {
+  @Output() removeClicked = new EventEmitter<Company>();
+
   @ViewChildren(TableColumnDirective)
   columnTemplates?: QueryList<TableColumnDirective>;
 
+  private readonly companyStoreFacade = inject(CompanyStoreFacade);
+
   readonly columns = COLUMNS;
-  readonly companies = companiesMock;
+  readonly companies$ = this.companyStoreFacade.companies$;
 
   getColumnTemplate = (column: TableColumn): TemplateRef<any> | null =>
     this.columnTemplates?.find(
@@ -63,5 +71,9 @@ export class CompaniesTableComponent {
 
   onPage(page: number): void {
     console.log(page);
+  }
+
+  remove(company: Company): void {
+    this.removeClicked.emit(company);
   }
 }

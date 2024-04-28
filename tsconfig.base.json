@@ -15,8 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dp/admin/company/data-access": [
+        "libs/admin/company/data-access/src/index.ts"
+      ],
+      "@dp/admin/company/dto": ["libs/admin/company/dto/src/index.ts"],
       "@dp/admin/company/pages": ["libs/admin/company/pages/src/index.ts"],
       "@dp/admin/company/shell": ["libs/admin/company/shell/src/index.ts"],
+      "@dp/admin/company/store": ["libs/admin/company/store/src/index.ts"],
       "@dp/admin/company/types": ["libs/admin/company/types/src/index.ts"],
       "@dp/admin/company/ui": ["libs/admin/company/ui/src/index.ts"],
       "@dp/admin/employment/pages": [
@@ -32,6 +37,9 @@
       "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
       "@dp/admin/shared/types": ["libs/admin/shared/types/src/index.ts"],
       "@dp/admin/shared/utils": ["libs/admin/shared/utils/src/index.ts"],
+      "@dp/shared/consts": ["libs/shared/consts/src/index.ts"],
+      "@dp/shared/core": ["libs/shared/core/src/index.ts"],
+      "@dp/shared/effects": ["libs/shared/effects/src/index.ts"],
       "@dp/shared/layout": ["libs/shared/layout/src/index.ts"],
       "@dp/shared/styles": ["libs/shared/styles/src/index.ts"],
       "@dp/shared/types": ["libs/shared/types/src/index.ts"],

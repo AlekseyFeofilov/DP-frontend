@@ -1,27 +1,32 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Component,
+  OnInit,
+  Output,
+  Input,
+} from '@angular/core';
+import {
   ReactiveFormsModule,
+  FormControl,
   Validators,
+  FormGroup,
 } from '@angular/forms';
-import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
-import { TuiTextfieldControllerModule } from '@taiga-ui/core';
-import { TuiButtonModule } from '@taiga-ui/experimental';
 import {
-  TuiInputModule,
   TuiInputNumberModule,
   TuiInputTagModule,
+  TuiInputModule,
 } from '@taiga-ui/kit';
-
-export interface CompanyForm {
-  name: string;
-  spokesman: string | null;
-  contact: string | null;
-  vacancies: ReadonlyArray<string>;
-  vacanciesNumber: number | null;
-}
+import {
+  tuiMarkControlAsTouchedAndValidate,
+  tuiIsPresent,
+} from '@taiga-ui/cdk';
+import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule } from '@taiga-ui/experimental';
+import { NewCompany } from '@dp/admin/company/types';
+import { CommonModule } from '@angular/common';
+import { FormValue } from '@dp/shared/types';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'dp-company-form',
@@ -39,7 +44,10 @@ export interface CompanyForm {
   styleUrl: './company-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompanyFormComponent {
+export class CompanyFormComponent implements OnInit {
+  @Input() initialValue?: NewCompany | null;
+  @Output() readonly submitted = new EventEmitter<FormValue<NewCompany>>();
+
   readonly form = new FormGroup({
     name: new FormControl<string>('', {
       nonNullable: true,
@@ -47,12 +55,52 @@ export class CompanyFormComponent {
     }),
     spokesman: new FormControl<string>(''),
     contact: new FormControl<string>(''),
-    vacancies: new FormControl<string[]>([]),
+    vacancies: new FormControl<string[]>([], {
+      nonNullable: true,
+    }),
     vacanciesNumber: new FormControl<number | null>(null),
   });
 
+  readonly loading$ = new BehaviorSubject<boolean>(false);
+
+  ngOnInit(): void {
+    this.assignInitialValues();
+  }
+
   onSubmit(): void {
     tuiMarkControlAsTouchedAndValidate(this.form);
-    console.log(this.form.value);
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    const formValue = this.form.getRawValue();
+
+    this.loading$.next(true);
+
+    this.submitted.next({
+      value: {
+        name: formValue.name,
+        spokesman: '',
+        contact: formValue.contact,
+        vacancies: [],
+        vacanciesNumber: formValue.vacanciesNumber,
+      },
+      finishHandler: this.handleFinish.bind(this),
+    });
+  }
+
+  private handleFinish(): void {
+    this.loading$.next(false);
+  }
+
+  private assignInitialValues(): void {
+    if (!tuiIsPresent(this.initialValue)) {
+      return;
+    }
+
+    this.form.setValue({
+      ...this.initialValue,
+    });
   }
 }

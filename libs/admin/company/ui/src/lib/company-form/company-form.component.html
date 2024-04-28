@@ -31,5 +31,7 @@
     >Сколько вакансий предоставляет компания</tui-input-number
   >
 
-  <button class="action" type="submit" tuiButton>Сохранить</button>
+  <button class="action" type="submit" tuiButton [loading]="loading$ | async">
+    Сохранить
+  </button>
 </form>

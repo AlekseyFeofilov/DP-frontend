@@ -10,7 +10,7 @@
   </thead>
 
   <tbody
-    *tuiLet="companies | tuiTableSort as sortedCompanies"
+    *tuiLet="(companies$ | async) || [] | tuiTableSort as sortedCompanies"
     tuiTbody
     [data]="sortedCompanies"
   >
@@ -47,9 +47,11 @@
   {{ index + 1 }}. {{ company.name }}
 </ng-template>
 
-<ng-template dpTableColumn="spokesman" let-company
-  ><div>{{ company.spokesman }}</div></ng-template
->
+<ng-template dpTableColumn="spokesman" let-company>
+  @if (company.spokesman) {
+    <div>{{ company.spokesman }}</div>
+  }
+</ng-template>
 
 <ng-template dpTableColumn="contact" let-company>
   @if (company.contact) {
@@ -70,8 +72,10 @@
 </ng-template>
 
 <ng-template dpTableColumn="vacanciesNumber" let-company>
-  <div>{{ company.vacanciesNumber }}</div></ng-template
->
+  @if (company.vacanciesNumber) {
+    <div>{{ company.vacanciesNumber }}</div>
+  }
+</ng-template>
 
 <ng-template dpTableColumn="actions" let-company>
   <button
@@ -82,6 +86,7 @@
     tuiIconButton
     type="button"
     class="tui-space_right-1"
+    (click)="remove(company)"
   ></button>
 
   <a
