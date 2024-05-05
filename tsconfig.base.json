@@ -24,11 +24,18 @@
       "@dp/admin/company/store": ["libs/admin/company/store/src/index.ts"],
       "@dp/admin/company/types": ["libs/admin/company/types/src/index.ts"],
       "@dp/admin/company/ui": ["libs/admin/company/ui/src/index.ts"],
+      "@dp/admin/employment/data-access": [
+        "libs/admin/employment/data-access/src/index.ts"
+      ],
+      "@dp/admin/employment/dto": ["libs/admin/employment/dto/src/index.ts"],
       "@dp/admin/employment/pages": [
         "libs/admin/employment/pages/src/index.ts"
       ],
       "@dp/admin/employment/shell": [
         "libs/admin/employment/shell/src/index.ts"
+      ],
+      "@dp/admin/employment/store": [
+        "libs/admin/employment/store/src/index.ts"
       ],
       "@dp/admin/employment/types": [
         "libs/admin/employment/types/src/index.ts"

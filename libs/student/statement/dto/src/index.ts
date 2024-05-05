@@ -1,1 +1,1 @@
-export * from './lib/student-statement-dto/student-statement-dto.component';
+export * from './lib/create-internship-statement-dto';

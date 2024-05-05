@@ -1,6 +1,6 @@
 import {
-  HttpInterceptorFn,
   HttpHandlerFn,
+  HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
 
@@ -9,7 +9,7 @@ export const authInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn,
 ) => {
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjEwNjk0ZWZkLTk1NzMtNGQ5NS05MjM3LWYwYzBhNzU4YzdlZiIsIkFjY291bnRJZCI6IjVmMmMyN2M0LTc4NDYtNDgyNS1iYzRkLTZkMzY5Njg2MTM0ZSIsIk5hbWUiOiJhbHlvbnRhMDNAbWFpbC5ydSIsIkVtYWlsIjoiYWx5b250YTAzQG1haWwucnUiLCJyb2xlIjpbIkFkbWluaXN0cmF0b3IiLCJTdHVkZW50Il0sIm5iZiI6MTcxNDMxNjA1MCwiZXhwIjoxNzE1MTgwMDUwLCJpYXQiOjE3MTQzMTYwNTAsImlzcyI6Ikp3dFRlc3RJc3N1ZXIiLCJhdWQiOiJKd3RUZXN0Q2xpZW50In0.XjKDZlRUlKggSl4FNdPuoiUnICw3NeR5FGyy8c5FX1w';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImZjMWJlZDJjLTE5NWItNDg2Ni04NGU4LTFmN2NjZjhiNGIyMSIsIkFjY291bnRJZCI6IjVmMmMyN2M0LTc4NDYtNDgyNS1iYzRkLTZkMzY5Njg2MTM0ZSIsIk5hbWUiOiLQotCw0YDQsNGB0L7QstCwINCQ0LvRkdC90LAg0JLQsNGB0LjQu9GM0LXQstC90LAgIiwiRW1haWwiOiJhbHlvbnRhMDNAbWFpbC5ydSIsInJvbGUiOlsiQWRtaW5pc3RyYXRvciIsIlN0dWRlbnQiXSwibmJmIjoxNzE0OTM2MDk3LCJleHAiOjE3MTU4MDAwOTcsImlhdCI6MTcxNDkzNjA5NywiaXNzIjoiSnd0VGVzdElzc3VlciIsImF1ZCI6Ikp3dFRlc3RDbGllbnQifQ.eJZiMoJg3uz2e5BZ2hU-9udMf_pCL1TC7p4ROvz0Vqc';
   const modifiedReq = req.clone({
     headers: req.headers.set('Authorization', `Bearer ${token}`),
   });

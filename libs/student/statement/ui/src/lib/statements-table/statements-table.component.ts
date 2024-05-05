@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { TableColumn } from '@dp/admin/shared/types';
 import { TableColumnDirective } from '@dp/admin/shared/utils';
-import { statemnetsMock } from '@dp/student/statement/store';
+import { statementsMock } from '@dp/student/statement/store';
 import {
   StatementCommon,
   StatementStatus,
@@ -19,6 +19,7 @@ import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
 import { TuiHintModule } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/experimental';
 import { of } from 'rxjs';
+
 import { COLUMNS } from './columns';
 
 @Component({
@@ -44,7 +45,7 @@ export class StatementsTableComponent {
   // private readonly companyStoreFacade = inject(CompanyStoreFacade);
 
   readonly columns = COLUMNS;
-  readonly statements$ = of(statemnetsMock);
+  readonly statements$ = of(statementsMock);
 
   getColumnTemplate = (column: TableColumn): TemplateRef<any> | null =>
     this.columnTemplates?.find(

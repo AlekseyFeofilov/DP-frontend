@@ -4,4 +4,5 @@ export interface CreateCompanyDto {
   communicationPlace: string;
   contact: string;
   comment: string;
+  isPartner: boolean;
 }

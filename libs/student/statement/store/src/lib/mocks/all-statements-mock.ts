@@ -4,17 +4,12 @@ import {
   StatementType,
 } from '@dp/student/statement/types';
 import { TuiDay } from '@taiga-ui/cdk';
-export const statemnetsMock: ReadonlyArray<StatementCommon> = [
+
+export const statementsMock: ReadonlyArray<StatementCommon> = [
   {
     id: '1',
     type: StatementType.Employment,
     status: StatementStatus.Declined,
-    date: TuiDay.currentLocal(),
-  },
-  {
-    id: '2',
-    type: StatementType.Employment,
-    status: StatementStatus.NonVerified,
     date: TuiDay.currentLocal(),
   },
   {

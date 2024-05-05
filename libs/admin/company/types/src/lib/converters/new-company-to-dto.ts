@@ -11,5 +11,6 @@ export function convertNewCompanyToDto(
     communicationPlace: '',
     contact: newCompany.contact || '',
     comment: '',
+    isPartner: true,
   };
 }

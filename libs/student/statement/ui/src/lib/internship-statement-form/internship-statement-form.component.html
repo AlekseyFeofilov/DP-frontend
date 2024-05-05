@@ -1,7 +1,7 @@
 <tui-notification tuiNotification status="info">
   Заявка должна пройти проверку сотрудниками деканата. В случае одобрения на
   странице со всеми заявками выберите какую из одобренных заявок желаете
-  перевести заявку на трудоустройство. В случае отказа заявку перевести в
+  перевести в заявку на трудоустройство. В случае отказа заявку перевести в
   трудоустройство не получится - в ответе будет указана причина отказа.
   <ng-template #tooltip>Hello world</ng-template>
 </tui-notification>
@@ -9,7 +9,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label>Название компании</label>
   <tui-select
-    formControlName="companyName"
+    formControlName="company"
     tuiHintContent="В случае если желаемой компании нет в общем списке партнеров, следует всегда выбирать HITs, а в комментарии прописать реальное место прохождения практики"
     [tuiTextfieldCleaner]="true"
     [tuiTextfieldLabelOutside]="true"
@@ -17,7 +17,7 @@
     Выберите из списка партнеров
     <tui-data-list-wrapper
       *tuiDataList
-      [items]="companies"
+      [items]="companies$ | async"
     ></tui-data-list-wrapper>
   </tui-select>
 
@@ -34,5 +34,7 @@
     >Все, что хотите сообщить дополнительно</tui-textarea
   >
 
-  <button class="action" type="submit" tuiButton>Отправить</button>
+  <button class="action" type="submit" tuiButton [loading]="loading$ | async">
+    Отправить
+  </button>
 </form>
