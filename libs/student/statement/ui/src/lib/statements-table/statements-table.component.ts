@@ -7,7 +7,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { TableColumn } from '@dp/admin/shared/types';
-import { TableColumnDirective } from '@dp/admin/shared/utils';
+import { TableColumnDirective } from '@dp/shared/utils';
 import { statementsMock } from '@dp/student/statement/store';
 import {
   StatementCommon,

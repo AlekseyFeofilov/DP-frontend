@@ -5,11 +5,3 @@ export enum EmploymentVariantStatus {
   OfferAccepted = 'Получил оффер (Принял)',
   OfferRefused = 'Получил оффер (Отказался)',
 }
-
-export interface EmploymentVariant {
-  priority: number;
-  companyName: string;
-  comment?: string;
-  vacancy: string;
-  status: EmploymentVariantStatus;
-}

@@ -12,7 +12,7 @@ import {
   StudentWithEmployments,
 } from '@dp/admin/employment/types';
 import { TableColumn } from '@dp/admin/shared/types';
-import { TableColumnDirective } from '@dp/admin/shared/utils';
+import { TableColumnDirective } from '@dp/shared/utils';
 import {
   TuiTableModule,
   TuiTablePaginationModule,
@@ -25,6 +25,7 @@ import {
   tuiTooltipOptionsProvider,
 } from '@taiga-ui/experimental';
 import { TUI_ARROW } from '@taiga-ui/kit';
+
 import { COLUMNS } from './columns';
 import { employmentsMock } from './mocks';
 

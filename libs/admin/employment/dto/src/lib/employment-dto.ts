@@ -1,6 +1,6 @@
 import { CompanyDto } from '@dp/admin/company/dto';
 
-export enum EmploymentStatus {
+export enum EmploymentStatusDto {
   Active,
   Inactive,
 }
@@ -13,5 +13,5 @@ export interface EmploymentDto {
   employmentRequestId: string | null;
   vacancy: string;
   comment: string | null;
-  employmentStatus: 'Active';
+  employmentStatus: EmploymentStatusDto;
 }

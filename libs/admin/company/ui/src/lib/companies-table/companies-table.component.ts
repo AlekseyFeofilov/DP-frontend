@@ -1,26 +1,26 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  EventEmitter,
-  ViewChildren,
-  TemplateRef,
   Component,
-  QueryList,
+  EventEmitter,
   Output,
+  QueryList,
+  TemplateRef,
+  ViewChildren,
   inject,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CompanyStoreFacade } from '@dp/admin/company/store';
+import { Company } from '@dp/admin/company/types';
+import { PATH_NAME } from '@dp/admin/shared/consts';
+import { TableColumn } from '@dp/admin/shared/types';
+import { TableColumnDirective } from '@dp/shared/utils';
 import {
-  TuiTablePaginationModule,
   TuiTableModule,
+  TuiTablePaginationModule,
 } from '@taiga-ui/addon-table';
 import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
-import { TableColumnDirective } from '@dp/admin/shared/utils';
-import { CompanyStoreFacade } from '@dp/admin/company/store';
 import { TuiButtonModule } from '@taiga-ui/experimental';
-import { TableColumn } from '@dp/admin/shared/types';
-import { PATH_NAME } from '@dp/admin/shared/consts';
-import { Company } from '@dp/admin/company/types';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { TuiTagModule } from '@taiga-ui/kit';
 
 import { COLUMNS } from './columns';

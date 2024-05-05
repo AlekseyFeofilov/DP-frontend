@@ -1,7 +1,7 @@
 {
-  "name": "admin-shared-utils",
+  "name": "shared-employment-variant-dto",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/admin/shared/utils/src",
+  "sourceRoot": "libs/shared/employment-variant/dto/src",
   "prefix": "dp",
   "tags": [],
   "projectType": "library",

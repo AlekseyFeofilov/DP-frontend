@@ -43,13 +43,19 @@
       "@dp/admin/employment/ui": ["libs/admin/employment/ui/src/index.ts"],
       "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
       "@dp/admin/shared/types": ["libs/admin/shared/types/src/index.ts"],
-      "@dp/admin/shared/utils": ["libs/admin/shared/utils/src/index.ts"],
       "@dp/shared/consts": ["libs/shared/consts/src/index.ts"],
       "@dp/shared/core": ["libs/shared/core/src/index.ts"],
       "@dp/shared/effects": ["libs/shared/effects/src/index.ts"],
+      "@dp/shared/employment-variant/dto": [
+        "libs/shared/employment-variant/dto/src/index.ts"
+      ],
+      "@dp/shared/employment-variant/types": [
+        "libs/shared/employment-variant/types/src/index.ts"
+      ],
       "@dp/shared/layout": ["libs/shared/layout/src/index.ts"],
       "@dp/shared/styles": ["libs/shared/styles/src/index.ts"],
       "@dp/shared/types": ["libs/shared/types/src/index.ts"],
+      "@dp/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@dp/student/employment-variant/pages": [
         "libs/student/employment-variant/pages/src/index.ts"
       ],
