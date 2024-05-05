@@ -12,6 +12,7 @@ import {
   TuiErrorModule,
   TuiGroupModule,
   TuiHintModule,
+  TuiNotificationModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/experimental';
@@ -50,6 +51,7 @@ export interface EmploymentVariantForm {
     TuiGroupModule,
     TuiErrorModule,
     TuiFieldErrorPipeModule,
+    TuiNotificationModule,
   ],
   providers: [
     {
@@ -95,7 +97,7 @@ export class EmploymentVariantFormComponent {
     'HITs',
   ] as const;
 
-  // пофиксить зависимость от admin домена
+  // TODO пофиксить зависимость от admin домена
   readonly statuses = Object.values(EmploymentVariantStatus);
 
   onSubmit(): void {

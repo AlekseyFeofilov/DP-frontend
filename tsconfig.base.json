@@ -52,14 +52,24 @@
       "@dp/student/employment-variant/ui": [
         "libs/student/employment-variant/ui/src/index.ts"
       ],
-      "@dp/student/employment/pages": [
-        "libs/student/employment/pages/src/index.ts"
+      "@dp/student/shared/consts": ["libs/student/shared/consts/src/index.ts"],
+      "@dp/student/statement/data-access": [
+        "libs/student/statement/data-access/src/index.ts"
       ],
-      "@dp/student/employment/shell": [
-        "libs/student/employment/shell/src/index.ts"
+      "@dp/student/statement/dto": ["libs/student/statement/dto/src/index.ts"],
+      "@dp/student/statement/pages": [
+        "libs/student/statement/pages/src/index.ts"
       ],
-      "@dp/student/employment/ui": ["libs/student/employment/ui/src/index.ts"],
-      "@dp/student/shared/consts": ["libs/student/shared/consts/src/index.ts"]
+      "@dp/student/statement/shell": [
+        "libs/student/statement/shell/src/index.ts"
+      ],
+      "@dp/student/statement/store": [
+        "libs/student/statement/store/src/index.ts"
+      ],
+      "@dp/student/statement/types": [
+        "libs/student/statement/types/src/index.ts"
+      ],
+      "@dp/student/statement/ui": ["libs/student/statement/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

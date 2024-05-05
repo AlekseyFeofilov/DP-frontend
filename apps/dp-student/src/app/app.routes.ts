@@ -6,9 +6,9 @@ export const appRoutes: Route[] = [
   //   path: PATH_NAME.home,
   // },
   {
-    path: PATH_NAME.employment,
+    path: PATH_NAME.statement,
     loadChildren: () =>
-      import('@dp/student/employment/shell').then(m => m.EmploymentShellModule),
+      import('@dp/student/statement/shell').then(m => m.StatementShellModule),
   },
   {
     path: PATH_NAME.employmentVariant,

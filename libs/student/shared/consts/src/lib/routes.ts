@@ -3,10 +3,9 @@ export const PATH_NAME = {
 
   practiceDiary: 'practice-diary',
 
-  employment: 'employment',
-  employmentId: ':employmentId',
+  statement: 'statement',
 
-  request: 'request',
+  internship: 'internship',
 
   employmentVariant: 'employment-variant',
   employmentVariantId: ':employmentVariantId',

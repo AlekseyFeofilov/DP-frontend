@@ -1,0 +1,21 @@
+<div class="title">
+  <tui-tabs>
+    <h1 class="title__text">Заявления</h1>
+    <a
+      tuiTab
+      [routerLink]="myStatementsPath"
+      routerLinkActive
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Мои</a
+    >
+    <a
+      tuiTab
+      [routerLink]="createStatementPath"
+      routerLinkActive
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Создать</a
+    >
+  </tui-tabs>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,9 +1,0 @@
-{
-  "name": "student-employment-shell",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/student/employment/shell/src",
-  "prefix": "dp",
-  "tags": [],
-  "projectType": "library",
-  "targets": {}
-}

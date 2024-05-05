@@ -80,7 +80,7 @@ export class EmploymentsTableComponent {
     this.open = !this.open;
   }
 
-  // вынести
+  // TODO: вынести
   getPriorityText(priority: number): string {
     switch (priority) {
       case 0:
@@ -92,7 +92,7 @@ export class EmploymentsTableComponent {
     }
   }
 
-  // вынести
+  // TODO: вынести
   getCommonStatusText(student: StudentWithEmployments): string {
     if (student.employment) {
       if (student.employment.status === EmploymentStatus.Verified) {
@@ -129,6 +129,7 @@ export class EmploymentsTableComponent {
     return 'Нет';
   }
 
+  // TODO: возвращать класс
   getEmploymentStatusColor(status: EmploymentStatus): string {
     return status === EmploymentStatus.Verified
       ? 'var(--tui-success-fill)'

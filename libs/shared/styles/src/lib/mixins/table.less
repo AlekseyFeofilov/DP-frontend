@@ -1,10 +1,6 @@
 .table() {
   width: 100%;
 
-  * {
-    font: var(--tui-font-text-m);
-  }
-
   td,
   th {
     white-space: nowrap;
@@ -22,5 +18,31 @@
 
   tr:nth-child(even) td {
     background: var(--tui-base-02);
+  }
+}
+
+.table-hoverable() {
+  width: 100%;
+
+  * {
+    font: var(--tui-font-text-m);
+  }
+
+  td,
+  th {
+    height: 70px;
+    white-space: nowrap;
+    border-color: transparent;
+    border-bottom-color: var(--tui-base-03);
+  }
+
+  tr {
+    cursor: pointer;
+
+    &:hover {
+      td {
+        background-color: var(--tui-base-02);
+      }
+    }
   }
 }

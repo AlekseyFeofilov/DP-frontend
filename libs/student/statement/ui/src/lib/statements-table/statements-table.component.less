@@ -1,0 +1,31 @@
+@import 'mixins/table';
+
+.table {
+  .table-hoverable();
+}
+
+.status {
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+    background: var(--tui-base-04);
+  }
+
+  &.non-verified:before {
+    background: var(--tui-warning-fill);
+  }
+
+  &.accepted:before {
+    background: var(--tui-success-fill);
+  }
+
+  &.declined:before {
+    background: var(--tui-error-fill);
+  }
+}
