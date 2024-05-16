@@ -1,30 +1,30 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { EmploymentVariantStatus } from '@dp/admin/employment/types';
-import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
+  TuiDataListWrapperModule,
+  TuiFieldErrorPipeModule,
+  TUI_VALIDATION_ERRORS,
+  TuiRadioBlockModule,
+  TuiTextareaModule,
+  TuiSelectModule,
+  TuiInputModule,
+} from '@taiga-ui/kit';
 import {
+  TuiTextfieldControllerModule,
+  TuiNotificationModule,
   TuiErrorModule,
   TuiGroupModule,
   TuiHintModule,
-  TuiNotificationModule,
-  TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
-import { TuiButtonModule } from '@taiga-ui/experimental';
 import {
-  TUI_VALIDATION_ERRORS,
-  TuiDataListWrapperModule,
-  TuiFieldErrorPipeModule,
-  TuiInputModule,
-  TuiRadioBlockModule,
-  TuiSelectModule,
-  TuiTextareaModule,
-} from '@taiga-ui/kit';
+  ReactiveFormsModule,
+  FormControl,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
+import { EmploymentVariantStatus } from '@dp/shared/employment-variant/types';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
+import { TuiButtonModule } from '@taiga-ui/experimental';
+import { CommonModule } from '@angular/common';
 
 export interface EmploymentVariantForm {
   companyName: string;

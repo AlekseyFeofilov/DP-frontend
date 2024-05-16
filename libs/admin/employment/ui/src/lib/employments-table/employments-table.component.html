@@ -10,7 +10,7 @@
   </thead>
 
   <tbody
-    *tuiLet="studentsWithEmployments | tuiTableSort as sortedStudents"
+    *tuiLet="(dashboardInfo$ | async) || [] | tuiTableSort as sortedStudents"
     tuiTbody
     [data]="sortedStudents"
   >
@@ -115,9 +115,9 @@
   {{ student.name }}
 </ng-template>
 
-<ng-template dpTableColumn="status" let-student>{{
-  student | tuiMapper: getCommonStatusText
-}}</ng-template>
+<ng-template dpTableColumn="status" let-student>
+  {{ student.status }}
+</ng-template>
 
 <ng-template dpTableColumn="company" let-student>
   @if (student.employment) {

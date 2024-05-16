@@ -1,33 +1,30 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ViewChildren,
+  TemplateRef,
   Component,
   QueryList,
-  TemplateRef,
-  ViewChildren,
+  inject,
 } from '@angular/core';
 import {
-  EmploymentStatus,
-  EmploymentVariantStatus,
-  StudentWithEmployments,
-} from '@dp/admin/employment/types';
-import { TableColumn } from '@dp/admin/shared/types';
-import { TableColumnDirective } from '@dp/shared/utils';
+  tuiTooltipOptionsProvider,
+  TuiTooltipModule,
+  TuiButtonModule,
+} from '@taiga-ui/experimental';
 import {
-  TuiTableModule,
   TuiTablePaginationModule,
+  TuiTableModule,
 } from '@taiga-ui/addon-table';
 import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
+import { EmploymentStoreFacade } from '@dp/admin/employment/store';
 import { TuiSvgModule, TuiWrapperModule } from '@taiga-ui/core';
-import {
-  TuiButtonModule,
-  TuiTooltipModule,
-  tuiTooltipOptionsProvider,
-} from '@taiga-ui/experimental';
+import { EmploymentStatus } from '@dp/admin/employment/types';
+import { TableColumnDirective } from '@dp/shared/utils';
+import { TableColumn } from '@dp/admin/shared/types';
+import { CommonModule } from '@angular/common';
 import { TUI_ARROW } from '@taiga-ui/kit';
 
 import { COLUMNS } from './columns';
-import { employmentsMock } from './mocks';
 
 @Component({
   selector: 'dp-employments-table',
@@ -54,14 +51,16 @@ import { employmentsMock } from './mocks';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmploymentsTableComponent {
+  @ViewChildren(TableColumnDirective)
+  columnTemplates?: QueryList<TableColumnDirective>;
+
+  private readonly employmentStoreFacade = inject(EmploymentStoreFacade);
+
   readonly columns = COLUMNS;
-  readonly studentsWithEmployments = employmentsMock;
+  readonly dashboardInfo$ = this.employmentStoreFacade.dashboardInfo$;
   readonly arrow = TUI_ARROW;
 
   open = false;
-
-  @ViewChildren(TableColumnDirective)
-  columnTemplates?: QueryList<TableColumnDirective>;
 
   getColumnTemplate = (column: TableColumn): TemplateRef<any> | null =>
     this.columnTemplates?.find(
@@ -93,46 +92,9 @@ export class EmploymentsTableComponent {
     }
   }
 
-  // TODO: вынести
-  getCommonStatusText(student: StudentWithEmployments): string {
-    if (student.employment) {
-      if (student.employment.status === EmploymentStatus.Verified) {
-        return 'Трудоустроен';
-      } else {
-        return 'Трудоустроен (не подтверждено)';
-      }
-    }
-
-    if (student.employmentVariants.length) {
-      if (
-        student.employmentVariants.find(variant =>
-          [
-            EmploymentVariantStatus.OfferPending,
-            EmploymentVariantStatus.OfferAccepted,
-            EmploymentVariantStatus.OfferRefused,
-          ].includes(variant.status),
-        )
-      ) {
-        return 'Получил оффер';
-      }
-
-      if (
-        student.employmentVariants.find(
-          variant => variant.status === EmploymentVariantStatus.Interviewed,
-        )
-      ) {
-        return 'Прошел собеседование';
-      }
-
-      return 'Выбираю компании';
-    }
-
-    return 'Нет';
-  }
-
   // TODO: возвращать класс
   getEmploymentStatusColor(status: EmploymentStatus): string {
-    return status === EmploymentStatus.Verified
+    return status === EmploymentStatus.Active
       ? 'var(--tui-success-fill)'
       : 'var(--tui-error-fill)';
   }

@@ -1,19 +1,22 @@
 import {
-  EmploymentStatus,
-  EmploymentVariantStatus,
+  EmploymentStudentStatus,
   StudentWithEmployments,
+  EmploymentStatus,
 } from '@dp/admin/employment/types';
+import { EmploymentVariantStatus } from '@dp/shared/employment-variant/types';
 
 export const employmentsMock: ReadonlyArray<StudentWithEmployments> = [
   {
     id: '1',
     name: 'Иванов Иван',
-    group: '972101',
+    group: 972101,
+    status: EmploymentStudentStatus.Employed,
     employment: {
+      id: '1',
       vacancy: 'QA',
       comment: 'На самом деле Тинькофф',
       companyName: 'HITS',
-      status: EmploymentStatus.NonVerified,
+      status: EmploymentStatus.Inactive,
     },
     employmentVariants: [
       {
@@ -39,11 +42,14 @@ export const employmentsMock: ReadonlyArray<StudentWithEmployments> = [
   {
     id: '2',
     name: 'Петров Иван',
-    group: '972101',
+    group: 972101,
+    status: EmploymentStudentStatus.Employed,
     employment: {
+      id: '1',
       vacancy: 'Front react',
       companyName: 'red_mad_robot',
-      status: EmploymentStatus.NonVerified,
+      status: EmploymentStatus.Active,
+      comment: null,
     },
     employmentVariants: [
       {
@@ -69,7 +75,9 @@ export const employmentsMock: ReadonlyArray<StudentWithEmployments> = [
   {
     id: '3',
     name: 'Иванов Иван',
-    group: '972101',
+    group: 972101,
+    employment: null,
+    status: EmploymentStudentStatus.Non,
     employmentVariants: [
       {
         priority: 0,

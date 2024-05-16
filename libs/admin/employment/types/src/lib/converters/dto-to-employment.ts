@@ -1,7 +1,7 @@
 import { EmploymentDto } from '@dp/admin/employment/dto';
 
-import { Employment } from '../models';
 import { EMPLOYMENT_STATUS_MAP } from './employment-status-map';
+import { Employment } from '../models';
 
 export function convertDtoToEmployment(dto: EmploymentDto): Employment {
   return {
