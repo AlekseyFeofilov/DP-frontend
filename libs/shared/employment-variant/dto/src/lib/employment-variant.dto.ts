@@ -15,5 +15,5 @@ export interface EmploymentVariantDto {
   company: CompanyDto;
   occupation: string;
   studentId: string;
-  comment?: string;
+  comment?: string | null;
 }

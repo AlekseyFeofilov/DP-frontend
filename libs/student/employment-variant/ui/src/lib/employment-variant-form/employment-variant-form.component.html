@@ -27,15 +27,15 @@
 
   <label>Приоритет</label>
   <div tuiGroup [collapsed]="true">
-    <tui-radio-block formControlName="priority" contentAlign="right" [item]="0">
-      Высокий
-    </tui-radio-block>
-    <tui-radio-block formControlName="priority" contentAlign="right" [item]="1">
-      Средний
-    </tui-radio-block>
-    <tui-radio-block formControlName="priority" contentAlign="right" [item]="2">
-      Низкий
-    </tui-radio-block>
+    @for (priority of priorities; track $index) {
+      <tui-radio-block
+        formControlName="priority"
+        contentAlign="right"
+        [item]="$index"
+      >
+        priority
+      </tui-radio-block>
+    }
   </div>
   <tui-error
     formControlName="priority"

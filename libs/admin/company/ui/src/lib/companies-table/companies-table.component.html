@@ -47,9 +47,7 @@
   {{ index + 1 }}. {{ company.name }}
 </ng-template>
 
-<ng-template dpTableColumn="tutor" let-company>
-  <div>{{ company.tutor }}</div>
-</ng-template>
+<ng-template dpTableColumn="tutor" let-company> company.tutor </ng-template>
 
 <ng-template dpTableColumn="contact" let-company>
   @if (company.contact) {

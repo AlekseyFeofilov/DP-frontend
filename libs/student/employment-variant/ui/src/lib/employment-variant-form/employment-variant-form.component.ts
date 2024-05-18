@@ -1,30 +1,31 @@
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  TuiDataListWrapperModule,
-  TuiFieldErrorPipeModule,
-  TUI_VALIDATION_ERRORS,
-  TuiRadioBlockModule,
-  TuiTextareaModule,
-  TuiSelectModule,
-  TuiInputModule,
-} from '@taiga-ui/kit';
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { EMPLOYMENT_VARIANT_PRIORITY } from '@dp/shared/employment-variant/consts';
+import { EmploymentVariantStatus } from '@dp/shared/employment-variant/types';
+import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
 import {
-  TuiTextfieldControllerModule,
-  TuiNotificationModule,
   TuiErrorModule,
   TuiGroupModule,
   TuiHintModule,
+  TuiNotificationModule,
+  TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
-import {
-  ReactiveFormsModule,
-  FormControl,
-  Validators,
-  FormGroup,
-} from '@angular/forms';
-import { EmploymentVariantStatus } from '@dp/shared/employment-variant/types';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
 import { TuiButtonModule } from '@taiga-ui/experimental';
-import { CommonModule } from '@angular/common';
+import {
+  TUI_VALIDATION_ERRORS,
+  TuiDataListWrapperModule,
+  TuiFieldErrorPipeModule,
+  TuiInputModule,
+  TuiRadioBlockModule,
+  TuiSelectModule,
+  TuiTextareaModule,
+} from '@taiga-ui/kit';
 
 export interface EmploymentVariantForm {
   companyName: string;
@@ -87,6 +88,8 @@ export class EmploymentVariantFormComponent {
     comment: new FormControl<string>(''),
   });
 
+  readonly priorities = EMPLOYMENT_VARIANT_PRIORITY;
+
   readonly companies = [
     'ЦФТ',
     'НТР',
@@ -97,7 +100,6 @@ export class EmploymentVariantFormComponent {
     'HITs',
   ] as const;
 
-  // TODO пофиксить зависимость от admin домена
   readonly statuses = Object.values(EmploymentVariantStatus);
 
   onSubmit(): void {

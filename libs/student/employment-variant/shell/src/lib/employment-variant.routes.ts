@@ -3,6 +3,13 @@ import { PATH_NAME } from '@dp/student/shared/consts';
 
 export const EMPLOYMENT_VARIANTS_ROUTES: Route[] = [
   {
+    path: '',
+    loadComponent: () =>
+      import('@dp/student/employment-variant/pages').then(
+        m => m.AllEmploymentVariantsComponent,
+      ),
+  },
+  {
     path: PATH_NAME.create,
     loadComponent: () =>
       import('@dp/student/employment-variant/pages').then(

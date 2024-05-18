@@ -1,0 +1,75 @@
+<table tuiTable [columns]="columnProperties" class="table">
+  <thead>
+    <tr tuiThGroup>
+      @for (column of columns; track column.property) {
+        <th *tuiHead="column.property" tuiTh [sorter]="column.sorter">
+          {{ column.title }}
+        </th>
+      }
+    </tr>
+  </thead>
+
+  <tbody
+    *tuiLet="employmentVariants | tuiTableSort as sortedEmploymentVariants"
+    tuiTbody
+    [data]="sortedEmploymentVariants"
+  >
+    @for (
+      employmentVariant of sortedEmploymentVariants;
+      track employmentVariant.id
+    ) {
+      <tr tuiTr>
+        @for (column of columns; track column.property) {
+          <td *tuiCell="column.property" tuiTd>
+            <ng-container
+              *ngTemplateOutlet="
+                column | tuiMapper: getColumnTemplate;
+                context: { $implicit: employmentVariant, index: $index }
+              "
+            ></ng-container>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+
+<ng-template
+  dpTableColumn="companyName"
+  let-employmentVariant
+  let-index="index"
+>
+  {{ index + 1 }}. {{ employmentVariant.companyName }}
+</ng-template>
+
+<ng-template dpTableColumn="vacancy" let-employmentVariant>
+  {{ employmentVariant.vacancy }}
+  @if (employmentVariant.comment) {
+    <button
+      tuiIconButton
+      appearance="icon"
+      iconLeft="tuiIconInfo"
+      size="xs"
+      [tuiHint]="employmentVariant.comment"
+    ></button>
+  }
+</ng-template>
+
+<ng-template dpTableColumn="priority" let-employmentVariant>
+  {{ priorities[employmentVariant.priority] }}
+</ng-template>
+
+<ng-template dpTableColumn="status" let-employmentVariant>
+  {{ employmentVariant.status }}
+</ng-template>
+
+<ng-template dpTableColumn="actions" let-employmentVariant>
+  <a
+    tuiIconButton
+    appearance="flat"
+    iconLeft="tuiIconEdit"
+    size="s"
+    title="Edit"
+    [routerLink]="employmentVariant | tuiMapper: getEditEmploymentVariantRoute"
+  ></a>
+</ng-template>

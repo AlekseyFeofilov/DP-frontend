@@ -1,6 +1,6 @@
 import { EmploymentDto } from './employment-dto';
 
-export enum EmploymentStudentStatusDto {
+export enum EmploymentStudentDtoStatus {
   Non,
   CompaniesChose,
   PassedTheInterview,
@@ -12,7 +12,7 @@ export enum EmploymentStudentStatusDto {
 export interface StudentWithEmploymnetsDto {
   userId: string;
   name: string;
-  status: EmploymentStudentStatusDto;
+  status: EmploymentStudentDtoStatus;
   group: {
     id: string;
     number: number;
