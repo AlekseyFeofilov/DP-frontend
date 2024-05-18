@@ -1,6 +1,7 @@
-import { Company, NewCompany } from '@dp/admin/company/types';
+import { NewCompany } from '@dp/admin/company/types';
 import { createAction, props } from '@ngrx/store';
 
+import { Company } from '@dp/shared/company/types';
 import { COMPANY_STORE_FEATURE_KEY } from './company-store.key';
 
 const loadAll = createAction(

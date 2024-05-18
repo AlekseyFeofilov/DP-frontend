@@ -1,29 +1,29 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ViewChildren,
-  TemplateRef,
   Component,
   QueryList,
+  TemplateRef,
+  ViewChildren,
   inject,
 } from '@angular/core';
-import {
-  tuiTooltipOptionsProvider,
-  TuiTooltipModule,
-  TuiButtonModule,
-} from '@taiga-ui/experimental';
-import {
-  TuiTablePaginationModule,
-  TuiTableModule,
-} from '@taiga-ui/addon-table';
-import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
 import { EmploymentStoreFacade } from '@dp/admin/employment/store';
-import { TuiSvgModule, TuiWrapperModule } from '@taiga-ui/core';
 import { EmploymentStatus } from '@dp/admin/employment/types';
 import { TableColumnDirective } from '@dp/shared/utils';
-import { TableColumn } from '@dp/admin/shared/types';
-import { CommonModule } from '@angular/common';
+import {
+  TuiTableModule,
+  TuiTablePaginationModule,
+} from '@taiga-ui/addon-table';
+import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
+import { TuiSvgModule, TuiWrapperModule } from '@taiga-ui/core';
+import {
+  TuiButtonModule,
+  TuiTooltipModule,
+  tuiTooltipOptionsProvider,
+} from '@taiga-ui/experimental';
 import { TUI_ARROW } from '@taiga-ui/kit';
 
+import { TableColumn } from '@dp/shared/types';
 import { COLUMNS } from './columns';
 
 @Component({

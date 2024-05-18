@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'admin-shared-types',
+  displayName: 'shared-company-dto',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/admin/shared/types',
+  coverageDirectory: '../../../../coverage/libs/shared/company/dto',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

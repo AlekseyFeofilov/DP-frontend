@@ -1,18 +1,18 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
 } from '@angular/core';
-import { CompanyStoreFacade } from '@dp/admin/company/store';
-import { CompanyFormComponent } from '@dp/admin/company/ui';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CompanyStoreFacade } from '@dp/admin/company/store';
 import { NewCompany } from '@dp/admin/company/types';
+import { CompanyFormComponent } from '@dp/admin/company/ui';
 import { PATH_NAME } from '@dp/admin/shared/consts';
-import { TuiLoaderModule } from '@taiga-ui/core';
-import { CommonModule } from '@angular/common';
 import { FormValue } from '@dp/shared/types';
 import { tuiIsPresent } from '@taiga-ui/cdk';
+import { TuiLoaderModule } from '@taiga-ui/core';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -33,7 +33,7 @@ export class EditCompanyComponent implements OnInit {
     filter(tuiIsPresent),
     map(selectedCompany => {
       const { id, ...company } = selectedCompany;
-      return company;
+      return company as NewCompany;
     }),
   ); // TODO: создать хелпер
 

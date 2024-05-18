@@ -1,15 +1,13 @@
 import {
-  AllCompaniesApiResponse,
   CreateCompanyApiRequest,
-  CompanyByIdApiResponse,
   EditCompanyApiRequest,
 } from '@dp/admin/company/data-access';
+import { NewCompany, convertNewCompanyToDto } from '@dp/admin/company/types';
 import {
-  convertNewCompanyToDto,
-  convertDtoToCompany,
-  NewCompany,
-  Company,
-} from '@dp/admin/company/types';
+  AllCompaniesApiResponse,
+  CompanyByIdApiResponse,
+} from '@dp/shared/company/data-access';
+import { Company, convertDtoToCompany } from '@dp/shared/company/types';
 
 export namespace CompanyApiAdapterHelper {
   export function parseAllCompaniesApiResponse(

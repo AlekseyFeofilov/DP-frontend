@@ -1,7 +1,10 @@
 export interface NewCompany {
   name: string;
-  spokesman: string | null;
+  tutor: string;
   contact: string | null;
   vacancies: string[];
-  vacanciesNumber: number | null;
+  vacanciesNumber: string | null;
+  isPartner: boolean;
+  comment: string | null;
+  communicationPlace: string | null;
 }

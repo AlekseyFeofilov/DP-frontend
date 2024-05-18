@@ -1,5 +1,5 @@
 import { StudentWithEmployments } from '@dp/admin/employment/types';
-import { TableColumn } from '@dp/admin/shared/types';
+import { TableColumn } from '@dp/shared/types';
 import { tuiDefaultSort } from '@taiga-ui/cdk';
 
 export const COLUMNS: ReadonlyArray<TableColumn> = [

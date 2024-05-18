@@ -1,15 +1,16 @@
+import { Injectable, inject } from '@angular/core';
+import { CompanyApiService } from '@dp/admin/company/data-access';
 import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { CompanyApiService } from '@dp/admin/company/data-access';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
 import { notificationActions } from '@dp/shared/effects';
-import { Injectable, inject } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TuiDialogService } from '@taiga-ui/core';
 import { TUI_PROMPT } from '@taiga-ui/kit';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
 
+import { CompanyCommonApiService } from '@dp/shared/company/data-access';
 import { CompanyApiAdapterHelper } from './company-api-adapter.helper';
 import { companyActions } from './company-store.actions';
 
@@ -17,13 +18,14 @@ import { companyActions } from './company-store.actions';
 export class CompanyStoreEffects {
   private readonly actions$ = inject(Actions);
   private readonly companyApiService = inject(CompanyApiService);
+  private readonly companyCommonApiService = inject(CompanyCommonApiService);
   private readonly dialogService = inject(TuiDialogService);
 
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(companyActions.loadAll),
       switchMap(() =>
-        this.companyApiService.getAll().pipe(
+        this.companyCommonApiService.getAll().pipe(
           map(response => {
             const companies =
               CompanyApiAdapterHelper.parseAllCompaniesApiResponse(response);
@@ -47,7 +49,7 @@ export class CompanyStoreEffects {
     this.actions$.pipe(
       ofType(companyActions.loadSelected),
       switchMap(({ id }) =>
-        this.companyApiService.getById(id).pipe(
+        this.companyCommonApiService.getById(id).pipe(
           map(response => {
             const company =
               CompanyApiAdapterHelper.parseCompanyByIdApiResponse(response);

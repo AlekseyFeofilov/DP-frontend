@@ -4,14 +4,24 @@
     >Введите текст</tui-input
   >
 
-  <label>Ответственное лицо</label>
-  <tui-input formControlName="spokesman" [tuiTextfieldCleaner]="true"
+  <label></label>
+  <tui-checkbox-labeled formControlName="isPartner" size="l"
+    >Партнер</tui-checkbox-labeled
+  >
+
+  <label>Куратор</label>
+  <tui-input formControlName="tutor" [tuiTextfieldCleaner]="true"
     >Введите ФИО</tui-input
   >
 
   <label>Контакт</label>
   <tui-input formControlName="contact" [tuiTextfieldCleaner]="true"
     >Например, номер телефона, телеграм или email</tui-input
+  >
+
+  <label>Место коммуникации</label>
+  <tui-input formControlName="communicationPlace" [tuiTextfieldCleaner]="true"
+    >Например, почта</tui-input
   >
 
   <label>Вакансии</label>
@@ -23,12 +33,16 @@
   >
 
   <label>Количество мест</label>
-  <tui-input-number
-    [min]="0"
-    [step]="1"
-    formControlName="vacanciesNumber"
+  <tui-input formControlName="vacanciesNumber" [tuiTextfieldCleaner]="true"
+    >Сколько вакансий предоставляет компания</tui-input
+  >
+
+  <label>Место для комментария</label>
+  <tui-textarea
+    formControlName="comment"
+    [expandable]="true"
     [tuiTextfieldCleaner]="true"
-    >Сколько вакансий предоставляет компания</tui-input-number
+    >Дополнительная информация</tui-textarea
   >
 
   <button class="action" type="submit" tuiButton [loading]="loading$ | async">

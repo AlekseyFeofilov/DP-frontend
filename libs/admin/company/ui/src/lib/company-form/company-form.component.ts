@@ -1,31 +1,33 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  EventEmitter,
   Component,
+  EventEmitter,
+  Input,
   OnInit,
   Output,
-  Input,
 } from '@angular/core';
 import {
-  ReactiveFormsModule,
   FormControl,
-  Validators,
   FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
+import { NewCompany } from '@dp/admin/company/types';
+import { FormValue } from '@dp/shared/types';
 import {
-  TuiInputNumberModule,
-  TuiInputTagModule,
-  TuiInputModule,
-} from '@taiga-ui/kit';
-import {
-  tuiMarkControlAsTouchedAndValidate,
   tuiIsPresent,
+  tuiMarkControlAsTouchedAndValidate,
 } from '@taiga-ui/cdk';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/experimental';
-import { NewCompany } from '@dp/admin/company/types';
-import { CommonModule } from '@angular/common';
-import { FormValue } from '@dp/shared/types';
+import {
+  TuiCheckboxLabeledModule,
+  TuiInputModule,
+  TuiInputNumberModule,
+  TuiInputTagModule,
+  TuiTextareaModule,
+} from '@taiga-ui/kit';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -39,6 +41,8 @@ import { BehaviorSubject } from 'rxjs';
     TuiInputNumberModule,
     TuiButtonModule,
     TuiTextfieldControllerModule,
+    TuiTextareaModule,
+    TuiCheckboxLabeledModule,
   ],
   templateUrl: './company-form.component.html',
   styleUrl: './company-form.component.less',
@@ -53,12 +57,20 @@ export class CompanyFormComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    spokesman: new FormControl<string>(''),
+    tutor: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
     contact: new FormControl<string>(''),
+    communicationPlace: new FormControl<string>(''),
     vacancies: new FormControl<string[]>([], {
       nonNullable: true,
     }),
-    vacanciesNumber: new FormControl<number | null>(null),
+    vacanciesNumber: new FormControl<string>(''),
+    isPartner: new FormControl<boolean>(true, {
+      nonNullable: true,
+    }),
+    comment: new FormControl<string>(''),
   });
 
   readonly loading$ = new BehaviorSubject<boolean>(false);
@@ -81,10 +93,13 @@ export class CompanyFormComponent implements OnInit {
     this.submitted.next({
       value: {
         name: formValue.name,
-        spokesman: '',
+        tutor: formValue.tutor,
         contact: formValue.contact,
+        communicationPlace: formValue.communicationPlace,
         vacancies: [],
         vacanciesNumber: formValue.vacanciesNumber,
+        isPartner: formValue.isPartner,
+        comment: formValue.comment,
       },
       finishHandler: this.handleFinish.bind(this),
     });

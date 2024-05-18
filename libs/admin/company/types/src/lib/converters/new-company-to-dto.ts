@@ -7,10 +7,12 @@ export function convertNewCompanyToDto(
 ): CreateCompanyDto | EditCompanyDto {
   return {
     companyName: newCompany.name,
-    placesQuantity: newCompany.vacanciesNumber?.toString() || '', // TODO
-    communicationPlace: '',
-    contact: newCompany.contact || '',
-    comment: '',
-    isPartner: true,
+    placesQuantity: newCompany.vacanciesNumber,
+    communicationPlace: newCompany.communicationPlace,
+    contact: newCompany.contact,
+    comment: newCompany.comment,
+    isPartner: newCompany.isPartner,
+    tutor: newCompany.tutor,
+    vacancy: '', // TODO
   };
 }

@@ -1,4 +1,4 @@
-import { TableColumn } from '@dp/admin/shared/types';
+import { TableColumn } from '@dp/shared/types';
 import { StatementCommon } from '@dp/student/statement/types';
 
 export const COLUMNS: ReadonlyArray<TableColumn> = [

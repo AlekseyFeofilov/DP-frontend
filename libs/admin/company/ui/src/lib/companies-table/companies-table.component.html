@@ -47,10 +47,8 @@
   {{ index + 1 }}. {{ company.name }}
 </ng-template>
 
-<ng-template dpTableColumn="spokesman" let-company>
-  @if (company.spokesman) {
-    <div>{{ company.spokesman }}</div>
-  }
+<ng-template dpTableColumn="tutor" let-company>
+  <div>{{ company.tutor }}</div>
 </ng-template>
 
 <ng-template dpTableColumn="contact" let-company>
@@ -68,12 +66,6 @@
       [autoColor]="true"
       [value]="vacancy"
     ></tui-tag>
-  }
-</ng-template>
-
-<ng-template dpTableColumn="vacanciesNumber" let-company>
-  @if (company.vacanciesNumber) {
-    <div>{{ company.vacanciesNumber }}</div>
   }
 </ng-template>
 

@@ -12,8 +12,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CompanyCommonApiService } from '@dp/shared/company/data-access';
+import { filterPartners } from '@dp/shared/company/utils';
 import { FormValue, SelectItem } from '@dp/shared/types';
-import { CompanyApiService } from '@dp/student/statement/data-access';
 import { NewIntrenshipStatement } from '@dp/student/statement/types';
 import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
 import {
@@ -51,7 +52,7 @@ export interface InternshipStatementForm {
     TuiDataListWrapperModule,
     TuiNotificationModule,
   ],
-  providers: [CompanyApiService],
+  providers: [CompanyCommonApiService],
   templateUrl: './internship-statement-form.component.html',
   styleUrl: './internship-statement-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,7 +62,7 @@ export class InternshipStatementFormComponent {
     FormValue<NewIntrenshipStatement>
   >();
 
-  private readonly companyApiService = inject(CompanyApiService);
+  private readonly companyApiService = inject(CompanyCommonApiService);
 
   readonly loading$ = new BehaviorSubject<boolean>(false);
 
@@ -77,11 +78,12 @@ export class InternshipStatementFormComponent {
     comment: new FormControl<string>(''),
   });
 
-  readonly companies$ = this.companyApiService.getAllPartners().pipe(
-    shareReplay(),
+  readonly companies$ = this.companyApiService.getAll().pipe(
+    filterPartners,
     map(companies =>
       companies.map(company => new SelectItem(company.id, company.companyName)),
     ),
+    shareReplay(1),
   );
 
   onSubmit(): void {

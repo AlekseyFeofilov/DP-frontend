@@ -11,9 +11,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CompanyStoreFacade } from '@dp/admin/company/store';
-import { Company } from '@dp/admin/company/types';
 import { PATH_NAME } from '@dp/admin/shared/consts';
-import { TableColumn } from '@dp/admin/shared/types';
 import { TableColumnDirective } from '@dp/shared/utils';
 import {
   TuiTableModule,
@@ -23,6 +21,8 @@ import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
 import { TuiButtonModule } from '@taiga-ui/experimental';
 import { TuiTagModule } from '@taiga-ui/kit';
 
+import { Company } from '@dp/shared/company/types';
+import { TableColumn } from '@dp/shared/types';
 import { COLUMNS } from './columns';
 
 @Component({

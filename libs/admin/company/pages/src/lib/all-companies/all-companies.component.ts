@@ -1,17 +1,17 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
 } from '@angular/core';
-import { CompaniesTableComponent } from '@dp/admin/company/ui';
-import { CompanyStoreFacade } from '@dp/admin/company/store';
-import { TuiButtonModule } from '@taiga-ui/experimental';
-import { PATH_NAME } from '@dp/admin/shared/consts';
-import { Company } from '@dp/admin/company/types';
-import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CompanyStoreFacade } from '@dp/admin/company/store';
+import { CompaniesTableComponent } from '@dp/admin/company/ui';
+import { PATH_NAME } from '@dp/admin/shared/consts';
+import { Company } from '@dp/shared/company/types';
 import { tuiPure } from '@taiga-ui/cdk';
+import { TuiButtonModule } from '@taiga-ui/experimental';
 
 @Component({
   selector: 'dp-all-companies',

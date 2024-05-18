@@ -6,7 +6,6 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core';
-import { TableColumn } from '@dp/admin/shared/types';
 import { TableColumnDirective } from '@dp/shared/utils';
 import { statementsMock } from '@dp/student/statement/store';
 import {
@@ -20,6 +19,7 @@ import { TuiHintModule } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/experimental';
 import { of } from 'rxjs';
 
+import { TableColumn } from '@dp/shared/types';
 import { COLUMNS } from './columns';
 
 @Component({

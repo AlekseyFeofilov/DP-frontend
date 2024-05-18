@@ -42,7 +42,12 @@
       ],
       "@dp/admin/employment/ui": ["libs/admin/employment/ui/src/index.ts"],
       "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
-      "@dp/admin/shared/types": ["libs/admin/shared/types/src/index.ts"],
+      "@dp/shared/company/data-access": [
+        "libs/shared/company/data-access/src/index.ts"
+      ],
+      "@dp/shared/company/dto": ["libs/shared/company/dto/src/index.ts"],
+      "@dp/shared/company/types": ["libs/shared/company/types/src/index.ts"],
+      "@dp/shared/company/utils": ["libs/shared/company/utils/src/index.ts"],
       "@dp/shared/consts": ["libs/shared/consts/src/index.ts"],
       "@dp/shared/core": ["libs/shared/core/src/index.ts"],
       "@dp/shared/effects": ["libs/shared/effects/src/index.ts"],

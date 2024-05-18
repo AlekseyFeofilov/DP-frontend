@@ -1,11 +1,12 @@
-import { Company, NewCompany } from '@dp/admin/company/types';
-import { StoreStateStatus } from '@dp/shared/types';
 import { Injectable, inject } from '@angular/core';
+import { NewCompany } from '@dp/admin/company/types';
+import { StoreStateStatus } from '@dp/shared/types';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs';
 
-import { fromCompanyStore } from './company-store.selectors';
+import { Company } from '@dp/shared/company/types';
 import { companyActions } from './company-store.actions';
+import { fromCompanyStore } from './company-store.selectors';
 
 @Injectable()
 export class CompanyStoreFacade {

@@ -1,4 +1,4 @@
-import { TableColumn } from '@dp/admin/shared/types';
+import { TableColumn } from '@dp/shared/types';
 
 export const COLUMNS: ReadonlyArray<TableColumn> = [
   {
@@ -7,8 +7,8 @@ export const COLUMNS: ReadonlyArray<TableColumn> = [
     sorter: null,
   },
   {
-    property: 'spokesman',
-    title: 'Представитель',
+    property: 'tutor',
+    title: 'Куратор',
     sorter: null,
   },
   {
@@ -19,11 +19,6 @@ export const COLUMNS: ReadonlyArray<TableColumn> = [
   {
     property: 'vacancies',
     title: 'Вакансии',
-    sorter: null,
-  },
-  {
-    property: 'vacanciesNumber',
-    title: 'Кол-во мест',
     sorter: null,
   },
   {

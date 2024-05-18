@@ -1,7 +1,7 @@
 {
-  "name": "admin-shared-types",
+  "name": "shared-company-utils",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/admin/shared/types/src",
+  "sourceRoot": "libs/shared/company/utils/src",
   "prefix": "dp",
   "tags": [],
   "projectType": "library",

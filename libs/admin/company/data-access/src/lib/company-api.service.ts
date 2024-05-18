@@ -1,16 +1,8 @@
-import {
-  CreateCompanyDto,
-  EditCompanyDto,
-  CompanyDto,
-} from '@dp/admin/company/dto';
-import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { CreateCompanyDto, EditCompanyDto } from '@dp/admin/company/dto';
 import { BASE_URL } from '@dp/shared/core';
 import { Observable } from 'rxjs';
-
-export type AllCompaniesApiResponse = ReadonlyArray<CompanyDto>;
-
-export type CompanyByIdApiResponse = CompanyDto;
 
 export interface CreateCompanyApiRequest {
   payload: CreateCompanyDto;
@@ -29,14 +21,6 @@ export interface DeleteCompanyApiRequest {
 export class CompanyApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = `${inject(BASE_URL)}/Employer`;
-
-  getAll(): Observable<AllCompaniesApiResponse> {
-    return this.http.get<AllCompaniesApiResponse>(`${this.baseUrl}/GetAll`);
-  }
-
-  getById(id: string): Observable<CompanyByIdApiResponse> {
-    return this.http.get<CompanyByIdApiResponse>(`${this.baseUrl}/${id}`);
-  }
 
   create({ payload }: CreateCompanyApiRequest): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}`, payload);
