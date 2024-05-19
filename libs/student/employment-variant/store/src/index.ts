@@ -1,1 +1,3 @@
-export * from './lib/student-employment-variant-store/student-employment-variant-store.component';
+export * from './lib/employment-variant-store.effects';
+export * from './lib/employment-variant-store.facade';
+export * from './lib/employment-variant-store.reducer';

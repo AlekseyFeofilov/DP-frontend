@@ -1,1 +1,1 @@
-export * from './lib/student-employment-variant-data-access/student-employment-variant-data-access.component';
+export * from './lib/employment-variant-api.service';

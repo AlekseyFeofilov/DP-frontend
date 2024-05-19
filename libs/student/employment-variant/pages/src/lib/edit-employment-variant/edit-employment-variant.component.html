@@ -2,4 +2,13 @@
   <h1>Редактирование варианта трудоустройства</h1>
 </div>
 
-<dp-employment-variant-form class="form"></dp-employment-variant-form>
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-employment-variant-form
+    class="form"
+    mode="edit"
+    [initialValue]="employmentVariant$ | async"
+    (submitted)="onFormSubmit($event)"
+  ></dp-employment-variant-form>
+}

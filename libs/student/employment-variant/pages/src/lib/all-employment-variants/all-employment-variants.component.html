@@ -9,4 +9,11 @@
   >
 </div>
 
-<dp-employment-variants-table></dp-employment-variants-table>
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-employment-variants-table
+    [employmentVariants]="(employmentVariants$ | async) || []"
+    (removeClicked)="removeEmploymentVariant($event)"
+  ></dp-employment-variants-table>
+}

@@ -9,4 +9,8 @@
   >
 </div>
 
-<dp-companies-table (removeClicked)="onRemove($event)"></dp-companies-table>
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-companies-table (removeClicked)="onRemove($event)"></dp-companies-table>
+}

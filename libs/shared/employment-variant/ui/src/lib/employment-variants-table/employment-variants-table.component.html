@@ -34,25 +34,15 @@
   </tbody>
 </table>
 
-<ng-template
-  dpTableColumn="companyName"
-  let-employmentVariant
-  let-index="index"
->
-  {{ index + 1 }}. {{ employmentVariant.companyName }}
+<ng-template dpTableColumn="company" let-employmentVariant let-index="index">
+  {{ index + 1 }}. {{ employmentVariant.company.name }}
+  @if (employmentVariant.comment) {
+    <tui-tooltip [content]="employmentVariant.comment"></tui-tooltip>
+  }
 </ng-template>
 
 <ng-template dpTableColumn="vacancy" let-employmentVariant>
   {{ employmentVariant.vacancy }}
-  @if (employmentVariant.comment) {
-    <button
-      tuiIconButton
-      appearance="icon"
-      iconLeft="tuiIconInfo"
-      size="xs"
-      [tuiHint]="employmentVariant.comment"
-    ></button>
-  }
 </ng-template>
 
 <ng-template dpTableColumn="priority" let-employmentVariant>
@@ -64,6 +54,16 @@
 </ng-template>
 
 <ng-template dpTableColumn="actions" let-employmentVariant>
+  <button
+    appearance="flat"
+    iconLeft="tuiIconTrash"
+    size="s"
+    title="Remove"
+    tuiIconButton
+    type="button"
+    class="tui-space_right-1"
+    (click)="remove(employmentVariant)"
+  ></button>
   <a
     tuiIconButton
     appearance="flat"
@@ -72,4 +72,11 @@
     title="Edit"
     [routerLink]="employmentVariant | tuiMapper: getEditEmploymentVariantRoute"
   ></a>
+  <button
+    tuiIconButton
+    appearance="flat"
+    iconLeft="tuiIconMessageCircle"
+    size="s"
+    title="Chat"
+  ></button>
 </ng-template>

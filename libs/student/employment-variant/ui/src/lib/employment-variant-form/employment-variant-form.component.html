@@ -8,20 +8,24 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label>Название компании</label>
   <tui-select
-    formControlName="companyName"
+    formControlName="company"
     tuiHintContent="В случае если желаемой компании нет в общем списке партнеров, следует всегда выбирать HITs, а в комментарии прописать реальное место прохождения практики"
     [tuiTextfieldCleaner]="true"
     [tuiTextfieldLabelOutside]="true"
+    [readOnly]="isEditMode"
   >
     Выберите из списка партнеров
     <tui-data-list-wrapper
       *tuiDataList
-      [items]="companies"
+      [items]="companies$ | async"
     ></tui-data-list-wrapper>
   </tui-select>
 
   <label>Желаемая вакансия</label>
-  <tui-input formControlName="vacancy" [tuiTextfieldCleaner]="true"
+  <tui-input
+    formControlName="vacancy"
+    [tuiTextfieldCleaner]="true"
+    [readOnly]="isEditMode"
     >Например, java-backend разработчик</tui-input
   >
 
@@ -33,7 +37,7 @@
         contentAlign="right"
         [item]="$index"
       >
-        priority
+        {{ priority }}
       </tui-radio-block>
     }
   </div>
@@ -56,8 +60,11 @@
     formControlName="comment"
     [expandable]="true"
     [tuiTextfieldCleaner]="true"
+    [readOnly]="isEditMode"
     >Все, что хотите сообщить дополнительно</tui-textarea
   >
 
-  <button class="action" type="submit" tuiButton>Отправить</button>
+  <button class="action" type="submit" tuiButton [loading]="loading$ | async">
+    Отправить
+  </button>
 </form>

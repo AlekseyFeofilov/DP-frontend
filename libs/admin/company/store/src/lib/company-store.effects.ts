@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { CompanyApiService } from '@dp/admin/company/data-access';
+import { CompanyCommonApiService } from '@dp/shared/company/data-access';
 import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
@@ -10,7 +11,6 @@ import { TuiDialogService } from '@taiga-ui/core';
 import { TUI_PROMPT } from '@taiga-ui/kit';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
 
-import { CompanyCommonApiService } from '@dp/shared/company/data-access';
 import { CompanyApiAdapterHelper } from './company-api-adapter.helper';
 import { companyActions } from './company-store.actions';
 

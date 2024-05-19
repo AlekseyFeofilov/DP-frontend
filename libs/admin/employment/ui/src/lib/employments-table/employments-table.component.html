@@ -78,7 +78,7 @@
               {{ variant.status }}
             </th>
             <th tuiTd>
-              {{ variant.companyName }}
+              {{ variant.company.name }}
               @if (variant.comment) {
                 <tui-tooltip [content]="variant.comment"></tui-tooltip>
               }

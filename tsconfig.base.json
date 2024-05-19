@@ -70,6 +70,9 @@
       "@dp/student/employment-variant/data-access": [
         "libs/student/employment-variant/data-access/src/index.ts"
       ],
+      "@dp/student/employment-variant/dto": [
+        "libs/student/employment-variant/dto/src/index.ts"
+      ],
       "@dp/student/employment-variant/pages": [
         "libs/student/employment-variant/pages/src/index.ts"
       ],
@@ -78,6 +81,9 @@
       ],
       "@dp/student/employment-variant/store": [
         "libs/student/employment-variant/store/src/index.ts"
+      ],
+      "@dp/student/employment-variant/types": [
+        "libs/student/employment-variant/types/src/index.ts"
       ],
       "@dp/student/employment-variant/ui": [
         "libs/student/employment-variant/ui/src/index.ts"

@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
+  Output,
   QueryList,
   TemplateRef,
   ViewChildren,
@@ -15,10 +17,9 @@ import { TableColumnDirective } from '@dp/shared/utils';
 import { PATH_NAME } from '@dp/student/shared/consts';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
-import { TuiHintModule } from '@taiga-ui/core';
+import { TuiTooltipModule } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/experimental';
 import { COLUMNS } from './columns';
-import { employmentVariantsMock } from './employment-variants.mock';
 
 @Component({
   selector: 'dp-employment-variants-table',
@@ -31,16 +32,17 @@ import { employmentVariantsMock } from './employment-variants.mock';
     TuiMapperPipeModule,
     TableColumnDirective,
     TuiButtonModule,
-    TuiHintModule,
+    TuiTooltipModule,
   ],
   templateUrl: './employment-variants-table.component.html',
   styleUrl: './employment-variants-table.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmploymentVariantsTableComponent {
-  // TODO: required
-  @Input({ required: false })
-  employmentVariants: ReadonlyArray<EmploymentVariant> = employmentVariantsMock;
+  @Input({ required: true })
+  employmentVariants: ReadonlyArray<EmploymentVariant> = [];
+
+  @Output() removeClicked = new EventEmitter<EmploymentVariant>();
 
   @ViewChildren(TableColumnDirective)
   columnTemplates?: QueryList<TableColumnDirective>;
@@ -60,5 +62,9 @@ export class EmploymentVariantsTableComponent {
   @tuiPure
   get columnProperties(): string[] {
     return this.columns.map(column => column.property);
+  }
+
+  remove(employmentVariant: EmploymentVariant): void {
+    this.removeClicked.emit(employmentVariant);
   }
 }

@@ -1,6 +1,7 @@
 import { EmploymentVariantDto } from '@dp/shared/employment-variant/dto';
+
 import { EmploymentVariant } from '../models';
-import { EMPLOYMENT_VARIANT_STATUS_MAP } from './employment-varioant-status-map';
+import { EMPLOYMENT_VARIANT_STATUS_MAP_FROM_DTO } from './employment-variant-status-map';
 
 export function convertDtoToEmploymentVariant(
   dto: EmploymentVariantDto,
@@ -8,9 +9,12 @@ export function convertDtoToEmploymentVariant(
   return {
     id: dto.id,
     priority: dto.priority,
-    companyName: '', // TODO
+    company: {
+      id: dto.employerId,
+      name: '', // TODO
+    },
     vacancy: dto.occupation,
-    status: EMPLOYMENT_VARIANT_STATUS_MAP[dto.status],
+    status: EMPLOYMENT_VARIANT_STATUS_MAP_FROM_DTO[dto.status],
     comment: dto.comment ?? null,
   };
 }

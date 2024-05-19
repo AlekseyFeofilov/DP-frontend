@@ -1,14 +1,29 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CompanyCommonApiService } from '@dp/shared/company/data-access';
+import { filterPartners } from '@dp/shared/company/utils';
 import { EMPLOYMENT_VARIANT_PRIORITY } from '@dp/shared/employment-variant/consts';
 import { EmploymentVariantStatus } from '@dp/shared/employment-variant/types';
-import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
+import { FormMode, FormValue, SelectItem } from '@dp/shared/types';
+import { NewEmploymentVariant } from '@dp/student/employment-variant/types';
+import {
+  tuiIsPresent,
+  tuiMarkControlAsTouchedAndValidate,
+} from '@taiga-ui/cdk';
 import {
   TuiErrorModule,
   TuiGroupModule,
@@ -26,14 +41,7 @@ import {
   TuiSelectModule,
   TuiTextareaModule,
 } from '@taiga-ui/kit';
-
-export interface EmploymentVariantForm {
-  companyName: string;
-  vacancy: string;
-  status: EmploymentVariantStatus;
-  priority: number;
-  comment: string | null;
-}
+import { BehaviorSubject, map, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'dp-employment-variant-form',
@@ -55,6 +63,7 @@ export interface EmploymentVariantForm {
     TuiNotificationModule,
   ],
   providers: [
+    CompanyCommonApiService,
     {
       provide: TUI_VALIDATION_ERRORS,
       useValue: {
@@ -66,9 +75,20 @@ export interface EmploymentVariantForm {
   styleUrl: './employment-variant-form.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmploymentVariantFormComponent {
+export class EmploymentVariantFormComponent implements OnInit {
+  @Input() initialValue?: NewEmploymentVariant | null;
+  @Input() mode: FormMode = 'create';
+
+  @Output() readonly submitted = new EventEmitter<
+    FormValue<NewEmploymentVariant>
+  >();
+
+  private readonly companyApiService = inject(CompanyCommonApiService);
+
+  readonly loading$ = new BehaviorSubject<boolean>(false);
+
   readonly form = new FormGroup({
-    companyName: new FormControl<string | null>(null, {
+    company: new FormControl<SelectItem | null>(null, {
       validators: [Validators.required],
     }),
     vacancy: new FormControl<string>('', {
@@ -90,20 +110,65 @@ export class EmploymentVariantFormComponent {
 
   readonly priorities = EMPLOYMENT_VARIANT_PRIORITY;
 
-  readonly companies = [
-    'ЦФТ',
-    'НТР',
-    'red_mad_robot',
-    'IndoorSoft',
-    'MccSoft',
-    'Креософт',
-    'HITs',
-  ] as const;
+  readonly companies$ = this.companyApiService.getAll().pipe(
+    filterPartners,
+    map(companies =>
+      companies.map(company => new SelectItem(company.id, company.companyName)),
+    ),
+    shareReplay(1),
+  );
 
   readonly statuses = Object.values(EmploymentVariantStatus);
 
+  get isEditMode() {
+    return this.mode === 'edit';
+  }
+
+  ngOnInit(): void {
+    this.assignInitialValues();
+  }
+
   onSubmit(): void {
     tuiMarkControlAsTouchedAndValidate(this.form);
-    console.log(this.form.value);
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    const formValue = this.form.getRawValue();
+
+    this.loading$.next(true);
+
+    this.submitted.next({
+      value: {
+        company: {
+          id: formValue.company!.key,
+          name: formValue.company!.value,
+        },
+        vacancy: formValue.vacancy,
+        status: formValue.status,
+        priority: formValue.priority!,
+        comment: formValue.comment,
+      },
+      finishHandler: this.handleFinish.bind(this),
+    });
+  }
+
+  private handleFinish(): void {
+    this.loading$.next(false);
+  }
+
+  private assignInitialValues(): void {
+    if (!tuiIsPresent(this.initialValue)) {
+      return;
+    }
+
+    this.form.setValue({
+      ...this.initialValue,
+      company: new SelectItem(
+        this.initialValue.company.id,
+        this.initialValue.company.name,
+      ),
+    });
   }
 }

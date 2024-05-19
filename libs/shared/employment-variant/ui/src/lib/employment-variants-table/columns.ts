@@ -2,7 +2,7 @@ import { TableColumn } from '@dp/shared/types';
 
 export const COLUMNS: ReadonlyArray<TableColumn> = [
   {
-    property: 'companyName',
+    property: 'company',
     title: 'Компания',
     sorter: null,
   },
