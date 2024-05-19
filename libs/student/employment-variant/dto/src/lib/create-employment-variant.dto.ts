@@ -5,4 +5,5 @@ export interface CreateEmploymentVariantDto {
   occupation: string;
   status: EmploymentVariantDtoStatus;
   priority: number;
+  comment?: string | null;
 }

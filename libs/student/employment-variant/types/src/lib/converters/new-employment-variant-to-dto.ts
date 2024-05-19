@@ -13,6 +13,7 @@ export function convertNewEmploymentVariantToCreateDto(
     occupation: newEmploymentVariant.vacancy,
     status: EMPLOYMENT_VARIANT_STATUS_MAP_TO_DTO[newEmploymentVariant.status],
     priority: newEmploymentVariant.priority,
+    comment: newEmploymentVariant.comment,
   };
 }
 
@@ -23,5 +24,6 @@ export function convertNewEmploymentVariantToEditDto(
     occupation: newEmploymentVariant.vacancy,
     status: EMPLOYMENT_VARIANT_STATUS_MAP_TO_DTO[newEmploymentVariant.status],
     priority: newEmploymentVariant.priority,
+    comment: newEmploymentVariant.comment,
   };
 }
