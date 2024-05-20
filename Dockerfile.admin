@@ -5,6 +5,7 @@ COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 RUN npx nx build dp-admin
+RUN npm prune --omit=dev --omit=optional --omit=peer --ignore-scripts
 
 #STAGE 2
 FROM nginx:1.17.1-alpine
