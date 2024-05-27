@@ -1,3 +1,4 @@
+import { StudentDto } from '@dp/shared/student/dto';
 import { EmploymentDto } from './employment-dto';
 
 export enum EmploymentStudentDtoStatus {
@@ -9,15 +10,8 @@ export enum EmploymentStudentDtoStatus {
   Employed,
 }
 
-export interface StudentWithEmploymnetsDto {
-  userId: string;
-  name: string;
+export interface StudentWithEmploymnetsDto extends StudentDto {
   status: EmploymentStudentDtoStatus;
-  group: {
-    id: string;
-    number: number;
-    grade: number;
-  } | null;
   employmentVariants: any[]; // TODO
   employments: EmploymentDto[];
 }

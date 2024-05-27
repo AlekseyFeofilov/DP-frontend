@@ -1,0 +1,23 @@
+<ng-container *tuiLet="statementType$ | async as statementType">
+  <div class="title">
+    <h1>Заявления на {{ statementName$ | async }}</h1>
+    @if (statementType === 'internshipCheck') {
+      <a
+        tuiButton
+        size="m"
+        iconLeft="tuiIconPlusLarge"
+        [routerLink]="createRoute"
+        >Создать</a
+      >
+    }
+  </div>
+
+  @switch (statementType) {
+    @case ('internshipCheck') {
+      <dp-internship-check-statements-table></dp-internship-check-statements-table>
+    }
+    @case ('internshipApply') {
+      <dp-internship-apply-statements-table></dp-internship-apply-statements-table>
+    }
+  }
+</ng-container>

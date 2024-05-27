@@ -1,28 +1,22 @@
-<a
-  tuiCell
-  tuiCardLarge
-  tuiSurface="elevated"
-  [routerLink]="createInternshipStatementPath"
->
-  <div tuiTitle="m">
-    Прохождение практики в компании
-    <div tuiSubtitle>
-      На основе этой заявки после ее одобрения создается заявка на
-      трудоустройство
+<div class="title">
+  <h1>Заявления</h1>
+</div>
+
+@for (category of categories; track category.name) {
+  <a
+    class="tui-space_top-4"
+    tuiCell
+    tuiCardLarge
+    tuiSurface="elevated"
+    [routerLink]="category.path"
+  >
+    <div tuiTitle="m">
+      {{ category.name }}
+      <div tuiSubtitle>
+        {{ category.description }}
+      </div>
     </div>
-  </div>
 
-  <tui-icon icon="tuiIconChevronRightLarge" tuiAppearance="icon"></tui-icon>
-</a>
-
-<a class="tui-space_top-4" tuiCell tuiCardLarge tuiSurface="elevated">
-  <div tuiTitle="m">
-    Трудоустройство
-    <div tuiSubtitle>
-      На основе этой заявки после ее одобрения создается активное
-      трудоустройство
-    </div>
-  </div>
-
-  <tui-icon icon="tuiIconChevronRightLarge" tuiAppearance="icon"></tui-icon>
-</a>
+    <tui-icon icon="tuiIconChevronRightLarge" tuiAppearance="icon"></tui-icon>
+  </a>
+}

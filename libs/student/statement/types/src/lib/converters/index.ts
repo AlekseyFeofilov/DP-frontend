@@ -1,1 +1,1 @@
-export * from './new-internship-statement-to-dto';
+export * from './new-internship-check-statement-to-dto';

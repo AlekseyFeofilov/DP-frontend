@@ -1,3 +1,4 @@
+import { CompanyDto } from '@dp/shared/company/dto';
 export enum EmploymentVariantDtoStatus {
   NoInfo = 'NoInfo',
   Interviewed = 'Interviewed',
@@ -10,7 +11,7 @@ export interface EmploymentVariantDto {
   id: string;
   status: EmploymentVariantDtoStatus;
   priority: number;
-  employerId: string; // TODO
+  employer: CompanyDto;
   occupation: string;
   studentId: string;
   comment?: string | null;

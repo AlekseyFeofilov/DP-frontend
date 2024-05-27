@@ -2,7 +2,7 @@ import {
   EmploymentDtoStatus,
   StudentWithEmploymnetsDto,
 } from '@dp/admin/employment/dto';
-
+import { convertDtoToStudent } from '@dp/shared/student/types';
 import { StudentWithEmployments } from '../models';
 import { convertDtoToEmployment } from './dto-to-employment';
 import { EMPLOYMENT_STUDENT_STATUS_MAP } from './employment-student-status-map';
@@ -15,10 +15,8 @@ export function convertDtoToStudentWithEmployments(
   );
 
   return {
-    id: dto.userId,
-    name: dto.name,
+    ...convertDtoToStudent(dto),
     status: EMPLOYMENT_STUDENT_STATUS_MAP[dto.status],
-    group: dto.group?.number || null,
     employment: activeEmployemnt
       ? convertDtoToEmployment(activeEmployemnt)
       : null,

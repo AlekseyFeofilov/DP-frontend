@@ -1,13 +1,10 @@
 import { EmploymentVariant } from '@dp/shared/employment-variant/types';
-
+import { Student } from '@dp/shared/student/types';
 import { EmploymentStudentStatus } from '../enums';
 import { Employment } from './employment';
 
-export interface StudentWithEmployments {
-  id: string;
-  name: string;
+export interface StudentWithEmployments extends Student {
   status: EmploymentStudentStatus;
-  group: number | null;
   employment: Employment | null;
   employmentVariants: EmploymentVariant[];
 }

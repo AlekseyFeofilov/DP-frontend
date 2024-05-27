@@ -1,0 +1,9 @@
+{
+  "name": "student-statement-consts",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/student/statement/consts/src",
+  "prefix": "dp",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

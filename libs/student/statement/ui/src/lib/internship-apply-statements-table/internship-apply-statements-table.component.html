@@ -1,0 +1,9 @@
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-internship-statements-table
+    hideStudentColumn
+    hideNewStatementStatementAction
+    [statements]="(statements$ | async) || []"
+  ></dp-internship-statements-table>
+}

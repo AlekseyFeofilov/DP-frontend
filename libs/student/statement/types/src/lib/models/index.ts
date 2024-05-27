@@ -1,2 +1,1 @@
-export * from './new-intrenship-statement';
-export * from './statement';
+export * from './new-intrenship-check-statement';

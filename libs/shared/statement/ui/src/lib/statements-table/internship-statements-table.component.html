@@ -1,0 +1,81 @@
+<table tuiTable [columns]="columnProperties" class="table" size="l">
+  <thead>
+    <tr tuiThGroup>
+      @for (column of columns; track column.property) {
+        <th *tuiHead="column.property" tuiTh [sorter]="column.sorter">
+          {{ column.title }}
+        </th>
+      }
+    </tr>
+  </thead>
+
+  <tbody
+    *tuiLet="statements | tuiTableSort as sortedStatements"
+    tuiTbody
+    [data]="sortedStatements"
+  >
+    @for (statement of sortedStatements; track statement.id) {
+      <tr tuiTr>
+        @for (column of columns; track column.property) {
+          <td *tuiCell="column.property" tuiTd>
+            <ng-container
+              *ngTemplateOutlet="
+                column | tuiMapper: getColumnTemplate;
+                context: { $implicit: statement, index: $index }
+              "
+            ></ng-container>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+
+<ng-template dpTableColumn="student" let-statement let-index="index">
+  {{ statement.student.name }}
+</ng-template>
+
+<ng-template dpTableColumn="date" let-statement>
+  {{ statement.createDate }}
+</ng-template>
+
+<ng-template dpTableColumn="company" let-statement let-index="index">
+  {{ statement.company.name }}
+  @if (statement.comment) {
+    <tui-tooltip [content]="statement.comment"></tui-tooltip>
+  }
+</ng-template>
+
+<ng-template dpTableColumn="vacancy" let-statement let-index="index">
+  {{ statement.vacancy }}
+</ng-template>
+
+<ng-template dpTableColumn="status" let-statement>
+  <div class="status" [class]="statement | tuiMapper: getStatusClassName">
+    {{ statement.status }}
+  </div>
+</ng-template>
+
+<ng-template dpTableColumn="actions" let-statement>
+  <button
+    tuiIconButton
+    appearance="flat"
+    iconLeft="tuiIconMessageCircle"
+    size="s"
+    type="button"
+    class="tui-space_right-1"
+  ></button>
+
+  @if (statement | tuiMapper: showCreateInternshipApplyStatementAction) {
+    <button
+      tuiIconButton
+      appearance="flat"
+      iconLeft="tuiIconFilePlus"
+      size="s"
+      type="button"
+      class="tui-space_right-1"
+      tuiHint="Создать заявление о трудоустройстве"
+      (click)="onNewStatementClick(statement)"
+    ></button>
+  }
+</ng-template>

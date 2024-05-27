@@ -1,1 +1,1 @@
-export * from './lib/create-internship-statement-dto';
+export * from './lib/create-internship-check-statement-dto';

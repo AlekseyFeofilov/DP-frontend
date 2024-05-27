@@ -1,35 +1,40 @@
-import { Route } from '@angular/router';
+import { StatementRouteData } from '@dp/shared/statement/type';
+import { RouteWithTypedData } from '@dp/shared/types';
 import { PATH_NAME } from '@dp/student/shared/consts';
 
-export const STATEMENT_ROUTES: Route[] = [
+export const STATEMENT_ROUTES: RouteWithTypedData<StatementRouteData>[] = [
   {
     path: '',
     loadComponent: () =>
       import('@dp/student/statement/pages').then(
-        m => m.StatementLayoutComponent,
+        m => m.StatementCategoriesComponent,
       ),
-    children: [
-      {
-        path: '',
-        loadComponent: () =>
-          import('@dp/student/statement/pages').then(
-            m => m.AllStatementsComponent,
-          ),
-      },
-      {
-        path: PATH_NAME.create,
-        loadComponent: () =>
-          import('@dp/student/statement/pages').then(
-            m => m.StatementCategoriesComponent,
-          ),
-      },
-    ],
   },
   {
-    path: `${PATH_NAME.create}/${PATH_NAME.internship}`,
+    path: PATH_NAME.internshipCheck,
+    data: {
+      statementType: 'internshipCheck',
+    },
+    loadComponent: () =>
+      import('@dp/student/statement/pages').then(
+        m => m.AllInternshipStatementsComponent,
+      ),
+  },
+  {
+    path: `${PATH_NAME.internshipCheck}/${PATH_NAME.create}`,
     loadComponent: () =>
       import('@dp/student/statement/pages').then(
         m => m.NewInternshipStatementComponent,
+      ),
+  },
+  {
+    path: PATH_NAME.internshipApply,
+    data: {
+      statementType: 'internshipApply',
+    },
+    loadComponent: () =>
+      import('@dp/student/statement/pages').then(
+        m => m.AllInternshipStatementsComponent,
       ),
   },
 ];
