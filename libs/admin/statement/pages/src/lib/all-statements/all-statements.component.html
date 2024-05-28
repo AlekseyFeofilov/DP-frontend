@@ -1,0 +1,10 @@
+<ng-container *tuiLet="statementType$ | async as statementType">
+  @switch (statementType) {
+    @case ('internshipCheck') {
+      <dp-internship-check-statements-table></dp-internship-check-statements-table>
+    }
+    @case ('internshipApply') {
+      <dp-internship-apply-statements-table></dp-internship-apply-statements-table>
+    }
+  }
+</ng-container>

@@ -14,7 +14,7 @@ import { TuiButtonModule } from '@taiga-ui/experimental';
 import { map } from 'rxjs';
 
 @Component({
-  selector: 'dp-all-internship-statements',
+  selector: 'dp-all-statements',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,11 +25,11 @@ import { map } from 'rxjs';
     TuiButtonModule,
   ],
   providers: [NavigationDataService],
-  templateUrl: './all-internship-statements.component.html',
-  styleUrl: './all-internship-statements.component.less',
+  templateUrl: './all-statements.component.html',
+  styleUrl: './all-statements.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AllInternshipStatementsComponent {
+export class AllStatementsComponent {
   private readonly navigationDataService = inject(NavigationDataService);
 
   readonly statementType$ = this.navigationDataService

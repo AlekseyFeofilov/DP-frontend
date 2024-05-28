@@ -1,0 +1,10 @@
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-internship-statements-table
+    hideNewStatementAction
+    [statements]="(statements$ | async) || []"
+    (acceptClicked)="acceptStatement($event)"
+    (declineClicked)="declineStatement($event)"
+  ></dp-internship-statements-table>
+}

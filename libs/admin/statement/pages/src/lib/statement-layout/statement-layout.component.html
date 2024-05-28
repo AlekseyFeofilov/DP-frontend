@@ -1,0 +1,21 @@
+<div class="title">
+  <tui-tabs>
+    <h1 class="title__text">Заявления</h1>
+    <a
+      tuiTab
+      [routerLink]="internshipCheckStatementsPath"
+      routerLinkActive
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Прохождение практики</a
+    >
+    <a
+      tuiTab
+      [routerLink]="internshipApplyStatementsPath"
+      routerLinkActive
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Трудоустройство</a
+    >
+  </tui-tabs>
+</div>
+
+<router-outlet></router-outlet>

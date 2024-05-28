@@ -8,7 +8,7 @@ export type AllInternshipApplyStatementsApiResponse =
   Array<InternshipApplyStatementDto>;
 
 export interface CreateInternshipApplyStatementApiRequest {
-  internshipCheckStatementId: string;
+  baseStatementId: string;
 }
 
 @Injectable()
@@ -23,11 +23,8 @@ export class InternshipApplyStatementApiService {
   }
 
   createStatement({
-    internshipCheckStatementId,
+    baseStatementId,
   }: CreateInternshipApplyStatementApiRequest): Observable<void> {
-    return this.http.post<void>(
-      `${this.baseUrl}/${internshipCheckStatementId}`,
-      null,
-    );
+    return this.http.post<void>(`${this.baseUrl}/${baseStatementId}`, null);
   }
 }

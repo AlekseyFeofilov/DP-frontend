@@ -47,22 +47,24 @@ export class InternshipStatementsTableComponent {
   set hideStudentColumn(value: boolean) {
     if (value) {
       this.columns = COLUMNS.filter(column => column.property !== 'student');
-      return;
     }
-
-    this.columns = COLUMNS;
   }
 
   @Input({ transform: booleanAttribute })
-  hideNewStatementStatementAction = false;
+  hideNewStatementAction = false;
+
+  @Input({ transform: booleanAttribute })
+  hideChangeStatusAction = false;
 
   @Output() messageClicked = new EventEmitter<void>();
   @Output() newStatementClicked = new EventEmitter<InternshipStatementCommon>();
+  @Output() acceptClicked = new EventEmitter<InternshipStatementCommon>();
+  @Output() declineClicked = new EventEmitter<InternshipStatementCommon>();
 
   @ViewChildren(TableColumnDirective)
   columnTemplates?: QueryList<TableColumnDirective>;
 
-  columns: TableColumn[] = [];
+  columns: TableColumn[] = COLUMNS;
 
   readonly getColumnTemplate = (column: TableColumn): TemplateRef<any> | null =>
     this.columnTemplates?.find(
@@ -70,11 +72,20 @@ export class InternshipStatementsTableComponent {
     )?.templateRef || null;
 
   // TODO
+  readonly showChangeStatusAction = (
+    statement: InternshipStatementCommon,
+  ): boolean => {
+    return (
+      !this.hideChangeStatusAction &&
+      statement.status === InternshipCheckStatementStatus.NonVerified
+    );
+  };
+
   readonly showCreateInternshipApplyStatementAction = (
     statement: InternshipStatementCommon,
   ): boolean => {
     return (
-      !this.hideNewStatementStatementAction &&
+      !this.hideNewStatementAction &&
       statement.status === InternshipCheckStatementStatus.Accepted
     );
   };
@@ -84,8 +95,16 @@ export class InternshipStatementsTableComponent {
     return this.columns.map(column => column.property);
   }
 
-  onNewStatementClick(baseStatement: InternshipStatementCommon): void {
-    this.newStatementClicked.emit(baseStatement);
+  onNewStatementClick(statement: InternshipStatementCommon): void {
+    this.newStatementClicked.emit(statement);
+  }
+
+  onAcceptClick(statement: InternshipStatementCommon): void {
+    this.acceptClicked.emit(statement);
+  }
+
+  onDeclineClick(statement: InternshipStatementCommon): void {
+    this.declineClicked.emit(statement);
   }
 
   getStatusClassName(statement: InternshipStatementCommon): string {

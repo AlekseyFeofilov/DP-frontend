@@ -14,9 +14,14 @@ export const SIDEBAR_NAVIGATION: ReadonlyArray<NavigationItem> = [
     icon: 'tuiIconFileTextLarge',
   },
   {
+    path: PATH_NAME.statement,
+    name: 'Заявления',
+    icon: 'tuiIconClipboardLarge',
+  },
+  {
     path: PATH_NAME.employment,
     name: 'Трудоустройства',
-    icon: 'tuiIconClipboardLarge',
+    icon: 'tuiIconPaperclipLarge',
   },
   {
     path: PATH_NAME.company,

@@ -6,6 +6,11 @@ export const appRoutes: Route[] = [
   //   path: PATH_NAME.home,
   // },
   {
+    path: PATH_NAME.statement,
+    loadChildren: () =>
+      import('@dp/admin/statement/shell').then(m => m.StatementShellModule),
+  },
+  {
     path: PATH_NAME.company,
     loadChildren: () =>
       import('@dp/admin/company/shell').then(m => m.CompanyShellModule),

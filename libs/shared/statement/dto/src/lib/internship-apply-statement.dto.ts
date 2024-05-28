@@ -1,3 +1,4 @@
+import { StudentDto } from '@dp/shared/student/dto';
 import { InternshipCheckStatementDto } from './internship-check-statement.dto';
 
 export enum InternshipApplyStatementDtoStatus {
@@ -9,7 +10,8 @@ export enum InternshipApplyStatementDtoStatus {
 
 export interface InternshipApplyStatementDto {
   id: string;
-  studentId: string;
+  student: StudentDto;
   internshipRequest: InternshipCheckStatementDto;
   status: InternshipApplyStatementDtoStatus;
+  createDateTime: string;
 }

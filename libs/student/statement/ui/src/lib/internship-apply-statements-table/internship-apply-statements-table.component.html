@@ -3,7 +3,8 @@
 } @else {
   <dp-internship-statements-table
     hideStudentColumn
-    hideNewStatementStatementAction
+    hideNewStatementAction
+    hideChangeStatusAction
     [statements]="(statements$ | async) || []"
   ></dp-internship-statements-table>
 }

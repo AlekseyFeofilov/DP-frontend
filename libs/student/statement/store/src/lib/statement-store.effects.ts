@@ -119,7 +119,7 @@ export class StatementStoreEffects {
             label: 'Вы уверены?',
             size: 's',
             data: {
-              content: `На основе этого заявления создастся заявление о трудоустройстве в компании "${baseStatement.company.name}" на позицию "${baseStatement.vacancy}" и отправится на проверку в деканат`,
+              content: `На основе этого заявления создастся заявление о трудоустройстве в компании <b>"${baseStatement.company.name}"</b> на позицию <b>"${baseStatement.vacancy}"</b> и отправится на проверку в деканат`,
             },
           })
           .pipe(

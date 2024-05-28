@@ -16,9 +16,7 @@ export const STATEMENT_ROUTES: RouteWithTypedData<StatementRouteData>[] = [
       statementType: 'internshipCheck',
     },
     loadComponent: () =>
-      import('@dp/student/statement/pages').then(
-        m => m.AllInternshipStatementsComponent,
-      ),
+      import('@dp/student/statement/pages').then(m => m.AllStatementsComponent),
   },
   {
     path: `${PATH_NAME.internshipCheck}/${PATH_NAME.create}`,
@@ -33,8 +31,6 @@ export const STATEMENT_ROUTES: RouteWithTypedData<StatementRouteData>[] = [
       statementType: 'internshipApply',
     },
     loadComponent: () =>
-      import('@dp/student/statement/pages').then(
-        m => m.AllInternshipStatementsComponent,
-      ),
+      import('@dp/student/statement/pages').then(m => m.AllStatementsComponent),
   },
 ];

@@ -78,4 +78,28 @@
       (click)="onNewStatementClick(statement)"
     ></button>
   }
+
+  @if (statement | tuiMapper: showChangeStatusAction) {
+    <button
+      tuiIconButton
+      appearance="flat"
+      iconLeft="tuiIconCheck"
+      size="s"
+      type="button"
+      class="tui-space_right-1"
+      tuiHint="Подтвердить"
+      (click)="onAcceptClick(statement)"
+    ></button>
+
+    <button
+      tuiIconButton
+      appearance="flat"
+      iconLeft="tuiIconClose"
+      size="s"
+      type="button"
+      class="tui-space_right-1"
+      tuiHint="Отклонить"
+      (click)="onDeclineClick(statement)"
+    ></button>
+  }
 </ng-template>

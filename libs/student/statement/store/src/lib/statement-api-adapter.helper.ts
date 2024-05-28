@@ -43,10 +43,10 @@ export namespace StatementApiAdapterHelper {
   }
 
   export function parseCreateInternshipApplyStatementApiRequest(
-    internshipCheckStatementId: string,
+    baseStatementId: string,
   ): CreateInternshipApplyStatementApiRequest {
     return {
-      internshipCheckStatementId,
+      baseStatementId,
     };
   }
 }
