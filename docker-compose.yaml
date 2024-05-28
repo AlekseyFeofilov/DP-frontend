@@ -2,20 +2,26 @@ name: dp-front
 
 services:
   student:
+    hostname: dp-front-student
     build:
       context: .
       dockerfile: Dockerfile.student
     expose:
-      - 8180
-    ports:
-      - "8180:80"
+      - "80:80"
+    networks:
+      - front
 
   admin:
+    hostname: dp-front-admin
     build:
       context: .
       dockerfile: Dockerfile.admin
     expose:
-      - 8280
-    ports:
-      - "8280:80"
+      - "80:80"
+    networks:
+      - front
+
+networks:
+  front:
+    name: dp-front
 
