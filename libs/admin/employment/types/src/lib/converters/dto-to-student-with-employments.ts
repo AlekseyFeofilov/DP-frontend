@@ -2,6 +2,7 @@ import {
   EmploymentDtoStatus,
   StudentWithEmploymnetsDto,
 } from '@dp/admin/employment/dto';
+import { convertDtoToEmploymentVariant } from '@dp/shared/employment-variant/types';
 import { convertDtoToStudent } from '@dp/shared/student/types';
 import { StudentWithEmployments } from '../models';
 import { convertDtoToEmployment } from './dto-to-employment';
@@ -20,6 +21,8 @@ export function convertDtoToStudentWithEmployments(
     employment: activeEmployemnt
       ? convertDtoToEmployment(activeEmployemnt)
       : null,
-    employmentVariants: [],
+    employmentVariants: dto.employmentVariants.map(variant =>
+      convertDtoToEmploymentVariant(variant),
+    ),
   };
 }

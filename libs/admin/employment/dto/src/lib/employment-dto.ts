@@ -1,8 +1,8 @@
 import { CompanyDto } from '@dp/shared/company/dto';
 
 export enum EmploymentDtoStatus {
-  Active,
-  Inactive,
+  Active = 'Active',
+  Inactive = 'InActive',
 }
 
 export interface EmploymentDto {

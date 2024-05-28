@@ -15,7 +15,7 @@
     [data]="sortedStudents"
   >
     @for (student of sortedStudents; track student.id) {
-      <tr tuiTr [class.open]="open" (click)="onRowClick()">
+      <tr tuiTr [class.open]="isRowOpen($index)" (click)="onRowClick($index)">
         @for (column of columns; track column.property) {
           <td *tuiCell="column.property" tuiTd>
             <ng-container
@@ -28,7 +28,7 @@
         }
       </tr>
 
-      @if (open) {
+      @if (isRowOpen($index)) {
         @if (student.employment; as employment) {
           <tr class="employment">
             <th tuiTd>1. Трудоустройство</th>
@@ -40,18 +40,6 @@
               "
             >
               {{ employment.status }}
-
-              @if (employment.status) {
-                <button
-                  class="employment__approve"
-                  tuiButton
-                  size="xs"
-                  appearance="flat"
-                  iconLeft="tuiIconCheck"
-                >
-                  Подтвердить
-                </button>
-              }
             </th>
             <th tuiTd>
               {{ employment.companyName }}
@@ -66,7 +54,7 @@
         @for (variant of student.employmentVariants; track $index) {
           <tr>
             <th tuiTd>
-              {{ variant.priority + (student.employment ? 2 : 1) }}. Приоритет:
+              {{ $index + (student.employment ? 2 : 1) }}. Приоритет:
               {{
                 variant.priority
                   | tuiMapper

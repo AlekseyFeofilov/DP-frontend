@@ -16,14 +16,12 @@ import {
 } from '@taiga-ui/addon-table';
 import { TuiLetModule, TuiMapperPipeModule, tuiPure } from '@taiga-ui/cdk';
 import { TuiSvgModule, TuiWrapperModule } from '@taiga-ui/core';
-import {
-  TuiButtonModule,
-  TuiTooltipModule,
-  tuiTooltipOptionsProvider,
-} from '@taiga-ui/experimental';
+import { TuiButtonModule, TuiTooltipModule } from '@taiga-ui/experimental';
 import { TUI_ARROW } from '@taiga-ui/kit';
 
+import { isStudentEmploymentStatusMatchFilterType } from '@dp/admin/employment/utils';
 import { TableColumn } from '@dp/shared/types';
+import { map, switchMap } from 'rxjs';
 import { COLUMNS } from './columns';
 
 @Component({
@@ -41,11 +39,6 @@ import { COLUMNS } from './columns';
     TuiButtonModule,
     TuiTooltipModule,
   ],
-  providers: [
-    tuiTooltipOptionsProvider({
-      icons: 'tuiIconMessageCircle',
-    }),
-  ],
   templateUrl: './employments-table.component.html',
   styleUrl: './employments-table.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -57,15 +50,32 @@ export class EmploymentsTableComponent {
   private readonly employmentStoreFacade = inject(EmploymentStoreFacade);
 
   readonly columns = COLUMNS;
-  readonly dashboardInfo$ = this.employmentStoreFacade.dashboardInfo$;
   readonly arrow = TUI_ARROW;
+  readonly openRowIds = new Set<number>();
 
-  open = false;
+  readonly dashboardFilter$ =
+    this.employmentStoreFacade.dashboardCurrentFilter$;
+  readonly dashboardInfo$ = this.dashboardFilter$.pipe(
+    switchMap(filterType =>
+      this.employmentStoreFacade.dashboardInfo$.pipe(
+        map(info =>
+          info.filter(student =>
+            isStudentEmploymentStatusMatchFilterType(
+              student.status,
+              filterType,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 
   getColumnTemplate = (column: TableColumn): TemplateRef<any> | null =>
     this.columnTemplates?.find(
       template => template.columnName === column.property,
     )?.templateRef || null;
+
+  isRowOpen = (rowId: number) => this.openRowIds.has(rowId);
 
   @tuiPure
   get columnProperties(): string[] {
@@ -76,8 +86,12 @@ export class EmploymentsTableComponent {
     console.log(page);
   }
 
-  onRowClick() {
-    this.open = !this.open;
+  onRowClick(rowId: number) {
+    if (this.isRowOpen(rowId)) {
+      this.openRowIds.delete(rowId);
+    } else {
+      this.openRowIds.add(rowId);
+    }
   }
 
   // TODO: вынести

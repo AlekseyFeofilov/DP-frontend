@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { EmploymentStoreFacade } from '@dp/admin/employment/store';
+import { EmploymentStudentCountFilterType } from '@dp/admin/employment/types';
 import { TuiBadgeModule } from '@taiga-ui/experimental';
 import { TuiTabsModule } from '@taiga-ui/kit';
 
@@ -11,4 +13,12 @@ import { TuiTabsModule } from '@taiga-ui/kit';
   styleUrl: './employments-filters.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmploymentsFiltersComponent {}
+export class EmploymentsFiltersComponent {
+  private readonly employmentStoreFacade = inject(EmploymentStoreFacade);
+
+  readonly filters$ = this.employmentStoreFacade.dashboardFilters$;
+
+  changeFilter(filter: EmploymentStudentCountFilterType): void {
+    this.employmentStoreFacade.setFilter(filter);
+  }
+}

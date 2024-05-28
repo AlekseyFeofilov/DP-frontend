@@ -41,6 +41,9 @@
         "libs/admin/employment/types/src/index.ts"
       ],
       "@dp/admin/employment/ui": ["libs/admin/employment/ui/src/index.ts"],
+      "@dp/admin/employment/utils": [
+        "libs/admin/employment/utils/src/index.ts"
+      ],
       "@dp/admin/shared/consts": ["libs/admin/shared/consts/src/index.ts"],
       "@dp/admin/statement/data-access": [
         "libs/admin/statement/data-access/src/index.ts"

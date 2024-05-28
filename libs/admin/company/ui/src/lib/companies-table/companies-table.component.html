@@ -45,6 +45,9 @@
 
 <ng-template dpTableColumn="name" let-company let-index="index">
   {{ index + 1 }}. {{ company.name }}
+  @if (company.comment) {
+    <tui-tooltip [content]="company.comment"></tui-tooltip>
+  }
 </ng-template>
 
 <ng-template dpTableColumn="tutor" let-company>

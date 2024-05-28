@@ -1,12 +1,14 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
 import { StoreStateStatus } from '@dp/shared/types';
+import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { EmploymentStoreState } from './employment-store-state.interface';
-import { EMPLOYMENT_STORE_FEATURE_KEY } from './employment-store.key';
 import { employmentActions } from './employment-store.actions';
+import { EMPLOYMENT_STORE_FEATURE_KEY } from './employment-store.key';
 
 const initalState: EmploymentStoreState = {
   dashboardInfo: [],
+  dashboardFilters: null,
+  currentFilter: 'all',
   status: StoreStateStatus.Initial,
 };
 
@@ -16,10 +18,23 @@ const reducer = createReducer(
     ...state,
     status: StoreStateStatus.Loading,
   })),
-  on(employmentActions.loadDashboardSuccess, (state, { dashboard }) => ({
+  on(
+    employmentActions.loadDashboardInfoSuccess,
+    (state, { dashboardInfo }) => ({
+      ...state,
+      dashboardInfo,
+    }),
+  ),
+  on(
+    employmentActions.loadDashboardFiltersSuccess,
+    (state, { dashboardFilters }) => ({
+      ...state,
+      dashboardFilters,
+    }),
+  ),
+  on(employmentActions.setDashboardFilter, (state, { filterType }) => ({
     ...state,
-    dashboardInfo: dashboard,
-    status: StoreStateStatus.Loaded,
+    currentFilter: filterType,
   })),
 );
 

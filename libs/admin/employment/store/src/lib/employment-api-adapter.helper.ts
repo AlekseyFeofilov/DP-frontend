@@ -1,8 +1,10 @@
+import { DashboardApiResponse } from '@dp/admin/employment/data-access';
 import {
+  convertDtoToEmploymentStudentCountFilter,
   convertDtoToStudentWithEmployments,
+  EmploymentStudentCountFilters,
   StudentWithEmployments,
 } from '@dp/admin/employment/types';
-import { DashboardApiResponse } from '@dp/admin/employment/data-access';
 
 export namespace EmploymentApiAdapterHelper {
   export function parseDashboardInfoApiResponse(
@@ -10,6 +12,14 @@ export namespace EmploymentApiAdapterHelper {
   ): ReadonlyArray<StudentWithEmployments> {
     return apiResponse.students.map(dto =>
       convertDtoToStudentWithEmployments(dto),
+    );
+  }
+
+  export function parseDashboardFiltersApiResponse(
+    apiResponse: DashboardApiResponse,
+  ): EmploymentStudentCountFilters {
+    return convertDtoToEmploymentStudentCountFilter(
+      apiResponse.studentStatusesCount,
     );
   }
 }

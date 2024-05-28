@@ -1,7 +1,7 @@
+import { Injectable, inject } from '@angular/core';
 import { EmploymentApiService } from '@dp/admin/employment/data-access';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Injectable, inject } from '@angular/core';
-import { map, switchMap } from 'rxjs';
+import { exhaustMap, switchMap } from 'rxjs';
 
 import { EmploymentApiAdapterHelper } from './employment-api-adapter.helper';
 import { employmentActions } from './employment-store.actions';
@@ -16,15 +16,25 @@ export class EmploymentStoreEffects {
       ofType(employmentActions.loadDashboard),
       switchMap(() =>
         this.employmentApiService.getDashboardInfo().pipe(
-          map(response => {
-            const dashboard =
+          exhaustMap(response => {
+            const dashboardInfo =
               EmploymentApiAdapterHelper.parseDashboardInfoApiResponse(
                 response,
               );
 
-            return employmentActions.loadDashboardSuccess({
-              dashboard,
-            });
+            const dashboardFilters =
+              EmploymentApiAdapterHelper.parseDashboardFiltersApiResponse(
+                response,
+              );
+
+            return [
+              employmentActions.loadDashboardFiltersSuccess({
+                dashboardFilters,
+              }),
+              employmentActions.loadDashboardInfoSuccess({
+                dashboardInfo,
+              }),
+            ];
           }),
 
           // catchError(() => {

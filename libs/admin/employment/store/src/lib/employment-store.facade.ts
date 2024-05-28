@@ -1,10 +1,11 @@
-import { StoreStateStatus } from '@dp/shared/types';
 import { Injectable, inject } from '@angular/core';
+import { StoreStateStatus } from '@dp/shared/types';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs';
 
-import { fromEmploymentStore } from './employment-store.selectors';
+import { EmploymentStudentCountFilterType } from '@dp/admin/employment/types';
 import { employmentActions } from './employment-store.actions';
+import { fromEmploymentStore } from './employment-store.selectors';
 
 @Injectable()
 export class EmploymentStoreFacade {
@@ -12,6 +13,12 @@ export class EmploymentStoreFacade {
 
   readonly dashboardInfo$ = this.store.pipe(
     select(fromEmploymentStore.selectDashboardInfo),
+  );
+  readonly dashboardFilters$ = this.store.pipe(
+    select(fromEmploymentStore.selectDashboardFilters),
+  );
+  readonly dashboardCurrentFilter$ = this.store.pipe(
+    select(fromEmploymentStore.selectCurrentFilter),
   );
 
   readonly status$ = this.store.pipe(select(fromEmploymentStore.selectStatus));
@@ -21,5 +28,9 @@ export class EmploymentStoreFacade {
 
   load(): void {
     this.store.dispatch(employmentActions.loadDashboard());
+  }
+
+  setFilter(filterType: EmploymentStudentCountFilterType): void {
+    this.store.dispatch(employmentActions.setDashboardFilter({ filterType }));
   }
 }

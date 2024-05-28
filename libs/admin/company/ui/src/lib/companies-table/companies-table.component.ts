@@ -23,6 +23,7 @@ import { TuiTagModule } from '@taiga-ui/kit';
 
 import { Company } from '@dp/shared/company/types';
 import { TableColumn } from '@dp/shared/types';
+import { TuiTooltipModule } from '@taiga-ui/core';
 import { COLUMNS } from './columns';
 
 @Component({
@@ -38,6 +39,7 @@ import { COLUMNS } from './columns';
     TableColumnDirective,
     TuiMapperPipeModule,
     TuiTablePaginationModule,
+    TuiTooltipModule,
   ],
   templateUrl: './companies-table.component.html',
   styleUrl: './companies-table.component.less',
