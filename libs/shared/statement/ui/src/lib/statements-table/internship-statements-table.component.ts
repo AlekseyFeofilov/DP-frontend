@@ -56,7 +56,7 @@ export class InternshipStatementsTableComponent {
   @Input({ transform: booleanAttribute })
   hideChangeStatusAction = false;
 
-  @Output() messageClicked = new EventEmitter<void>();
+  @Output() messageClicked = new EventEmitter<InternshipStatementCommon>();
   @Output() newStatementClicked = new EventEmitter<InternshipStatementCommon>();
   @Output() acceptClicked = new EventEmitter<InternshipStatementCommon>();
   @Output() declineClicked = new EventEmitter<InternshipStatementCommon>();
@@ -93,6 +93,10 @@ export class InternshipStatementsTableComponent {
   @tuiPure
   get columnProperties(): string[] {
     return this.columns.map(column => column.property);
+  }
+
+  onMessageClick(statement: InternshipStatementCommon): void {
+    this.messageClicked.emit(statement);
   }
 
   onNewStatementClick(statement: InternshipStatementCommon): void {

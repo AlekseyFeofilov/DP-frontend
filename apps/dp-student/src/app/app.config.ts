@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
+import { provideChat } from '@dp/shared/chat/shell';
 import { BASE_URL, authInterceptor } from '@dp/shared/core';
 import { provideCommonEffects } from '@dp/shared/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
@@ -38,6 +39,7 @@ export const appConfig: ApplicationConfig = {
       trace: false,
       traceLimit: 75,
     }),
+    provideChat(),
     importProvidersFrom(TuiRootModule, TuiDialogModule, TuiAlertModule),
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     { provide: LOCALE_ID, useValue: 'ru' },

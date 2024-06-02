@@ -6,13 +6,15 @@ import {
   inject,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ChatDialogService } from '@dp/shared/chat/ui';
 import { EmploymentVariant } from '@dp/shared/employment-variant/types';
 import { EmploymentVariantsTableComponent } from '@dp/shared/employment-variant/ui';
 import { EmploymentVariantStoreFacade } from '@dp/student/employment-variant/store';
 import { PATH_NAME } from '@dp/student/shared/consts';
-import { tuiPure } from '@taiga-ui/cdk';
+import { TuiDestroyService, tuiPure } from '@taiga-ui/cdk';
 import { TuiLoaderModule } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/experimental';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'dp-all-employment-variants',
@@ -24,6 +26,7 @@ import { TuiButtonModule } from '@taiga-ui/experimental';
     TuiButtonModule,
     TuiLoaderModule,
   ],
+  providers: [TuiDestroyService],
   templateUrl: './all-employment-variants.component.html',
   styleUrl: './all-employment-variants.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,6 +35,8 @@ export class AllEmploymentVariantsComponent implements OnInit {
   private readonly employmentVariantStoreFacade = inject(
     EmploymentVariantStoreFacade,
   );
+  private readonly chatDialogService = inject(ChatDialogService);
+  private readonly destroy$ = inject(TuiDestroyService);
 
   readonly employmentVariants$ =
     this.employmentVariantStoreFacade.employmentVariants$;
@@ -44,6 +49,13 @@ export class AllEmploymentVariantsComponent implements OnInit {
 
   ngOnInit(): void {
     this.employmentVariantStoreFacade.load();
+  }
+
+  openChat(employmentVariant: EmploymentVariant): void {
+    this.chatDialogService
+      .open(employmentVariant.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 
   removeEmploymentVariant(employmentVariant: EmploymentVariant) {

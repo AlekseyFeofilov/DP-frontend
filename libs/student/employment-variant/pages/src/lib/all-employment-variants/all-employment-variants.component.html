@@ -15,5 +15,6 @@
   <dp-employment-variants-table
     [employmentVariants]="(employmentVariants$ | async) || []"
     (removeClicked)="removeEmploymentVariant($event)"
+    (messageClicked)="openChat($event)"
   ></dp-employment-variants-table>
 }

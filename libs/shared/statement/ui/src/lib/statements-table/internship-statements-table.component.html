@@ -64,6 +64,7 @@
     size="s"
     type="button"
     class="tui-space_right-1"
+    (click)="onMessageClick(statement)"
   ></button>
 
   @if (statement | tuiMapper: showCreateInternshipApplyStatementAction) {

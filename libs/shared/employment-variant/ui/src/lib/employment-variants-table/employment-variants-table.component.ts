@@ -43,6 +43,7 @@ export class EmploymentVariantsTableComponent {
   employmentVariants: ReadonlyArray<EmploymentVariant> = [];
 
   @Output() removeClicked = new EventEmitter<EmploymentVariant>();
+  @Output() messageClicked = new EventEmitter<EmploymentVariant>();
 
   @ViewChildren(TableColumnDirective)
   columnTemplates?: QueryList<TableColumnDirective>;
@@ -66,5 +67,9 @@ export class EmploymentVariantsTableComponent {
 
   remove(employmentVariant: EmploymentVariant): void {
     this.removeClicked.emit(employmentVariant);
+  }
+
+  openChat(employmentVariant: EmploymentVariant): void {
+    this.messageClicked.emit(employmentVariant);
   }
 }

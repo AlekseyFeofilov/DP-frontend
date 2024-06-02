@@ -1,0 +1,73 @@
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <ng-container *tuiLet="loadingMessagesIds$ | async as loadingMessagesIds">
+    <ng-container *tuiLet="errorMessagesIds$ | async as errorMessagesIds">
+      @for (message of messages$ | async; track message.id) {
+        <ng-container
+          *tuiLet="
+            message | tuiMapper: isMessageFailed : errorMessagesIds as isFailed
+          "
+        >
+          <div
+            class="message"
+            [class.my]="message.isMy"
+            *tuiLet="
+              message
+                | tuiMapper: isMessageLoading : loadingMessagesIds as isLoading
+            "
+          >
+            <tui-avatar
+              class="avatar"
+              [src]="message.author.email | tuiInitials"
+              [style.background]="message.author.name | tuiAutoColor"
+            ></tui-avatar>
+            <div>
+              <div class="author">{{ message.author.name }}</div>
+              <div class="content" [class.error]="isFailed">
+                {{ message.content }}
+                <div class="date">
+                  @if (isLoading) {
+                    <tui-loader size="s"></tui-loader>
+                  } @else if (!isFailed) {
+                    {{ message.createDate }}
+                  }
+                </div>
+                @if (isFailed) {
+                  <tui-tooltip content="Ошибка отправления"></tui-tooltip>
+                }
+
+                @if (!isFailed && !isLoading && message.isMy) {
+                  <button
+                    size="xs"
+                    tuiIconButton
+                    iconLeft="tuiIconTrash"
+                    appearance="flat"
+                    (click)="removeMessage(message)"
+                  ></button>
+                }
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      }
+    </ng-container>
+  </ng-container>
+}
+
+<hr />
+
+<div class="footer">
+  <tui-textarea
+    class="input"
+    [tuiTextfieldLabelOutside]="true"
+    [formControl]="control"
+    >Начните писать</tui-textarea
+  >
+  <button
+    tuiIconButton
+    iconLeft="tuiIconSendLarge"
+    appearance="flat"
+    (click)="createMessage()"
+  ></button>
+</div>

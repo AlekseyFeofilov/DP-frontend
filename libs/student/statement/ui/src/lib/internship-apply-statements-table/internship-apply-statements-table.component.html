@@ -6,5 +6,6 @@
     hideNewStatementAction
     hideChangeStatusAction
     [statements]="(statements$ | async) || []"
+    (messageClicked)="openChat($event)"
   ></dp-internship-statements-table>
 }

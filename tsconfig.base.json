@@ -52,6 +52,14 @@
       "@dp/admin/statement/shell": ["libs/admin/statement/shell/src/index.ts"],
       "@dp/admin/statement/store": ["libs/admin/statement/store/src/index.ts"],
       "@dp/admin/statement/ui": ["libs/admin/statement/ui/src/index.ts"],
+      "@dp/shared/chat/data-access": [
+        "libs/shared/chat/data-access/src/index.ts"
+      ],
+      "@dp/shared/chat/dto": ["libs/shared/chat/dto/src/index.ts"],
+      "@dp/shared/chat/shell": ["libs/shared/chat/shell/src/index.ts"],
+      "@dp/shared/chat/store": ["libs/shared/chat/store/src/index.ts"],
+      "@dp/shared/chat/types": ["libs/shared/chat/types/src/index.ts"],
+      "@dp/shared/chat/ui": ["libs/shared/chat/ui/src/index.ts"],
       "@dp/shared/company/data-access": [
         "libs/shared/company/data-access/src/index.ts"
       ],

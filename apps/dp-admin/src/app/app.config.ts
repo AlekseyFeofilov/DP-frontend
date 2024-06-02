@@ -1,27 +1,28 @@
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
-  TuiDialogModule,
-  TuiAlertModule,
-  TUI_SANITIZER,
-  TuiRootModule,
-} from '@taiga-ui/core';
-import {
-  importProvidersFrom,
   ApplicationConfig,
   LOCALE_ID,
+  importProvidersFrom,
   isDevMode,
 } from '@angular/core';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { BASE_URL, authInterceptor } from '@dp/shared/core';
+import { provideCommonEffects } from '@dp/shared/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import {
+  TUI_SANITIZER,
+  TuiAlertModule,
+  TuiDialogModule,
+  TuiRootModule,
+} from '@taiga-ui/core';
 import { TUI_LANGUAGE, TUI_RUSSIAN_LANGUAGE } from '@taiga-ui/i18n';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
-import { BASE_URL, authInterceptor } from '@dp/shared/core';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { provideCommonEffects } from '@dp/shared/effects';
-import { provideRouter } from '@angular/router';
-import { provideStore } from '@ngrx/store';
 import { of } from 'rxjs';
 
+import { provideChat } from '@dp/shared/chat/shell';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -39,6 +40,7 @@ export const appConfig: ApplicationConfig = {
       trace: false,
       traceLimit: 75,
     }),
+    provideChat(),
     importProvidersFrom(TuiRootModule, TuiDialogModule, TuiAlertModule),
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     { provide: LOCALE_ID, useValue: 'ru' },

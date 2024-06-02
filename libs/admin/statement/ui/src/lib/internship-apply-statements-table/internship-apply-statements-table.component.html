@@ -4,6 +4,7 @@
   <dp-internship-statements-table
     hideNewStatementAction
     [statements]="(statements$ | async) || []"
+    (messageClicked)="openChat($event)"
     (acceptClicked)="acceptStatement($event)"
     (declineClicked)="declineStatement($event)"
   ></dp-internship-statements-table>

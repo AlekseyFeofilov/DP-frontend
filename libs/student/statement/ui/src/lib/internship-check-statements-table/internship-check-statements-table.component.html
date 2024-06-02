@@ -5,6 +5,7 @@
     hideStudentColumn
     hideChangeStatusAction
     [statements]="(statements$ | async) || []"
+    (messageClicked)="openChat($event)"
     (newStatementClicked)="createInternshipApplyStatement($event)"
   ></dp-internship-statements-table>
 }
