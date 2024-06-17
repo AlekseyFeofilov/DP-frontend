@@ -17,6 +17,6 @@ export function convertDtoToInternshipDiaryStatement(
     files: dto.files.map(convertDtoToFileInfo),
     createDate: TuiDay.jsonParse(normalizeDateTime(dto.createDateTime)),
     modifyDate: TuiDay.jsonParse(normalizeDateTime(dto.modifyDateTime)),
-    mark: dto.grade ?? null,
+    mark: dto.mark ?? null,
   };
 }

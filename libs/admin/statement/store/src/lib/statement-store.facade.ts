@@ -8,6 +8,7 @@ import {
 import { StoreStateStatus } from '@dp/shared/types';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs';
+import { StatemntFilters } from './statement-store-state.interface';
 import { statementActions } from './statement-store.actions';
 import { fromStatementStore } from './statement-store.selectors';
 
@@ -16,12 +17,14 @@ export class StatementStoreFacade {
   private readonly store = inject(Store);
 
   readonly internshipCheckStatements$ = this.store.pipe(
-    select(fromStatementStore.selectAllInternshipCheckStatements),
+    select(fromStatementStore.selectAllFilteredInternshipCheckStatements),
   );
 
   readonly internshipApplyStatements$ = this.store.pipe(
     select(fromStatementStore.selectAllInternshipApplyStatements),
   );
+
+  readonly groups$ = this.store.pipe(select(fromStatementStore.selectGroups));
 
   readonly status$ = this.store.pipe(select(fromStatementStore.selectStatus));
   readonly isLoading$ = this.status$.pipe(
@@ -62,5 +65,9 @@ export class StatementStoreFacade {
         newStatus,
       }),
     );
+  }
+
+  setFilters(filters: Partial<StatemntFilters>): void {
+    this.store.dispatch(statementActions.setFilters({ filters }));
   }
 }

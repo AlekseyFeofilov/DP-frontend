@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   InternshipApplyStatementsTableComponent,
   InternshipCheckStatementsTableComponent,
+  StatementFiltersComponent,
 } from '@dp/admin/statement/ui';
 import { NavigationDataService } from '@dp/shared/core';
 import { StatementRouteData } from '@dp/shared/statement/type';
@@ -17,6 +18,7 @@ import { map } from 'rxjs';
     TuiLetModule,
     InternshipCheckStatementsTableComponent,
     InternshipApplyStatementsTableComponent,
+    StatementFiltersComponent,
   ],
   providers: [NavigationDataService],
   templateUrl: './all-statements.component.html',

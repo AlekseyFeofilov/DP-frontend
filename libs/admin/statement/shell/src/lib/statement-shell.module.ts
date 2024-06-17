@@ -9,6 +9,7 @@ import {
   StatementStoreEffects,
   StatementStoreFacade,
 } from '@dp/admin/statement/store';
+import { GroupApiService } from '@dp/shared/student/data-access';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { STATEMENT_ROUTES } from './statement.routes';
@@ -20,6 +21,7 @@ import { STATEMENT_ROUTES } from './statement.routes';
     provideState(StatementStore),
     InternshipCheckStatementApiService,
     InternshipApplyStatementApiService,
+    GroupApiService,
     StatementStoreFacade,
   ],
 })

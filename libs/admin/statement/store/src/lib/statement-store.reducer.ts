@@ -1,12 +1,24 @@
 import { StoreStateStatus } from '@dp/shared/types';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { StatementStoreState } from './statement-store-state.interface';
+import {
+  StatementStoreState,
+  StatemntFilters,
+} from './statement-store-state.interface';
 import { statementActions } from './statement-store.actions';
 import { STATEMENT_STORE_FEATURE_KEY } from './statement-store.key';
+
+const initialFilters: StatemntFilters = {
+  studentName: null,
+  groupIds: [],
+  companyName: null,
+  vacancyName: null,
+};
 
 const initalState: StatementStoreState = {
   allInternshipCheckStatements: [],
   allInternshipApplyStatements: [],
+  groups: [],
+  filters: initialFilters,
   status: StoreStateStatus.Initial,
 };
 
@@ -17,6 +29,7 @@ const reducer = createReducer(
     statementActions.loadAllInternshipApply,
     state => ({
       ...state,
+      filters: initialFilters,
       status: StoreStateStatus.Loading,
     }),
   ),
@@ -68,6 +81,19 @@ const reducer = createReducer(
       ),
     }),
   ),
+
+  on(statementActions.setFilters, (state, { filters }) => ({
+    ...state,
+    filters: {
+      ...state.filters,
+      ...filters,
+    },
+  })),
+
+  on(statementActions.setGroups, (state, { groups }) => ({
+    ...state,
+    groups,
+  })),
 );
 
 export const StatementStore = createFeature({

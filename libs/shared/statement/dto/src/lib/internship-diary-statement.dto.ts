@@ -18,5 +18,5 @@ export interface InternshipDiaryStatementDto {
   status: InternshipDiaryStatementDtoStatus;
   createDateTime: string;
   modifyDateTime: string;
-  grade?: number | null;
+  mark?: number | null;
 }

@@ -6,6 +6,8 @@ import {
   InternshipCheckStatement,
   InternshipCheckStatementStatus,
 } from '@dp/shared/statement/type';
+import { Group } from '@dp/shared/student/types';
+import { StatemntFilters } from './statement-store-state.interface';
 import { STATEMENT_STORE_FEATURE_KEY } from './statement-store.key';
 
 const loadAllInternshipCheck = createAction(
@@ -70,6 +72,22 @@ const changeInternshipApplyStatus = createAction(
   }>(),
 );
 
+const setFilters = createAction(
+  `[${STATEMENT_STORE_FEATURE_KEY}] set filters`,
+  props<{
+    readonly filters: Partial<StatemntFilters>;
+  }>(),
+);
+
+const init = createAction(`[${STATEMENT_STORE_FEATURE_KEY}] init effects`);
+
+const setGroups = createAction(
+  `[${STATEMENT_STORE_FEATURE_KEY}] set groups`,
+  props<{
+    readonly groups: ReadonlyArray<Group>;
+  }>(),
+);
+
 export const statementActions = {
   loadAllInternshipCheck,
   loadAllInternshipApply,
@@ -79,4 +97,7 @@ export const statementActions = {
   changeInternshipCheckStatus,
   requestChangeInternshipApplyStatus,
   changeInternshipApplyStatus,
+  setFilters,
+  init,
+  setGroups,
 };

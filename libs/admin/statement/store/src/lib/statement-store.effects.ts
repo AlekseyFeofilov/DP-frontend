@@ -12,15 +12,18 @@ import {
   InternshipApplyStatementStatus,
   InternshipCheckStatementStatus,
 } from '@dp/shared/statement/type';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { GroupApiService } from '@dp/shared/student/data-access';
+import { convertDtoToGroup } from '@dp/shared/student/types';
+import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { TuiDialogService } from '@taiga-ui/core';
 import { TUI_PROMPT } from '@taiga-ui/kit';
-import { catchError, filter, map, switchMap } from 'rxjs';
+import { catchError, concatMap, filter, map, switchMap } from 'rxjs';
 import { StatementApiAdapterHelper } from './statement-api-adapter.helper';
 import { statementActions } from './statement-store.actions';
 
 @Injectable()
-export class StatementStoreEffects {
+export class StatementStoreEffects implements OnInitEffects {
   private readonly actions$ = inject(Actions);
   private readonly dialogService = inject(TuiDialogService);
   private readonly internshipCheckStatementApiService = inject(
@@ -28,6 +31,31 @@ export class StatementStoreEffects {
   );
   private readonly internshipApplyStatementApiService = inject(
     InternshipApplyStatementApiService,
+  );
+  private readonly groupApiService = inject(GroupApiService);
+
+  ngrxOnInitEffects(): Action {
+    return statementActions.init();
+  }
+
+  setFilters$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(statementActions.init),
+      switchMap(() =>
+        this.groupApiService.getAll().pipe(
+          concatMap(response => {
+            const groups = response.map(convertDtoToGroup);
+
+            return [
+              statementActions.setGroups({ groups }),
+              statementActions.setFilters({
+                filters: { groupIds: groups.map(group => group.id) },
+              }),
+            ];
+          }),
+        ),
+      ),
+    ),
   );
 
   loadAllInternshipCheck$ = createEffect(() =>

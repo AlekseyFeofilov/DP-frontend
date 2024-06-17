@@ -98,6 +98,9 @@
       "@dp/shared/statement/dto": ["libs/shared/statement/dto/src/index.ts"],
       "@dp/shared/statement/type": ["libs/shared/statement/type/src/index.ts"],
       "@dp/shared/statement/ui": ["libs/shared/statement/ui/src/index.ts"],
+      "@dp/shared/student/data-access": [
+        "libs/shared/student/data-access/src/index.ts"
+      ],
       "@dp/shared/student/dto": ["libs/shared/student/dto/src/index.ts"],
       "@dp/shared/student/types": ["libs/shared/student/types/src/index.ts"],
       "@dp/shared/styles": ["libs/shared/styles/src/index.ts"],
