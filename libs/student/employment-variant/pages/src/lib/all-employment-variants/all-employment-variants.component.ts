@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ChatDialogService } from '@dp/shared/chat/ui';
+import { ATTACHMENT_ENTITY_TYPE } from '@dp/shared/consts';
 import { EmploymentVariant } from '@dp/shared/employment-variant/types';
 import { EmploymentVariantsTableComponent } from '@dp/shared/employment-variant/ui';
 import { EmploymentVariantStoreFacade } from '@dp/student/employment-variant/store';
@@ -53,7 +54,7 @@ export class AllEmploymentVariantsComponent implements OnInit {
 
   openChat(employmentVariant: EmploymentVariant): void {
     this.chatDialogService
-      .open(employmentVariant.id)
+      .open(ATTACHMENT_ENTITY_TYPE.EmploymentVariant.key, employmentVariant.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe();
   }

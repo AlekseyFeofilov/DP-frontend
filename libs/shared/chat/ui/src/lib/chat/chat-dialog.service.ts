@@ -9,13 +9,14 @@ import { ChatComponent } from './chat.component';
 export class ChatDialogService {
   private readonly tuiSheetDialogService = inject(TuiSheetDialogService);
 
-  open(entityId: string): Observable<void> {
+  open(entityType: string, entityId: string): Observable<void> {
     return this.tuiSheetDialogService.open(
       new PolymorpheusComponent(ChatComponent),
       {
         label: 'Чат',
         stops: ['20rem'],
         data: {
+          entityType,
           entityId,
         },
       },

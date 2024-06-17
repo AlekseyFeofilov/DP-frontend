@@ -23,8 +23,8 @@ export class ChatStoreFacade {
     map(status => status === StoreStateStatus.Loading),
   );
 
-  load(entityId: string): void {
-    this.store.dispatch(chatActions.loadAll({ entityId }));
+  load(entityType: string, entityId: string): void {
+    this.store.dispatch(chatActions.loadAll({ entityType, entityId }));
   }
 
   create(newMessage: NewMessage): void {

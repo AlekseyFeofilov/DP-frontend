@@ -1,0 +1,9 @@
+<div class="title">
+  <h1>Заявления по дневникам практики</h1>
+</div>
+
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-internship-diary-statements-table></dp-internship-diary-statements-table>
+}

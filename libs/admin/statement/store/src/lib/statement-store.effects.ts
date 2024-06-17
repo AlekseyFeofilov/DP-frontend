@@ -15,7 +15,7 @@ import {
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TuiDialogService } from '@taiga-ui/core';
 import { TUI_PROMPT } from '@taiga-ui/kit';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { catchError, filter, map, switchMap } from 'rxjs';
 import { StatementApiAdapterHelper } from './statement-api-adapter.helper';
 import { statementActions } from './statement-store.actions';
 
@@ -124,14 +124,12 @@ export class StatementStoreEffects {
                 message: `Заявление ${newStatus === InternshipCheckStatementStatus.Accepted ? 'подтверждено' : 'отклонено'}`,
               }),
             ),
-            catchError(() =>
-              of(
-                notificationActions.error({
-                  label: NOTIFICATION_TEXTS.edit.error,
-                  message: NOTIFICATION_DESCRIPTION.error,
-                }),
-              ),
-            ),
+            catchError(() => [
+              notificationActions.error({
+                label: NOTIFICATION_TEXTS.edit.error,
+                message: NOTIFICATION_DESCRIPTION.error,
+              }),
+            ]),
           ),
       ),
     ),
@@ -179,14 +177,12 @@ export class StatementStoreEffects {
                 message: `Заявление ${newStatus === InternshipApplyStatementStatus.Accepted ? 'подтверждено' : 'отклонено'}`,
               }),
             ),
-            catchError(() =>
-              of(
-                notificationActions.error({
-                  label: NOTIFICATION_TEXTS.edit.error,
-                  message: NOTIFICATION_DESCRIPTION.error,
-                }),
-              ),
-            ),
+            catchError(() => [
+              notificationActions.error({
+                label: NOTIFICATION_TEXTS.edit.error,
+                message: NOTIFICATION_DESCRIPTION.error,
+              }),
+            ]),
           ),
       ),
     ),

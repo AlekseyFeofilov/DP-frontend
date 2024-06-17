@@ -24,6 +24,13 @@
       "@dp/admin/company/store": ["libs/admin/company/store/src/index.ts"],
       "@dp/admin/company/types": ["libs/admin/company/types/src/index.ts"],
       "@dp/admin/company/ui": ["libs/admin/company/ui/src/index.ts"],
+      "@dp/admin/diary/data-access": [
+        "libs/admin/diary/data-access/src/index.ts"
+      ],
+      "@dp/admin/diary/pages": ["libs/admin/diary/pages/src/index.ts"],
+      "@dp/admin/diary/shell": ["libs/admin/diary/shell/src/index.ts"],
+      "@dp/admin/diary/store": ["libs/admin/diary/store/src/index.ts"],
+      "@dp/admin/diary/ui": ["libs/admin/diary/ui/src/index.ts"],
       "@dp/admin/employment/data-access": [
         "libs/admin/employment/data-access/src/index.ts"
       ],
@@ -81,6 +88,12 @@
       "@dp/shared/employment-variant/ui": [
         "libs/shared/employment-variant/ui/src/index.ts"
       ],
+      "@dp/shared/file": ["libs/shared/file/src/index.ts"],
+      "@dp/shared/file/data-access": [
+        "libs/shared/file/data-access/src/index.ts"
+      ],
+      "@dp/shared/file/dto": ["libs/shared/file/dto/src/index.ts"],
+      "@dp/shared/file/types": ["libs/shared/file/types/src/index.ts"],
       "@dp/shared/layout": ["libs/shared/layout/src/index.ts"],
       "@dp/shared/statement/dto": ["libs/shared/statement/dto/src/index.ts"],
       "@dp/shared/statement/type": ["libs/shared/statement/type/src/index.ts"],

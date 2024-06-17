@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { StatementStoreFacade } from '@dp/admin/statement/store';
 import { ChatDialogService } from '@dp/shared/chat/ui';
+import { ATTACHMENT_ENTITY_TYPE } from '@dp/shared/consts';
 import {
   InternshipCheckStatementStatus,
   InternshipStatementCommon,
@@ -63,7 +64,7 @@ export class InternshipCheckStatementsTableComponent implements OnInit {
 
   openChat(statement: InternshipStatementCommon): void {
     this.chatDialogService
-      .open(statement.id)
+      .open(ATTACHMENT_ENTITY_TYPE.InternshipCheckStatement.key, statement.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe();
   }

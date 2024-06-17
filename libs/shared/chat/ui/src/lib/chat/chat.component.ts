@@ -35,6 +35,7 @@ import { TuiTextareaModule } from '@taiga-ui/kit';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 
 export interface ChatDialogData {
+  entityType: string;
   entityId: string;
 }
 
@@ -80,7 +81,10 @@ export class ChatComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.chatStoreFacade.load(this.context.data.entityId);
+    this.chatStoreFacade.load(
+      this.context.data.entityType,
+      this.context.data.entityId,
+    );
   }
 
   isMessageLoading(message: Message, loadingMessagesIds: string[]): boolean {
@@ -102,6 +106,7 @@ export class ChatComponent implements OnInit {
     }
 
     this.chatStoreFacade.create({
+      entityType: this.context.data.entityType,
       entityId: this.context.data.entityId,
       content: this.control.value.trim(),
     });

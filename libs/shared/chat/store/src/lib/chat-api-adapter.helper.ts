@@ -13,9 +13,10 @@ import {
 
 export namespace ChatApiAdapterHelper {
   export function parseGetAllMessagesApiRequest(
+    entityType: string,
     entityId: string,
   ): GetAllMessagesApiRequest {
-    return { entityId };
+    return { entityType, entityId };
   }
 
   export function parseAllMessagesApiResponse(

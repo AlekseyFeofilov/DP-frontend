@@ -4,7 +4,7 @@ import { CHAT_STORE_FEATURE_KEY } from './chat-store.key';
 
 const loadAll = createAction(
   `[${CHAT_STORE_FEATURE_KEY}] load all messages`,
-  props<{ readonly entityId: string }>(),
+  props<{ readonly entityType: string; readonly entityId: string }>(),
 );
 
 const loadAllSuccess = createAction(

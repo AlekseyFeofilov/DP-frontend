@@ -1,0 +1,36 @@
+@import '@taiga-ui/styles/taiga-ui-global';
+@import 'mixins/layout';
+
+:host {
+  .block();
+  font: var(--tui-font-text-l);
+}
+
+h4 {
+  font: var(--tui-font-heading-6);
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  .tui-space(bottom, 8);
+  gap: 1rem;
+
+  h4 {
+    .tui-space(vertical, 0);
+  }
+
+  .input {
+    width: 20rem;
+  }
+}
+
+.file {
+  .tui-space(bottom, 2);
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: var(--tui-base-02);
+  }
+}

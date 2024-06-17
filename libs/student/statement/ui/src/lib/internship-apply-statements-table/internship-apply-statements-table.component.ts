@@ -6,6 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { ChatDialogService } from '@dp/shared/chat/ui';
+import { ATTACHMENT_ENTITY_TYPE } from '@dp/shared/consts';
 import {
   InternshipStatementCommon,
   convertInternshipApplyStatementToCommon,
@@ -47,7 +48,7 @@ export class InternshipApplyStatementsTableComponent implements OnInit {
 
   openChat(statement: InternshipStatementCommon): void {
     this.chatDialogService
-      .open(statement.id)
+      .open(ATTACHMENT_ENTITY_TYPE.InternshipApplyStatement.key, statement.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe();
   }

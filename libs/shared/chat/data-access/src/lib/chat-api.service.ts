@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 export type AllMessagesApiResponse = Array<MessageDto>;
 
 export interface GetAllMessagesApiRequest {
+  entityType: string;
   entityId: string;
 }
 
@@ -28,9 +29,12 @@ export class ChatApiService {
   private readonly baseUrl = `${inject(BASE_URL)}/Comment`;
 
   getAll({
+    entityType,
     entityId,
   }: GetAllMessagesApiRequest): Observable<AllMessagesApiResponse> {
-    return this.http.get<AllMessagesApiResponse>(`${this.baseUrl}/${entityId}`);
+    return this.http.get<AllMessagesApiResponse>(
+      `${this.baseUrl}/${entityType}/${entityId}`,
+    );
   }
 
   create({

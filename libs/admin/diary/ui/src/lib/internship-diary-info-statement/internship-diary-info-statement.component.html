@@ -1,0 +1,87 @@
+<ng-container *ngIf="statement$ | async as statement">
+  <div class="section">
+    <h4>Студент:</h4>
+
+    {{ statement.student.name }}
+  </div>
+
+  @if (statement.student.group) {
+    <div class="section">
+      <h4>Группа:</h4>
+
+      {{ statement.student.group.number }}
+    </div>
+  }
+
+  <div class="section">
+    <h4>Семестр:</h4>
+
+    {{ statement.semester }}
+  </div>
+
+  <div class="section">
+    <h4>Дата последнего изменения:</h4>
+
+    {{ statement.modifyDate }}
+  </div>
+
+  <div class="section">
+    <h4>Дата создания:</h4>
+
+    {{ statement.createDate }}
+  </div>
+
+  <div class="section">
+    <h4>Статус:</h4>
+
+    <tui-select
+      [formControl]="statusControl"
+      [tuiTextfieldLabelOutside]="true"
+      class="input"
+    >
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="statuses"
+      ></tui-data-list-wrapper>
+    </tui-select>
+  </div>
+
+  <div class="section">
+    <h4>Оценка:</h4>
+
+    <tui-input-number
+      [formControl]="markControl"
+      [tuiTextfieldLabelOutside]="true"
+      [step]="1"
+      [min]="0"
+      class="input"
+      >Введите значение</tui-input-number
+    >
+  </div>
+
+  <button
+    size="s"
+    tuiButton
+    [disabled]="disableSaveButton$ | async"
+    (click)="saveChanges()"
+  >
+    Сохранить
+  </button>
+
+  <h4>Файлы:</h4>
+
+  @for (file of statement.files | tuiMapper: sortFiles; track file.id) {
+    <tui-files>
+      <tui-file
+        *ngIf="fileState$ | async as fileState"
+        tuiItem
+        class="file"
+        size="l"
+        showDelete="always"
+        [state]="fileState"
+        [file]="file | tuiMapper: parseFile"
+        (click)="saveFile(file)"
+      ></tui-file>
+    </tui-files>
+  }
+</ng-container>

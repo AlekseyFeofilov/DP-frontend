@@ -9,7 +9,7 @@ export const SIDEBAR_NAVIGATION: ReadonlyArray<NavigationItem> = [
     icon: 'tuiIconHomeLarge',
   },
   {
-    path: PATH_NAME.practiceDiary,
+    path: PATH_NAME.internshipDiary,
     name: 'Дневники практики',
     icon: 'tuiIconFileTextLarge',
   },

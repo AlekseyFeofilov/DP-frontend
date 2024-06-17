@@ -10,6 +10,7 @@ import { CompanyStoreFacade } from '@dp/admin/company/store';
 import { NewCompany } from '@dp/admin/company/types';
 import { CompanyFormComponent } from '@dp/admin/company/ui';
 import { PATH_NAME } from '@dp/admin/shared/consts';
+import { normalizeRouteParam } from '@dp/shared/core';
 import { FormValue } from '@dp/shared/types';
 import { tuiIsPresent } from '@taiga-ui/cdk';
 import { TuiLoaderModule } from '@taiga-ui/core';
@@ -41,7 +42,7 @@ export class EditCompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyId =
-      this.route.snapshot.params[PATH_NAME.companyId.replace(':', '')]; // TODO: создать хелпер
+      this.route.snapshot.params[normalizeRouteParam(PATH_NAME.companyId)];
 
     if (!this.companyId) {
       this.router.navigate([PATH_NAME.company]);

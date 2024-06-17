@@ -5,6 +5,7 @@ export function convertNewMessageToDto(
   newMessage: NewMessage,
 ): CreateMessageDto {
   return {
+    entityType: newMessage.entityType,
     entityId: newMessage.entityId,
     message: newMessage.content,
   };

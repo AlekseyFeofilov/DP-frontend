@@ -26,9 +26,14 @@ export class ChatStoreEffects {
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(chatActions.loadAll),
-      switchMap(({ entityId }) =>
+      switchMap(({ entityType, entityId }) =>
         this.chatApiService
-          .getAll(ChatApiAdapterHelper.parseGetAllMessagesApiRequest(entityId))
+          .getAll(
+            ChatApiAdapterHelper.parseGetAllMessagesApiRequest(
+              entityType,
+              entityId,
+            ),
+          )
           .pipe(
             map(response => {
               const messages =
@@ -77,9 +82,9 @@ export class ChatStoreEffects {
                 message: { ...stubMessage }, // TODO: add id
               }),
             ),
-            catchError(() =>
-              of(chatActions.markMessageAsFailed({ id: stubMessage.id })),
-            ),
+            catchError(() => [
+              chatActions.markMessageAsFailed({ id: stubMessage.id }),
+            ]),
           );
       }),
     ),

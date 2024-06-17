@@ -71,7 +71,6 @@ export class InternshipStatementsTableComponent {
       template => template.columnName === column.property,
     )?.templateRef || null;
 
-  // TODO
   readonly showChangeStatusAction = (
     statement: InternshipStatementCommon,
   ): boolean => {

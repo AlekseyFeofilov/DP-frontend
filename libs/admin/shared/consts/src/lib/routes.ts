@@ -1,13 +1,13 @@
 export const PATH_NAME = {
   home: '',
 
-  practiceDiary: 'practice-diary',
-
   statement: 'statement',
 
   internshipCheck: 'internship-check',
   internshipApply: 'internship-apply',
+
   internshipDiary: 'internship-diary',
+  internshipDiaryId: ':internshipDiaryId',
 
   employment: 'employment',
   employmentId: ':employmentId',

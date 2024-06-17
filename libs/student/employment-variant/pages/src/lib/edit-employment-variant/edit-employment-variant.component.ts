@@ -6,6 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { normalizeRouteParam } from '@dp/shared/core';
 import { FormValue } from '@dp/shared/types';
 import { EmploymentVariantStoreFacade } from '@dp/student/employment-variant/store';
 import { NewEmploymentVariant } from '@dp/student/employment-variant/types';
@@ -45,8 +46,8 @@ export class EditEmploymentVariantComponent implements OnInit {
   ngOnInit(): void {
     this.employmentVariantId =
       this.route.snapshot.params[
-        PATH_NAME.employmentVariantId.replace(':', '')
-      ]; // TODO: создать хелпер
+        normalizeRouteParam(PATH_NAME.employmentVariantId)
+      ];
 
     if (!this.employmentVariantId) {
       this.router.navigate([PATH_NAME.employmentVariant]);
