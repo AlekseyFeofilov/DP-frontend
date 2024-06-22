@@ -1,0 +1,23 @@
+<tui-multi-select
+  tuiTextfieldSize="m"
+  [editable]="false"
+  [expandable]="false"
+  [tuiTextfieldLabelOutside]="true"
+  [ngModel]="choosenGrops$ | async"
+  (ngModelChange)="onModelChange($event)"
+>
+  Группы
+  <tui-data-list *tuiDataList>
+    @if (groups$ | async; as groups) {
+      @for (grade of groups | tuiMapper: getGrades; track grade) {
+        <tui-opt-group [label]="grade + ' курс'" tuiMultiSelectGroup>
+          @for (group of groups[grade]; track group.id) {
+            <button tuiOption [value]="group">
+              {{ group.number }}
+            </button>
+          }
+        </tui-opt-group>
+      }
+    }
+  </tui-data-list>
+</tui-multi-select>

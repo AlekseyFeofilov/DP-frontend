@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SIDEBAR_NAVIGATION } from '@dp/admin/shared/consts';
-import { LayoutComponent } from '@dp/shared/layout';
+import { LayoutComponent } from '@dp/shared/ui';
 import { TuiRootModule } from '@taiga-ui/core';
 
 @Component({

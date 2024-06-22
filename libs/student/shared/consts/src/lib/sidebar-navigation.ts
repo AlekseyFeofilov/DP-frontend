@@ -1,4 +1,4 @@
-import { NavigationItem } from '@dp/shared/layout';
+import { NavigationItem } from '@dp/shared/types';
 import { PATH_NAME } from './routes';
 
 export const SIDEBAR_NAVIGATION: ReadonlyArray<NavigationItem> = [

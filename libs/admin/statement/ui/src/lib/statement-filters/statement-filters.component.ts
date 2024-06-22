@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { StatementStoreFacade } from '@dp/admin/statement/store';
-import { Group } from '@dp/shared/student/types';
+import { SEARCH_DEBOUNCE_TIME } from '@dp/shared/consts';
+import { Group } from '@dp/shared/group/types';
+import { GroupSelectComponent } from '@dp/shared/group/ui';
 import { TuiDestroyService, TuiMapperPipeModule } from '@taiga-ui/cdk';
 import {
   TuiDataListModule,
@@ -18,7 +20,7 @@ import {
   TuiMultiSelectModule,
   tuiItemsHandlersProvider,
 } from '@taiga-ui/kit';
-import { debounceTime, map, takeUntil } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'dp-statement-filters',
@@ -31,6 +33,7 @@ import { debounceTime, map, takeUntil } from 'rxjs';
     TuiMultiSelectModule,
     TuiDataListModule,
     TuiMapperPipeModule,
+    GroupSelectComponent,
   ],
   providers: [
     TuiDestroyService,
@@ -46,18 +49,6 @@ export class StatementFiltersComponent implements OnInit {
   private readonly statementStoreFacade = inject(StatementStoreFacade);
   private readonly destroy$ = inject(TuiDestroyService);
 
-  readonly groups$ = this.statementStoreFacade.groups$.pipe(
-    map(groups =>
-      groups.reduce(
-        (prev, curr) => ({
-          ...prev,
-          [curr.grade]: [...(prev[curr.grade] ?? []), curr],
-        }),
-        {} as Record<string, Group[]>,
-      ),
-    ),
-  );
-
   readonly studentNameControl = new FormControl<string | null>(null);
   readonly companyNameControl = new FormControl<string | null>(null);
   readonly vacancyNameControl = new FormControl<string | null>(null);
@@ -70,13 +61,9 @@ export class StatementFiltersComponent implements OnInit {
     this.trackGroupsControlChanges();
   }
 
-  getGrades(groups: Record<string, Group[]>): string[] {
-    return Object.keys(groups);
-  }
-
   private trackStudentNameControlChanges(): void {
     this.studentNameControl.valueChanges
-      .pipe(debounceTime(400), takeUntil(this.destroy$))
+      .pipe(debounceTime(SEARCH_DEBOUNCE_TIME), takeUntil(this.destroy$))
       .subscribe(value => {
         this.statementStoreFacade.setFilters({ studentName: value });
       });
@@ -84,7 +71,7 @@ export class StatementFiltersComponent implements OnInit {
 
   private trackCompanyNameControlChanges(): void {
     this.companyNameControl.valueChanges
-      .pipe(debounceTime(400), takeUntil(this.destroy$))
+      .pipe(debounceTime(SEARCH_DEBOUNCE_TIME), takeUntil(this.destroy$))
       .subscribe(value => {
         this.statementStoreFacade.setFilters({ companyName: value });
       });
@@ -92,7 +79,7 @@ export class StatementFiltersComponent implements OnInit {
 
   private trackVacancyNameControlChanges(): void {
     this.vacancyNameControl.valueChanges
-      .pipe(debounceTime(400), takeUntil(this.destroy$))
+      .pipe(debounceTime(SEARCH_DEBOUNCE_TIME), takeUntil(this.destroy$))
       .subscribe(value => {
         this.statementStoreFacade.setFilters({ vacancyName: value });
       });

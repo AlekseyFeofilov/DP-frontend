@@ -19,9 +19,7 @@ import { TuiSvgModule, TuiWrapperModule } from '@taiga-ui/core';
 import { TuiButtonModule, TuiTooltipModule } from '@taiga-ui/experimental';
 import { TUI_ARROW } from '@taiga-ui/kit';
 
-import { isStudentEmploymentStatusMatchFilterType } from '@dp/admin/employment/utils';
 import { TableColumn } from '@dp/shared/types';
-import { map, switchMap } from 'rxjs';
 import { COLUMNS } from './columns';
 
 @Component({
@@ -53,22 +51,7 @@ export class EmploymentsTableComponent {
   readonly arrow = TUI_ARROW;
   readonly openRowIds = new Set<number>();
 
-  readonly dashboardFilter$ =
-    this.employmentStoreFacade.dashboardCurrentFilter$;
-  readonly dashboardInfo$ = this.dashboardFilter$.pipe(
-    switchMap(filterType =>
-      this.employmentStoreFacade.dashboardInfo$.pipe(
-        map(info =>
-          info.filter(student =>
-            isStudentEmploymentStatusMatchFilterType(
-              student.status,
-              filterType,
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
+  readonly dashboardInfo$ = this.employmentStoreFacade.dashboardInfo$;
 
   getColumnTemplate = (column: TableColumn): TemplateRef<any> | null =>
     this.columnTemplates?.find(
@@ -80,10 +63,6 @@ export class EmploymentsTableComponent {
   @tuiPure
   get columnProperties(): string[] {
     return this.columns.map(column => column.property);
-  }
-
-  onPage(page: number): void {
-    console.log(page);
   }
 
   onRowClick(rowId: number) {

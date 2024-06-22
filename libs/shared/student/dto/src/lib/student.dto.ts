@@ -1,4 +1,4 @@
-import { GroupDto } from './group.dto';
+import { GroupDto } from '@dp/shared/group/dto';
 
 export interface StudentDto {
   userId: string;

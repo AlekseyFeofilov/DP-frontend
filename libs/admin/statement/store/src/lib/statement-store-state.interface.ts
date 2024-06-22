@@ -1,20 +1,23 @@
 import {
   InternshipApplyStatement,
+  InternshipApplyStatementStatus,
   InternshipCheckStatement,
+  InternshipCheckStatementStatus,
 } from '@dp/shared/statement/type';
-import { Group } from '@dp/shared/student/types';
 import { StoreStateStatus } from '@dp/shared/types';
 
 export interface StatemntFilters {
-  studentName: string | null;
-  groupIds: ReadonlyArray<string>;
-  companyName: string | null;
-  vacancyName: string | null;
+  readonly studentName: string | null;
+  readonly groupIds: ReadonlyArray<string>;
+  readonly companyName: string | null;
+  readonly vacancyName: string | null;
+  readonly internshipCheckStatuses: ReadonlyArray<InternshipCheckStatementStatus>;
+  readonly internshipApplyStatuses: ReadonlyArray<InternshipApplyStatementStatus>;
 }
+
 export interface StatementStoreState {
   readonly allInternshipCheckStatements: ReadonlyArray<InternshipCheckStatement>;
   readonly allInternshipApplyStatements: ReadonlyArray<InternshipApplyStatement>;
-  readonly groups: ReadonlyArray<Group>;
   readonly filters: StatemntFilters;
   readonly status: StoreStateStatus;
 }

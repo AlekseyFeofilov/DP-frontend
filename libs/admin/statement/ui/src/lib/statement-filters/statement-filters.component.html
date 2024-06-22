@@ -6,28 +6,7 @@
     >Имя студента</tui-input
   >
 
-  <tui-multi-select
-    [editable]="false"
-    [expandable]="false"
-    [formControl]="groupsControl"
-    [tuiTextfieldLabelOutside]="true"
-    tuiTextfieldSize="m"
-  >
-    Группы
-    <tui-data-list *tuiDataList>
-      @if (groups$ | async; as groups) {
-        @for (grade of groups | tuiMapper: getGrades; track grade) {
-          <tui-opt-group [label]="grade + ' курс'" tuiMultiSelectGroup>
-            @for (group of groups[grade]; track group.id) {
-              <button tuiOption [value]="group">
-                {{ group.number }}
-              </button>
-            }
-          </tui-opt-group>
-        }
-      }
-    </tui-data-list>
-  </tui-multi-select>
+  <dp-group-select [formControl]="groupsControl"></dp-group-select>
 </div>
 
 <div class="section">

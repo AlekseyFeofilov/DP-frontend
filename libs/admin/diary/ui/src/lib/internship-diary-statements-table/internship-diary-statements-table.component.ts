@@ -61,7 +61,7 @@ export class InternshipDiaryStatementsTableComponent {
 
   getStatusClassName(statement: InternshipDiaryStatement): string {
     switch (statement.status) {
-      case InternshipDiaryStatementStatus.Ready:
+      case InternshipDiaryStatementStatus.Rated:
       case InternshipDiaryStatementStatus.Approved:
       case InternshipDiaryStatementStatus.SubmittedForSigning:
         return 'accepted';

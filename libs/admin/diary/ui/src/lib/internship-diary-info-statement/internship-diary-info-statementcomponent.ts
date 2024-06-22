@@ -69,7 +69,7 @@ export class InternshipDiaryInfoStatementComponent implements OnInit {
   );
 
   // TODO: disable item handler (уточнить, если нельзя переходить из одного статуса в другой)
-  readonly statuses = Object.values(InternshipDiaryStatementStatus).slice(2);
+  readonly statuses = Object.values(InternshipDiaryStatementStatus).slice(3);
 
   readonly url$ = new BehaviorSubject<string>('');
   readonly fileState$ = new BehaviorSubject<TuiFileState>('normal');

@@ -57,9 +57,6 @@ export class DiaryApiService {
     id,
     mark,
   }: ChangInternshipeDiaryMarkApiRequest): Observable<void> {
-    const params = new HttpParams().set('mark', mark);
-    return this.http.put<void>(`${this.baseUrl}/${id}/grade/${mark}`, null, {
-      params,
-    });
+    return this.http.put<void>(`${this.baseUrl}/${id}/mark/${mark}`, null);
   }
 }

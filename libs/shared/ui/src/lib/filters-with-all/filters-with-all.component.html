@@ -1,0 +1,20 @@
+<button
+  *ngIf="buttonAppearance$ | async as buttonAppearance"
+  size="m"
+  tuiButton
+  type="button"
+  class="item tui-space_right-1"
+  [appearance]="buttonAppearance"
+  (click)="toggleAll()"
+>
+  Все
+</button>
+
+<tui-filter
+  *ngIf="model$ | async as model"
+  class="item"
+  [badgeHandler]="badgeHandler"
+  [items]="filters"
+  [ngModel]="model"
+  (ngModelChange)="onModelChange($event)"
+></tui-filter>

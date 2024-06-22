@@ -71,10 +71,6 @@ export class CompaniesTableComponent {
     return this.columns.map(column => column.property);
   }
 
-  onPage(page: number): void {
-    console.log(page);
-  }
-
   remove(company: Company): void {
     this.removeClicked.emit(company);
   }

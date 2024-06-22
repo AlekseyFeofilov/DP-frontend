@@ -5,6 +5,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { StatementStoreFacade } from '@dp/admin/statement/store';
 import { ChatDialogService } from '@dp/shared/chat/ui';
 import { ATTACHMENT_ENTITY_TYPE } from '@dp/shared/consts';
@@ -15,6 +16,7 @@ import {
   convertInternshipStatementCommonToApply,
 } from '@dp/shared/statement/type';
 import { InternshipStatementsTableComponent } from '@dp/shared/statement/ui';
+import { FiltersWithAllComponent } from '@dp/shared/ui';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiLoaderModule } from '@taiga-ui/core';
 import { map, takeUntil } from 'rxjs';
@@ -22,7 +24,13 @@ import { map, takeUntil } from 'rxjs';
 @Component({
   selector: 'dp-internship-apply-statements-table',
   standalone: true,
-  imports: [CommonModule, InternshipStatementsTableComponent, TuiLoaderModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    InternshipStatementsTableComponent,
+    TuiLoaderModule,
+    FiltersWithAllComponent,
+  ],
   providers: [TuiDestroyService],
   templateUrl: './internship-apply-statements-table.component.html',
   styleUrl: './internship-apply-statements-table.component.less',
@@ -34,6 +42,24 @@ export class InternshipApplyStatementsTableComponent implements OnInit {
   private readonly destroy$ = inject(TuiDestroyService);
 
   readonly isLoading$ = this.statementStoreFacade.isLoading$;
+
+  private readonly filtersControl = new FormControl<
+    InternshipApplyStatementStatus[]
+  >([], {
+    nonNullable: true,
+  });
+
+  readonly filtersControl$ = this.statementStoreFacade.filters$.pipe(
+    map(({ internshipApplyStatuses: statuses }) => {
+      this.filtersControl.setValue([...statuses], { emitEvent: false });
+      return this.filtersControl;
+    }),
+  );
+
+  readonly filtersCapacity$ =
+    this.statementStoreFacade.internshipApplyStatusesCapacity$;
+
+  readonly filters = Object.values(InternshipApplyStatementStatus);
 
   readonly statements$ =
     this.statementStoreFacade.internshipApplyStatements$.pipe(

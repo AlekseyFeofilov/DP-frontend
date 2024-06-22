@@ -5,6 +5,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { StatementStoreFacade } from '@dp/admin/statement/store';
 import { ChatDialogService } from '@dp/shared/chat/ui';
 import { ATTACHMENT_ENTITY_TYPE } from '@dp/shared/consts';
@@ -15,14 +16,23 @@ import {
   convertInternshipStatementCommonToCheck,
 } from '@dp/shared/statement/type';
 import { InternshipStatementsTableComponent } from '@dp/shared/statement/ui';
+import { FiltersWithAllComponent } from '@dp/shared/ui';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiLoaderModule } from '@taiga-ui/core';
+import { TuiFilterModule } from '@taiga-ui/kit';
 import { map, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'dp-internship-check-statements-table',
   standalone: true,
-  imports: [CommonModule, InternshipStatementsTableComponent, TuiLoaderModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    InternshipStatementsTableComponent,
+    TuiLoaderModule,
+    TuiFilterModule,
+    FiltersWithAllComponent,
+  ],
   providers: [TuiDestroyService],
   templateUrl: './internship-check-statements-table.component.html',
   styleUrl: './internship-check-statements-table.component.less',
@@ -35,6 +45,23 @@ export class InternshipCheckStatementsTableComponent implements OnInit {
 
   readonly isLoading$ = this.statementStoreFacade.isLoading$;
 
+  private readonly filtersControl = new FormControl<
+    InternshipCheckStatementStatus[]
+  >([], {
+    nonNullable: true,
+  });
+
+  readonly filtersControl$ = this.statementStoreFacade.filters$.pipe(
+    map(({ internshipCheckStatuses: statuses }) => {
+      this.filtersControl.setValue([...statuses], { emitEvent: false });
+      return this.filtersControl;
+    }),
+  );
+
+  readonly filtersCapacity$ =
+    this.statementStoreFacade.internshipCheckStatusesCapacity$;
+  readonly filters = Object.values(InternshipCheckStatementStatus);
+
   readonly statements$ =
     this.statementStoreFacade.internshipCheckStatements$.pipe(
       map(statements =>
@@ -46,6 +73,7 @@ export class InternshipCheckStatementsTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.statementStoreFacade.loadAllInternshipCheck();
+    this.trackFiltersControlChanges();
   }
 
   acceptStatement(statement: InternshipStatementCommon): void {
@@ -67,5 +95,15 @@ export class InternshipCheckStatementsTableComponent implements OnInit {
       .open(ATTACHMENT_ENTITY_TYPE.InternshipCheckStatement.key, statement.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe();
+  }
+
+  private trackFiltersControlChanges(): void {
+    this.filtersControl.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.statementStoreFacade.setFilters({
+          internshipCheckStatuses: value,
+        });
+      });
   }
 }

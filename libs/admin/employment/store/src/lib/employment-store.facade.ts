@@ -12,13 +12,10 @@ export class EmploymentStoreFacade {
   private readonly store = inject(Store);
 
   readonly dashboardInfo$ = this.store.pipe(
-    select(fromEmploymentStore.selectDashboardInfo),
+    select(fromEmploymentStore.selectFilteredDashboardInfo),
   );
   readonly dashboardFilters$ = this.store.pipe(
     select(fromEmploymentStore.selectDashboardFilters),
-  );
-  readonly dashboardCurrentFilter$ = this.store.pipe(
-    select(fromEmploymentStore.selectCurrentFilter),
   );
 
   readonly status$ = this.store.pipe(select(fromEmploymentStore.selectStatus));

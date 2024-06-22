@@ -24,7 +24,14 @@ export class StatementStoreFacade {
     select(fromStatementStore.selectAllInternshipApplyStatements),
   );
 
-  readonly groups$ = this.store.pipe(select(fromStatementStore.selectGroups));
+  readonly filters$ = this.store.pipe(select(fromStatementStore.selectFilters));
+
+  readonly internshipCheckStatusesCapacity$ = this.store.pipe(
+    select(fromStatementStore.selectInternshipCheckStatusesCapacity),
+  );
+  readonly internshipApplyStatusesCapacity$ = this.store.pipe(
+    select(fromStatementStore.selectInternshipApplyStatusesCapacity),
+  );
 
   readonly status$ = this.store.pipe(select(fromStatementStore.selectStatus));
   readonly isLoading$ = this.status$.pipe(

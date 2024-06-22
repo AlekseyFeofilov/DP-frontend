@@ -1,6 +1,6 @@
+import { convertDtoToGroup } from '@dp/shared/group/types';
 import { StudentDto } from '@dp/shared/student/dto';
 import { Student } from '../models/student';
-import { convertDtoToGroup } from './dto-to-group';
 
 export function convertDtoToStudent(dto: StudentDto): Student {
   return {

@@ -1,9 +1,0 @@
-{
-  "name": "shared-student-data-access",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/student/data-access/src",
-  "prefix": "dp",
-  "tags": [],
-  "projectType": "library",
-  "targets": {}
-}

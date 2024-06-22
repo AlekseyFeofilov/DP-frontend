@@ -1,7 +1,9 @@
-import { InternshipCheckStatement } from '@dp/shared/statement/type';
-import { isStringIncluded } from '@dp/shared/utils';
+import {
+  InternshipApplyStatementStatus,
+  InternshipCheckStatementStatus,
+} from '@dp/shared/statement/type';
+import { getStatusCapacity, isStringIncluded } from '@dp/shared/utils';
 import { createSelector } from '@ngrx/store';
-import { StatemntFilters } from './statement-store-state.interface';
 import { StatementStore } from './statement-store.reducer';
 
 const {
@@ -9,18 +11,20 @@ const {
   selectAllInternshipApplyStatements,
   selectStatus,
   selectFilters,
-  selectGroups,
 } = StatementStore;
 
 export const selectAllFilteredInternshipCheckStatements = createSelector(
   selectAllInternshipCheckStatements,
   selectFilters,
-  (
-    statements: ReadonlyArray<InternshipCheckStatement>,
-    filters: StatemntFilters,
-  ) =>
+  (statements, filters) =>
     statements.filter(statement => {
-      const { studentName, companyName, vacancyName, groupIds } = filters;
+      const {
+        studentName,
+        companyName,
+        vacancyName,
+        groupIds,
+        internshipCheckStatuses,
+      } = filters;
       const isMatch =
         (studentName
           ? isStringIncluded(statement.student.name, studentName)
@@ -33,14 +37,35 @@ export const selectAllFilteredInternshipCheckStatements = createSelector(
           : true) &&
         (statement.student.group
           ? groupIds.includes(statement.student.group.id)
-          : false);
+          : false) &&
+        internshipCheckStatuses.includes(statement.status);
       return isMatch;
     }),
+);
+
+export const selectInternshipCheckStatusesCapacity = createSelector(
+  selectAllInternshipCheckStatements,
+  statements =>
+    getStatusCapacity(
+      [...Object.values(InternshipCheckStatementStatus)],
+      [...statements],
+    ),
+);
+
+export const selectInternshipApplyStatusesCapacity = createSelector(
+  selectAllInternshipApplyStatements,
+  statements =>
+    getStatusCapacity(
+      [...Object.values(InternshipApplyStatementStatus)],
+      [...statements],
+    ),
 );
 
 export const fromStatementStore = {
   selectAllFilteredInternshipCheckStatements,
   selectAllInternshipApplyStatements,
   selectStatus,
-  selectGroups,
+  selectFilters,
+  selectInternshipCheckStatusesCapacity,
+  selectInternshipApplyStatusesCapacity,
 };

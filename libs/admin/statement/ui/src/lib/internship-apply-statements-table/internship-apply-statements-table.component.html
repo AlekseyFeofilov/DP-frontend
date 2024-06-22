@@ -1,6 +1,13 @@
 @if (isLoading$ | async) {
   <tui-loader></tui-loader>
 } @else {
+  <dp-filters-with-all
+    *ngIf="filtersControl$ | async as filtersControl"
+    [filters]="filters"
+    [filtersCapacitiy]="filtersCapacity$ | async"
+    [formControl]="filtersControl"
+  ></dp-filters-with-all>
+
   <dp-internship-statements-table
     hideNewStatementAction
     [statements]="(statements$ | async) || []"

@@ -7,7 +7,7 @@ export enum InternshipDiaryStatementDtoStatus {
   OnRevision = 'OnRevision',
   Approved = 'Approved',
   SubmittedForSigning = 'SubmittedForSigning',
-  Ready = 'Ready',
+  Rated = 'Rated',
 }
 
 export interface InternshipDiaryStatementDto {

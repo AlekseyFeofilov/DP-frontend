@@ -1,4 +1,4 @@
-import { Group } from './group';
+import { Group } from '@dp/shared/group/types';
 
 export interface Student {
   id: string;

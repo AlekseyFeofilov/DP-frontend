@@ -1,3 +1,7 @@
+import {
+  InternshipApplyStatementStatus,
+  InternshipCheckStatementStatus,
+} from '@dp/shared/statement/type';
 import { StoreStateStatus } from '@dp/shared/types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import {
@@ -12,12 +16,13 @@ const initialFilters: StatemntFilters = {
   groupIds: [],
   companyName: null,
   vacancyName: null,
+  internshipCheckStatuses: Object.values(InternshipCheckStatementStatus),
+  internshipApplyStatuses: Object.values(InternshipApplyStatementStatus),
 };
 
 const initalState: StatementStoreState = {
   allInternshipCheckStatements: [],
   allInternshipApplyStatements: [],
-  groups: [],
   filters: initialFilters,
   status: StoreStateStatus.Initial,
 };
@@ -88,11 +93,6 @@ const reducer = createReducer(
       ...state.filters,
       ...filters,
     },
-  })),
-
-  on(statementActions.setGroups, (state, { groups }) => ({
-    ...state,
-    groups,
   })),
 );
 

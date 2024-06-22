@@ -8,17 +8,16 @@ import {
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
 import { notificationActions } from '@dp/shared/effects';
+import { GroupStoreFacade } from '@dp/shared/group/store';
 import {
   InternshipApplyStatementStatus,
   InternshipCheckStatementStatus,
 } from '@dp/shared/statement/type';
-import { GroupApiService } from '@dp/shared/student/data-access';
-import { convertDtoToGroup } from '@dp/shared/student/types';
 import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { TuiDialogService } from '@taiga-ui/core';
 import { TUI_PROMPT } from '@taiga-ui/kit';
-import { catchError, concatMap, filter, map, switchMap } from 'rxjs';
+import { catchError, filter, map, switchMap } from 'rxjs';
 import { StatementApiAdapterHelper } from './statement-api-adapter.helper';
 import { statementActions } from './statement-store.actions';
 
@@ -32,7 +31,7 @@ export class StatementStoreEffects implements OnInitEffects {
   private readonly internshipApplyStatementApiService = inject(
     InternshipApplyStatementApiService,
   );
-  private readonly groupApiService = inject(GroupApiService);
+  private readonly groupStoreFacade = inject(GroupStoreFacade);
 
   ngrxOnInitEffects(): Action {
     return statementActions.init();
@@ -42,17 +41,12 @@ export class StatementStoreEffects implements OnInitEffects {
     this.actions$.pipe(
       ofType(statementActions.init),
       switchMap(() =>
-        this.groupApiService.getAll().pipe(
-          concatMap(response => {
-            const groups = response.map(convertDtoToGroup);
-
-            return [
-              statementActions.setGroups({ groups }),
-              statementActions.setFilters({
-                filters: { groupIds: groups.map(group => group.id) },
-              }),
-            ];
-          }),
+        this.groupStoreFacade.groups$.pipe(
+          map(groups =>
+            statementActions.setFilters({
+              filters: { groupIds: groups.map(group => group.id) },
+            }),
+          ),
         ),
       ),
     ),

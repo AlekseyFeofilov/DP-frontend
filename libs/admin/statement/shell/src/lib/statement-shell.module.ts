@@ -9,19 +9,18 @@ import {
   StatementStoreEffects,
   StatementStoreFacade,
 } from '@dp/admin/statement/store';
-import { GroupApiService } from '@dp/shared/student/data-access';
+import { GroupShellModule } from '@dp/shared/group/shell';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { STATEMENT_ROUTES } from './statement.routes';
 
 @NgModule({
-  imports: [RouterModule.forChild(STATEMENT_ROUTES)],
+  imports: [RouterModule.forChild(STATEMENT_ROUTES), GroupShellModule],
   providers: [
     provideEffects(StatementStoreEffects),
     provideState(StatementStore),
     InternshipCheckStatementApiService,
     InternshipApplyStatementApiService,
-    GroupApiService,
     StatementStoreFacade,
   ],
 })
