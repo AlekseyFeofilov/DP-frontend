@@ -1,4 +1,5 @@
 <tui-multi-select
+  *tuiLet="groups$ | async as groups"
   tuiTextfieldSize="m"
   [editable]="false"
   [expandable]="false"
@@ -8,7 +9,7 @@
 >
   Группы
   <tui-data-list *tuiDataList>
-    @if (groups$ | async; as groups) {
+    @if (groups) {
       @for (grade of groups | tuiMapper: getGrades; track grade) {
         <tui-opt-group [label]="grade + ' курс'" tuiMultiSelectGroup>
           @for (group of groups[grade]; track group.id) {

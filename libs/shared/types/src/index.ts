@@ -1,3 +1,4 @@
+export * from './lib/attachment/attachment-entity';
 export * from './lib/filter/filter-capacity';
 export * from './lib/form/form-mode';
 export * from './lib/form/form-value';

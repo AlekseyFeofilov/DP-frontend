@@ -26,14 +26,9 @@ export class ChatStoreEffects {
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(chatActions.loadAll),
-      switchMap(({ entityType, entityId }) =>
+      switchMap(({ entity }) =>
         this.chatApiService
-          .getAll(
-            ChatApiAdapterHelper.parseGetAllMessagesApiRequest(
-              entityType,
-              entityId,
-            ),
-          )
+          .getAll(ChatApiAdapterHelper.parseGetAllMessagesApiRequest(entity))
           .pipe(
             map(response => {
               const messages =

@@ -92,7 +92,10 @@ export class InternshipCheckStatementsTableComponent implements OnInit {
 
   openChat(statement: InternshipStatementCommon): void {
     this.chatDialogService
-      .open(ATTACHMENT_ENTITY_TYPE.InternshipCheckStatement.key, statement.id)
+      .open({
+        type: ATTACHMENT_ENTITY_TYPE.InternshipCheckStatement.key,
+        id: statement.id,
+      })
       .pipe(takeUntil(this.destroy$))
       .subscribe();
   }

@@ -1,0 +1,50 @@
+<div
+  *tuiLet="loadingFilesIds$ | async as loadingFilesIds"
+  tuiCardLarge
+  tuiSurface="elevated"
+  class="files tui-skeleton_rounded"
+  [class.tui-skeleton]="isLoading$ | async"
+>
+  <header tuiHeader>
+    <h2 tuiTitle>Файлы</h2>
+  </header>
+
+  @if (filesInfo$ | async; as filesInfo) {
+    @if (!readonly) {
+      <tui-input-files
+        [ngModel]="filesInfo"
+        (ngModelChange)="addFile($event)"
+      ></tui-input-files>
+    }
+
+    <tui-files [max]="4">
+      @for (
+        fileInfo of filesInfo | tuiMapper: sortFilesInfo;
+        track fileInfo.id
+      ) {
+        <ng-container
+          *tuiLet="
+            fileInfo
+              | tuiMapper: isFileInfoLoading : loadingFilesIds as isLoading
+          "
+        >
+          <tui-file
+            *tuiItem
+            size="l"
+            [showDelete]="readonly ? false : 'always'"
+            [state]="isLoading ? 'loading' : 'normal'"
+            [file]="fileInfo | tuiMapper: parseFileInfoToFileLike"
+            (removed)="removeFile(fileInfo)"
+            ><button tuiLink (click)="saveFileLocally(fileInfo)">
+              Скачать
+            </button></tui-file
+          ></ng-container
+        >
+      }
+    </tui-files>
+
+    @if (!filesInfo.length) {
+      <div class="empty-section">Пусто</div>
+    }
+  }
+</div>

@@ -3,13 +3,17 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GroupStoreFacade } from '@dp/shared/group/store';
 import { Group } from '@dp/shared/group/types';
-import { AbstractTuiControl, TuiMapperPipeModule } from '@taiga-ui/cdk';
+import {
+  AbstractTuiControl,
+  TuiLetModule,
+  TuiMapperPipeModule,
+} from '@taiga-ui/cdk';
 import {
   TuiDataListModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiMultiSelectModule } from '@taiga-ui/kit';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, tap } from 'rxjs';
 
 @Component({
   selector: 'dp-group-select',
@@ -21,6 +25,7 @@ import { BehaviorSubject, map } from 'rxjs';
     TuiTextfieldControllerModule,
     TuiDataListModule,
     TuiMapperPipeModule,
+    TuiLetModule,
   ],
   templateUrl: './group-select.component.html',
   styleUrl: './group-select.component.less',
@@ -32,6 +37,9 @@ export class GroupSelectComponent extends AbstractTuiControl<Group[]> {
   override focused = false;
 
   readonly groups$ = this.groupStoreFacade.groups$.pipe(
+    tap(groups => {
+      this.onModelChange([...groups]);
+    }),
     map(groups =>
       groups.reduce(
         (prev, curr) => ({
@@ -52,13 +60,7 @@ export class GroupSelectComponent extends AbstractTuiControl<Group[]> {
   onModelChange(value: Group[]): void {
     this.value = value;
     this.choosenGrops$.next(value);
-  }
-
-  override writeValue(value: Group[] | null): void {
-    if (value) {
-      this.choosenGrops$.next(value);
-    }
-    super.writeValue(value);
+    this.cdr.detectChanges();
   }
 
   protected override getFallbackValue(): Group[] {

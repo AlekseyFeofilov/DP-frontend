@@ -1,0 +1,67 @@
+@if (statement$ | async; as statement) {
+  <div class="left-content">
+    <div class="section">
+      <h4>Семестр:</h4>
+
+      {{ statement.semester }}
+    </div>
+
+    <div class="section">
+      <h4>Дата последнего изменения:</h4>
+
+      {{ statement.modifyDate }}
+    </div>
+
+    <div class="section">
+      <h4>Дата создания:</h4>
+
+      {{ statement.createDate }}
+    </div>
+
+    <div class="section">
+      <h4>Статус:</h4>
+
+      <dp-internship-diary-status-badge
+        [status]="statement.status"
+      ></dp-internship-diary-status-badge>
+    </div>
+
+    <div class="section">
+      <h4>Оценка:</h4>
+
+      {{ statement.mark ?? 'Нет' }}
+    </div>
+
+    <div class="tui-space_bottom-4">
+      @if (
+        statement.status === InternshipDiaryStatementStatus.No ||
+        statement.status === InternshipDiaryStatementStatus.OnRevision
+      ) {
+        <button size="s" tuiButton (click)="sendForReview()">
+          Отправить на проверку
+        </button>
+      }
+
+      @if (statement.status === InternshipDiaryStatementStatus.Approved) {
+        <button size="s" tuiButton (click)="markAsSigning()">
+          Пометить как сданный на подпись
+        </button>
+      }
+    </div>
+
+    @if (statement.semester === 5) {
+      <dp-internship-diary-template-form
+        [statementId]="statement.id"
+        (submitted)="createTemplate(statement.semester, $event)"
+      ></dp-internship-diary-template-form>
+    }
+  </div>
+
+  <dp-files-repository
+    class="right-content"
+    [entity]="{
+      type: ATTACHMENT_ENTITY_TYPE.InternshipDiaryStatement.key,
+      id: statement.id
+    }"
+  ></dp-files-repository>
+}

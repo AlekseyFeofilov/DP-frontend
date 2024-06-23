@@ -1,5 +1,6 @@
+import { AttachmentEntity } from '@dp/shared/types';
+
 export interface NewMessage {
-  entityType: string;
-  entityId: string;
+  entity: AttachmentEntity;
   content: string;
 }

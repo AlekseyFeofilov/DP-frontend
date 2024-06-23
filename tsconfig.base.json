@@ -93,7 +93,10 @@
         "libs/shared/file/data-access/src/index.ts"
       ],
       "@dp/shared/file/dto": ["libs/shared/file/dto/src/index.ts"],
+      "@dp/shared/file/shell": ["libs/shared/file/shell/src/index.ts"],
+      "@dp/shared/file/store": ["libs/shared/file/store/src/index.ts"],
       "@dp/shared/file/types": ["libs/shared/file/types/src/index.ts"],
+      "@dp/shared/file/ui": ["libs/shared/file/ui/src/index.ts"],
       "@dp/shared/group/data-access": [
         "libs/shared/group/data-access/src/index.ts"
       ],
@@ -111,6 +114,15 @@
       "@dp/shared/types": ["libs/shared/types/src/index.ts"],
       "@dp/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@dp/shared/utils": ["libs/shared/utils/src/index.ts"],
+      "@dp/student/diary/data-access": [
+        "libs/student/diary/data-access/src/index.ts"
+      ],
+      "@dp/student/diary/dto": ["libs/student/diary/dto/src/index.ts"],
+      "@dp/student/diary/pages": ["libs/student/diary/pages/src/index.ts"],
+      "@dp/student/diary/shell": ["libs/student/diary/shell/src/index.ts"],
+      "@dp/student/diary/store": ["libs/student/diary/store/src/index.ts"],
+      "@dp/student/diary/types": ["libs/student/diary/types/src/index.ts"],
+      "@dp/student/diary/ui": ["libs/student/diary/ui/src/index.ts"],
       "@dp/student/employment-variant/data-access": [
         "libs/student/employment-variant/data-access/src/index.ts"
       ],

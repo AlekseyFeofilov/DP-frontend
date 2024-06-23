@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Message, NewMessage } from '@dp/shared/chat/types';
-import { StoreStateStatus } from '@dp/shared/types';
+import { AttachmentEntity, StoreStateStatus } from '@dp/shared/types';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs';
 import { chatActions } from './chat-store.actions';
@@ -23,8 +23,8 @@ export class ChatStoreFacade {
     map(status => status === StoreStateStatus.Loading),
   );
 
-  load(entityType: string, entityId: string): void {
-    this.store.dispatch(chatActions.loadAll({ entityType, entityId }));
+  load(entity: AttachmentEntity): void {
+    this.store.dispatch(chatActions.loadAll({ entity }));
   }
 
   create(newMessage: NewMessage): void {

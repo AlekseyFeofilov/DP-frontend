@@ -31,12 +31,6 @@ import {
 } from '@taiga-ui/kit';
 import { BehaviorSubject, map, shareReplay } from 'rxjs';
 
-export interface InternshipStatementForm {
-  companyName: string;
-  vacancy: string;
-  comment: string | null;
-}
-
 @Component({
   selector: 'dp-internship-check-statement-form',
   standalone: true,

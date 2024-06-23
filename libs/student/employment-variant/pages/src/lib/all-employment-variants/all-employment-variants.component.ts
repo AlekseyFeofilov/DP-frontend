@@ -54,7 +54,10 @@ export class AllEmploymentVariantsComponent implements OnInit {
 
   openChat(employmentVariant: EmploymentVariant): void {
     this.chatDialogService
-      .open(ATTACHMENT_ENTITY_TYPE.EmploymentVariant.key, employmentVariant.id)
+      .open({
+        type: ATTACHMENT_ENTITY_TYPE.EmploymentVariant.key,
+        id: employmentVariant.id,
+      })
       .pipe(takeUntil(this.destroy$))
       .subscribe();
   }

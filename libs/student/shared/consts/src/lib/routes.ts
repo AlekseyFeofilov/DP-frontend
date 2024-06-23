@@ -5,7 +5,9 @@ export const PATH_NAME = {
 
   internshipCheck: 'internship-check',
   internshipApply: 'internship-apply',
+
   internshipDiary: 'internship-diary',
+  internshipDiaryId: ':internshipDiaryId',
 
   employmentVariant: 'employment-variant',
   employmentVariantId: ':employmentVariantId',

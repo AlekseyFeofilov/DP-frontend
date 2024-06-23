@@ -1,14 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BASE_URL } from '@dp/shared/core';
-import { Observable } from 'rxjs';
+import { FileInfoDto } from '@dp/shared/file/dto';
+import { Observable, map } from 'rxjs';
+
+export interface GetAllFilesInfoApiRequest {
+  entityType: string;
+  entityId: string;
+}
 
 export interface GetFileApiRequest {
   fileId: string;
 }
 
 export interface SaveFileApiRequest {
-  payload: File;
+  payload: FormData;
 }
 
 export interface AttachFileApiRequest {
@@ -16,6 +22,10 @@ export interface AttachFileApiRequest {
   entityType: string;
   entityId: string;
 }
+
+export type DetachFileApiRequest = AttachFileApiRequest;
+
+export type AllFilesInfoForEntityApiResponse = Array<FileInfoDto>;
 
 @Injectable()
 export class FileApiService {
@@ -28,8 +38,19 @@ export class FileApiService {
     });
   }
 
-  save({ payload }: SaveFileApiRequest): Observable<void> {
-    return this.http.post<void>(this.baseUrl, payload);
+  getAllInfoByEntity({
+    entityId,
+    entityType,
+  }: GetAllFilesInfoApiRequest): Observable<AllFilesInfoForEntityApiResponse> {
+    return this.http
+      .get<{
+        files: AllFilesInfoForEntityApiResponse;
+      }>(`${this.baseUrl}/${entityType}/${entityId}`)
+      .pipe(map(response => response.files));
+  }
+
+  save({ payload }: SaveFileApiRequest): Observable<string> {
+    return this.http.post<string>(this.baseUrl, payload);
   }
 
   attach({
@@ -40,6 +61,16 @@ export class FileApiService {
     return this.http.put<void>(
       `${this.baseUrl}/${fileId}/link/${entityType}/${entityId}`,
       null,
+    );
+  }
+
+  detach({
+    fileId,
+    entityId,
+    entityType,
+  }: AttachFileApiRequest): Observable<void> {
+    return this.http.delete<void>(
+      `${this.baseUrl}/${fileId}/link/${entityType}/${entityId}`,
     );
   }
 }

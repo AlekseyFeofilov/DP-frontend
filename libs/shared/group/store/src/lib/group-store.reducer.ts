@@ -22,7 +22,7 @@ const reducer = createReducer(
   })),
 );
 
-export const GroupStore = createFeature({
+export const groupStore = createFeature({
   name: GROUP_STORE_FEATURE_KEY,
   reducer,
 });

@@ -6,6 +6,7 @@ import {
   DiaryStoreEffects,
   DiaryStoreFacade,
 } from '@dp/admin/diary/store';
+import { provideFiles } from '@dp/shared/file/shell';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { DIARY_ROUTES } from './diary.routes';
@@ -13,6 +14,7 @@ import { DIARY_ROUTES } from './diary.routes';
 @NgModule({
   imports: [RouterModule.forChild(DIARY_ROUTES)],
   providers: [
+    provideFiles(),
     provideEffects(DiaryStoreEffects),
     provideState(diaryStore),
     DiaryApiService,

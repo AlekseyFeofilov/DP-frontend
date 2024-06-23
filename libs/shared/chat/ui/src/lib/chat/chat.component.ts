@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { ChatStoreFacade } from '@dp/shared/chat/store';
 import { Message } from '@dp/shared/chat/types';
+import { AttachmentEntity } from '@dp/shared/types';
 import {
   TuiLetModule,
   TuiMapperPipeModule,
@@ -35,8 +36,7 @@ import { TuiTextareaModule } from '@taiga-ui/kit';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 
 export interface ChatDialogData {
-  entityType: string;
-  entityId: string;
+  entity: AttachmentEntity;
 }
 
 @Component({
@@ -81,10 +81,7 @@ export class ChatComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.chatStoreFacade.load(
-      this.context.data.entityType,
-      this.context.data.entityId,
-    );
+    this.chatStoreFacade.load(this.context.data.entity);
   }
 
   isMessageLoading(message: Message, loadingMessagesIds: string[]): boolean {
@@ -106,8 +103,7 @@ export class ChatComponent implements OnInit {
     }
 
     this.chatStoreFacade.create({
-      entityType: this.context.data.entityType,
-      entityId: this.context.data.entityId,
+      entity: this.context.data.entity,
       content: this.control.value.trim(),
     });
 

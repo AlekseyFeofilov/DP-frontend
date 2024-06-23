@@ -1,0 +1,87 @@
+<tui-accordion>
+  <tui-accordion-item>
+    Генерация шаблона дневника практики с предзаполнением дефолтных полей
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" tuiAccordionItemContent>
+      <tui-notification tuiNotification status="info">
+        Заполните основные поля: выполняемые в ходе стажировки задачи и оценку
+        руководителя. На основе этих данных, а также данных о текущем
+        трудоустройстве будет автоматически сгенерирован шаблон дневника
+        практики и прикреплен к заявлению.
+      </tui-notification>
+
+      <h2>Характеристика</h2>
+
+      <div formGroupName="assessment">
+        <label>Оценка</label>
+        <tui-input-number
+          formControlName="mark"
+          [step]="1"
+          [min]="1"
+          [max]="5"
+          class="input"
+          >Введите значение от 1 до 5</tui-input-number
+        >
+
+        <label>Отзыв о работе студента</label>
+        <tui-textarea formControlName="text" [tuiTextfieldCleaner]="true"
+          >Введите текст</tui-textarea
+        >
+
+        <label>Дата написания</label>
+        <tui-input-date formControlName="date">Введите дату</tui-input-date>
+      </div>
+
+      <h2>Задачи</h2>
+
+      <div formArrayName="tasks">
+        @for (taskControl of form.controls.tasks.controls; track $index) {
+          <div formGroupName="{{ $index }}">
+            <label
+              >Задача {{ $index + 1 }}
+              @if ($index !== 0 || form.controls.tasks.controls.length !== 1) {
+                <button
+                  class="tui-space_left-2"
+                  appearance="flat"
+                  iconLeft="tuiIconTrash"
+                  size="s"
+                  title="Remove"
+                  tuiIconButton
+                  type="button"
+                  (click)="deleteTaskControl($index)"
+                ></button>
+              }
+            </label>
+
+            <label>Сроки выполнения</label>
+            <tui-input-date-range formControlName="dateRange"
+              >Введите дату начала и окончания</tui-input-date-range
+            >
+
+            <label>Название/описание</label>
+            <tui-textarea formControlName="name">Введите текст</tui-textarea>
+
+            <label>Трудозатраты</label>
+            <tui-input-time formControlName="spentTime"
+              >Введите время</tui-input-time
+            >
+          </div>
+        }
+
+        <button
+          class="tui-space_top-4"
+          tuiLink
+          size="s"
+          type="button"
+          icon="tuiIconPlus"
+          iconAlign="left"
+          [pseudo]="true"
+          (click)="addTaskControl()"
+        >
+          Добавить задачу
+        </button>
+      </div>
+
+      <button class="action" type="submit" tuiButton>Сгенерировать</button>
+    </form>
+  </tui-accordion-item>
+</tui-accordion>

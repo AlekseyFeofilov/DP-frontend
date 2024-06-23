@@ -1,10 +1,11 @@
 import { Message, NewMessage } from '@dp/shared/chat/types';
+import { AttachmentEntity } from '@dp/shared/types';
 import { createAction, props } from '@ngrx/store';
 import { CHAT_STORE_FEATURE_KEY } from './chat-store.key';
 
 const loadAll = createAction(
   `[${CHAT_STORE_FEATURE_KEY}] load all messages`,
-  props<{ readonly entityType: string; readonly entityId: string }>(),
+  props<{ readonly entity: AttachmentEntity }>(),
 );
 
 const loadAllSuccess = createAction(

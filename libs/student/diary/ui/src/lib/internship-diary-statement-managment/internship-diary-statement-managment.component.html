@@ -1,0 +1,52 @@
+@if (statements$ | async; as statements) {
+  @for (semester of semesters; track $index) {
+    <div>
+      <h2>{{ semester }} семестр</h2>
+      @if (
+        statements | tuiMapper: getStatementForSemester : semester;
+        as statement
+      ) {
+        <button
+          class="tui-space_right-2"
+          icon="tuiIconChevronLeft"
+          iconAlign="left"
+          tuiLink
+          [routerLink]="statement.id"
+        >
+          Перейти к заявлению
+        </button>
+        <button
+          class="tui-space_right-2"
+          tuiIconButton
+          appearance="flat"
+          iconLeft="tuiIconMessageCircle"
+          size="s"
+          type="button"
+          class="tui-space_right-1"
+          (click)="openChat(statement)"
+        ></button>
+
+        <button
+          class="tui-space_right-2"
+          size="s"
+          tuiIconButton
+          iconLeft="tuiIconTrash"
+          appearance="flat"
+          (click)="delete(statement)"
+        ></button>
+        <dp-internship-diary-status-badge
+          [status]="statement.status"
+        ></dp-internship-diary-status-badge>
+      } @else {
+        <button
+          icon="tuiIconPlus"
+          iconAlign="left"
+          tuiLink
+          (click)="create(semester)"
+        >
+          Создать заявление
+        </button>
+      }
+    </div>
+  }
+}

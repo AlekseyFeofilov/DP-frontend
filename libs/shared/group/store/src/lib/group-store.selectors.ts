@@ -1,6 +1,6 @@
-import { GroupStore } from './group-store.reducer';
+import { groupStore } from './group-store.reducer';
 
-const { selectGroups } = GroupStore;
+const { selectGroups } = groupStore;
 
 export const fromGroupStore = {
   selectGroups,

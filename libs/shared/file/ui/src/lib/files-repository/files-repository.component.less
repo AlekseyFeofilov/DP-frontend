@@ -1,0 +1,23 @@
+@import '@taiga-ui/styles/taiga-ui-global';
+
+:host {
+  display: block;
+}
+
+.files {
+  height: auto;
+
+  [tuiTitle] {
+    .tui-space(vertical, 0);
+  }
+}
+
+.empty-section {
+  display: flex;
+  height: 3.125rem;
+  border-radius: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--tui-base-06);
+  border: 1px dashed var(--tui-base-06);
+}

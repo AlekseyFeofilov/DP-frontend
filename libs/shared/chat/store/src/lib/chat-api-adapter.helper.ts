@@ -10,13 +10,13 @@ import {
   convertDtoToMessage,
   convertNewMessageToDto,
 } from '@dp/shared/chat/types';
+import { AttachmentEntity } from '@dp/shared/types';
 
 export namespace ChatApiAdapterHelper {
   export function parseGetAllMessagesApiRequest(
-    entityType: string,
-    entityId: string,
+    entity: AttachmentEntity,
   ): GetAllMessagesApiRequest {
-    return { entityType, entityId };
+    return { entityType: entity.type, entityId: entity.id };
   }
 
   export function parseAllMessagesApiResponse(
