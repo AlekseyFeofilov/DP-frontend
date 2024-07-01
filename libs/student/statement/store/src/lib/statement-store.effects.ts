@@ -3,7 +3,7 @@ import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import {
   InternshipApplyStatementApiService,
   InternshipCheckStatementApiService,
@@ -93,13 +93,13 @@ export class StatementStoreEffects {
             map(() => {
               finishCallback?.();
 
-              return notificationActions.success({
+              return alertActions.success({
                 message: 'Заявление успешно создано',
               });
             }),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.create.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),
@@ -144,13 +144,13 @@ export class StatementStoreEffects {
           )
           .pipe(
             map(() =>
-              notificationActions.success({
+              alertActions.success({
                 message: 'Заявление успешно создано',
               }),
             ),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.create.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),

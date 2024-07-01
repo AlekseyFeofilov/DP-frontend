@@ -1,4 +1,5 @@
 import { CompanyDto } from '@dp/shared/company/dto';
+
 export enum EmploymentVariantDtoStatus {
   NoInfo = 'NoInfo',
   Interviewed = 'Interviewed',

@@ -7,7 +7,7 @@ import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import { GroupStoreFacade } from '@dp/shared/group/store';
 import {
   InternshipApplyStatementStatus,
@@ -142,12 +142,12 @@ export class StatementStoreEffects implements OnInitEffects {
           )
           .pipe(
             map(() =>
-              notificationActions.success({
+              alertActions.success({
                 message: `Заявление ${newStatus === InternshipCheckStatementStatus.Accepted ? 'подтверждено' : 'отклонено'}`,
               }),
             ),
             catchError(() => [
-              notificationActions.error({
+              alertActions.error({
                 label: NOTIFICATION_TEXTS.edit.error,
                 message: NOTIFICATION_DESCRIPTION.error,
               }),
@@ -195,12 +195,12 @@ export class StatementStoreEffects implements OnInitEffects {
           )
           .pipe(
             map(() =>
-              notificationActions.success({
+              alertActions.success({
                 message: `Заявление ${newStatus === InternshipApplyStatementStatus.Accepted ? 'подтверждено' : 'отклонено'}`,
               }),
             ),
             catchError(() => [
-              notificationActions.error({
+              alertActions.error({
                 label: NOTIFICATION_TEXTS.edit.error,
                 message: NOTIFICATION_DESCRIPTION.error,
               }),

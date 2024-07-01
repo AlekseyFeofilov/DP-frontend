@@ -3,7 +3,7 @@ import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import { DiaryApiService } from '@dp/student/diary/data-access';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -102,14 +102,14 @@ export class DiaryStoreEffects {
           .pipe(
             mergeMap(() => {
               return [
-                notificationActions.success({
+                alertActions.success({
                   message: 'Изменения успешно сохранены',
                 }),
                 diaryActions.saveChangesSuccess(),
               ];
             }),
             catchError(() => [
-              notificationActions.error({
+              alertActions.error({
                 label: NOTIFICATION_TEXTS.edit.error,
                 message: NOTIFICATION_DESCRIPTION.error,
               }),
@@ -131,12 +131,12 @@ export class DiaryStoreEffects {
         return this.diaryApiService.createStatement(request).pipe(
           mergeMap(() => [
             diaryActions.loadAll(),
-            notificationActions.success({
+            alertActions.success({
               message: `Заявление по ${newIntrenshipDiaryStatement.semester} семестру создано`,
             }),
           ]),
           catchError(() => [
-            notificationActions.error({
+            alertActions.error({
               label: NOTIFICATION_TEXTS.create.error,
               message: NOTIFICATION_DESCRIPTION.error,
             }),
@@ -161,12 +161,12 @@ export class DiaryStoreEffects {
             diaryActions.loadSelected({
               id: newInternshipDiaryTemplate.statementId,
             }),
-            notificationActions.success({
+            alertActions.success({
               message: 'Изменения успешно сохранены',
             }),
           ]),
           catchError(() => [
-            notificationActions.error({
+            alertActions.error({
               label: NOTIFICATION_TEXTS.create.error,
               message: NOTIFICATION_DESCRIPTION.error,
             }),
@@ -204,13 +204,13 @@ export class DiaryStoreEffects {
           .deleteStatement({ id: internshipDiaryStatement.id })
           .pipe(
             map(() =>
-              notificationActions.success({
+              alertActions.success({
                 message: `Заявление по ${internshipDiaryStatement.semester} семестру удалено`,
               }),
             ),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.remove.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),

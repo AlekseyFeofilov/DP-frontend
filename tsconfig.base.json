@@ -105,6 +105,24 @@
       "@dp/shared/group/store": ["libs/shared/group/store/src/index.ts"],
       "@dp/shared/group/types": ["libs/shared/group/types/src/index.ts"],
       "@dp/shared/group/ui": ["libs/shared/group/ui/src/index.ts"],
+      "@dp/shared/notification/data-access": [
+        "libs/shared/notification/data-access/src/index.ts"
+      ],
+      "@dp/shared/notification/dto": [
+        "libs/shared/notification/dto/src/index.ts"
+      ],
+      "@dp/shared/notification/shell": [
+        "libs/shared/notification/shell/src/index.ts"
+      ],
+      "@dp/shared/notification/store": [
+        "libs/shared/notification/store/src/index.ts"
+      ],
+      "@dp/shared/notification/types": [
+        "libs/shared/notification/types/src/index.ts"
+      ],
+      "@dp/shared/notification/ui": [
+        "libs/shared/notification/ui/src/index.ts"
+      ],
       "@dp/shared/statement/dto": ["libs/shared/statement/dto/src/index.ts"],
       "@dp/shared/statement/type": ["libs/shared/statement/type/src/index.ts"],
       "@dp/shared/statement/ui": ["libs/shared/statement/ui/src/index.ts"],

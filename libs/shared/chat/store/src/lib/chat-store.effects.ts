@@ -6,7 +6,7 @@ import {
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
 import { TOKEN, parseToken } from '@dp/shared/core';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TuiDay } from '@taiga-ui/cdk';
@@ -114,13 +114,13 @@ export class ChatStoreEffects {
           .delete(ChatApiAdapterHelper.parseRemoveMessageApiRequest(message.id))
           .pipe(
             map(() =>
-              notificationActions.success({
+              alertActions.success({
                 message: 'Сообщение удалено',
               }),
             ),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.remove.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),

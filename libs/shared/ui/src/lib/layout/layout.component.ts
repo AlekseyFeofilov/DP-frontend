@@ -6,6 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NotificationsBellComponent } from '@dp/shared/notification/ui';
 import { NavigationItem } from '@dp/shared/types';
 import { TuiLinkModule, TuiModeModule, TuiSvgModule } from '@taiga-ui/core';
 
@@ -18,6 +19,7 @@ import { TuiLinkModule, TuiModeModule, TuiSvgModule } from '@taiga-ui/core';
     TuiSvgModule,
     TuiLinkModule,
     TuiModeModule,
+    NotificationsBellComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.less',

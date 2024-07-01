@@ -4,7 +4,7 @@ import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { tuiIsPresent } from '@taiga-ui/cdk';
@@ -127,14 +127,14 @@ export class DiaryStoreEffects {
         return combineLatest(requests).pipe(
           mergeMap(() => {
             return [
-              notificationActions.success({
+              alertActions.success({
                 message: 'Изменения успешно сохранены',
               }),
               diaryActions.saveChangesSuccess(),
             ];
           }),
           catchError(() => [
-            notificationActions.error({
+            alertActions.error({
               label: NOTIFICATION_TEXTS.edit.error,
               message: NOTIFICATION_DESCRIPTION.error,
             }),

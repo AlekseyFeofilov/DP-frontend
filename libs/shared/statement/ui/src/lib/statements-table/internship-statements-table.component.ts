@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -9,7 +10,9 @@ import {
   TemplateRef,
   ViewChildren,
   booleanAttribute,
+  inject,
 } from '@angular/core';
+import { ScrollToAnchorService } from '@dp/shared/core';
 import {
   InternshipCheckStatementStatus,
   InternshipStatementCommon,
@@ -35,11 +38,12 @@ import { COLUMNS } from './columns';
     TuiHintModule,
     TuiTooltipModule,
   ],
+  providers: [ScrollToAnchorService],
   templateUrl: './internship-statements-table.component.html',
   styleUrl: './internship-statements-table.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InternshipStatementsTableComponent {
+export class InternshipStatementsTableComponent implements AfterViewChecked {
   @Input({ required: true })
   statements: InternshipStatementCommon[] = [];
 
@@ -63,6 +67,10 @@ export class InternshipStatementsTableComponent {
 
   @ViewChildren(TableColumnDirective)
   columnTemplates?: QueryList<TableColumnDirective>;
+
+  private readonly scrollToAnchorService = inject(ScrollToAnchorService);
+
+  readonly activeFragment$ = this.scrollToAnchorService.activeFragment$;
 
   columns: TableColumn[] = COLUMNS;
 
@@ -92,6 +100,10 @@ export class InternshipStatementsTableComponent {
   @tuiPure
   get columnProperties(): string[] {
     return this.columns.map(column => column.property);
+  }
+
+  ngAfterViewChecked(): void {
+    this.scrollToAnchorService.scrollToAnchor();
   }
 
   onMessageClick(statement: InternshipStatementCommon): void {

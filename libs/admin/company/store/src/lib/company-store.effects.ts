@@ -5,7 +5,7 @@ import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TuiDialogService } from '@taiga-ui/core';
 import { TUI_PROMPT } from '@taiga-ui/kit';
@@ -81,13 +81,13 @@ export class CompanyStoreEffects {
             map(() => {
               finishCallback?.();
 
-              return notificationActions.success({
+              return alertActions.success({
                 message: 'Компания успешно созадна',
               });
             }),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.create.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),
@@ -110,13 +110,13 @@ export class CompanyStoreEffects {
             map(() => {
               finishCallback?.();
 
-              return notificationActions.success({
+              return alertActions.success({
                 message: 'Компания успешно отредактирована',
               });
             }),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.edit.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),
@@ -153,13 +153,13 @@ export class CompanyStoreEffects {
       switchMap(({ company }) =>
         this.companyApiService.delete({ id: company.id }).pipe(
           map(() =>
-            notificationActions.success({
+            alertActions.success({
               message: `Компания "${company.name}" удалена`,
             }),
           ),
           catchError(() =>
             of(
-              notificationActions.error({
+              alertActions.error({
                 label: NOTIFICATION_TEXTS.remove.error,
                 message: NOTIFICATION_DESCRIPTION.error,
               }),

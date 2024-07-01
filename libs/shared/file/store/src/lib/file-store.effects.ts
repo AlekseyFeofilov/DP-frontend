@@ -3,7 +3,7 @@ import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import { FileApiService } from '@dp/shared/file/data-access';
 import { convertFileToFileInfo } from '@dp/shared/file/types';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -89,7 +89,7 @@ export class FileStoreEffects {
             )
             .pipe(
               catchError(() => [
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.remove.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),

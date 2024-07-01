@@ -1,8 +1,7 @@
 import { EnvironmentProviders } from '@angular/core';
 import { provideEffects } from '@ngrx/effects';
-
-import { NotificationEffects } from './notification/notification.effects';
+import { AlertEffects } from './alert/alert.effects';
 
 export function provideCommonEffects(): EnvironmentProviders {
-  return provideEffects([NotificationEffects]);
+  return provideEffects([AlertEffects]);
 }

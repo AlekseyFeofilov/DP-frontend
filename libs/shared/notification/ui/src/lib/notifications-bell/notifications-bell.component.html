@@ -1,0 +1,54 @@
+@if (unreadNotificationsQuantity$ | async; as unreadNotificationsQuantity) {
+  <tui-badged-content
+    colorTop="var(--tui-error-fill)"
+    [contentTop]="unreadNotificationsQuantity"
+  >
+    <ng-container *ngTemplateOutlet="bell"></ng-container>
+  </tui-badged-content>
+} @else {
+  <ng-container *ngTemplateOutlet="bell"></ng-container>
+}
+
+<ng-template #bell>
+  <button
+    class="bell"
+    iconRight="tuiIconBellLarge"
+    tuiIconButton
+    size="s"
+    appearance="icon"
+    type="button"
+    [tuiDropdown]="dropdownContent"
+    [tuiDropdownManual]="(open$ | async) ?? false"
+    (click)="onClick()"
+    (tuiActiveZoneChange)="onActiveZone($event)"
+    (tuiObscured)="onObscured($event)"
+  >
+    <ng-template #dropdownContent>
+      <tui-data-list-wrapper
+        [itemContent]="content"
+        [items]="notifications$ | async"
+        [emptyContent]="empty"
+      ></tui-data-list-wrapper>
+
+      <ng-template #content let-notification
+        ><a [href]="notification.link" class="notification-item">
+          <div class="notification-item__text">
+            @if (!notification.isRead) {
+              <tui-badge class="notification-item__new" status="success"
+                >Новое!</tui-badge
+              >
+            }
+            <div>{{ notification.title }}</div>
+          </div>
+          <button
+            tuiIconButton
+            iconRight="tuiIconClose"
+            size="xs"
+            appearance="icon"
+            (click)="$event.preventDefault(); deleteNotification(notification)"
+          ></button></a
+      ></ng-template>
+
+      <ng-template #empty><tui-loader></tui-loader></ng-template>
+    </ng-template></button
+></ng-template>

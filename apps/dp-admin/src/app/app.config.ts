@@ -23,6 +23,7 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { of } from 'rxjs';
 
 import { provideChat } from '@dp/shared/chat/shell';
+import { provideNotifications } from '@dp/shared/notification/shell';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -41,6 +42,7 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75,
     }),
     provideChat(),
+    provideNotifications(),
     importProvidersFrom(TuiRootModule, TuiDialogModule, TuiAlertModule),
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     { provide: LOCALE_ID, useValue: 'ru' },

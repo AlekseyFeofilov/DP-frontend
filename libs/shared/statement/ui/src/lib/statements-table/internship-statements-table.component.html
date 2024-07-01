@@ -15,7 +15,11 @@
     [data]="sortedStatements"
   >
     @for (statement of sortedStatements; track statement.id) {
-      <tr tuiTr>
+      <tr
+        tuiTr
+        [id]="statement.id"
+        [class.row__active]="(activeFragment$ | async) === statement.id"
+      >
         @for (column of columns; track column.property) {
           <td *tuiCell="column.property" tuiTd>
             <ng-container

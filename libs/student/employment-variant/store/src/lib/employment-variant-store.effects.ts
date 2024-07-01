@@ -3,7 +3,7 @@ import {
   NOTIFICATION_DESCRIPTION,
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
-import { notificationActions } from '@dp/shared/effects';
+import { alertActions } from '@dp/shared/effects';
 import { EmploymentVariantApiService } from '@dp/student/employment-variant/data-access';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TuiDialogService } from '@taiga-ui/core';
@@ -87,13 +87,13 @@ export class EmploymentVariantStoreEffects {
             map(() => {
               finishCallback?.();
 
-              return notificationActions.success({
+              return alertActions.success({
                 message: 'Вариант трудоустройства успешно созадн',
               });
             }),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.create.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),
@@ -119,13 +119,13 @@ export class EmploymentVariantStoreEffects {
             map(() => {
               finishCallback?.();
 
-              return notificationActions.success({
+              return alertActions.success({
                 message: 'Вариант трудоустройства успешно отредактирован',
               });
             }),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.edit.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),
@@ -164,13 +164,13 @@ export class EmploymentVariantStoreEffects {
           .delete({ id: employmentVariant.id })
           .pipe(
             map(() =>
-              notificationActions.success({
+              alertActions.success({
                 message: `Вариант трудоустройства в компанию ${employmentVariant.company.name} удален`,
               }),
             ),
             catchError(() =>
               of(
-                notificationActions.error({
+                alertActions.error({
                   label: NOTIFICATION_TEXTS.remove.error,
                   message: NOTIFICATION_DESCRIPTION.error,
                 }),
