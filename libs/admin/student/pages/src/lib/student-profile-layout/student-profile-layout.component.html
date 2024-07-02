@@ -15,11 +15,28 @@
     <div class="profile_info">
       <div class="profile_info_name">
         {{ info.name }}
+        <tui-badge appearance="info" class="tui-space_left-3">{{
+          info.status
+        }}</tui-badge>
       </div>
       <div>Группа: {{ info.group?.number }}</div>
       <div>Курс: {{ info.group?.grade }}</div>
-      <div>Трудоустройство: {{ info.employment?.companyName }}</div>
-      <div>Позиция: {{ info.employment?.vacancy }}</div>
+      <div class="profile_info_employment">
+        <div>
+          <div>Трудоустройство: {{ info.employment?.companyName }}</div>
+          <div>Позиция: {{ info.employment?.vacancy }}</div>
+        </div>
+        @if (info.employment) {
+          <button
+            tuiButton
+            size="xs"
+            appearance="accent"
+            (click)="cancelEmployment()"
+          >
+            Отменить
+          </button>
+        }
+      </div>
     </div>
   </div>
 

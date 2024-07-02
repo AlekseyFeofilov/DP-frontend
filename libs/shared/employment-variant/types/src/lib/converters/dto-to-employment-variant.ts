@@ -1,6 +1,6 @@
 import { EmploymentVariantDto } from '@dp/shared/employment-variant/dto';
 
-import { Company, convertDtoToCompany } from '@dp/shared/company/types';
+import { convertDtoToCompany } from '@dp/shared/company/types';
 import { EmploymentVariant } from '../models';
 import { EMPLOYMENT_VARIANT_STATUS_MAP_FROM_DTO } from './employment-variant-status-map';
 
@@ -10,9 +10,9 @@ export function convertDtoToEmploymentVariant(
   return {
     id: dto.id,
     priority: dto.priority,
-    company: dto.employer ? convertDtoToCompany(dto.employer) : ({} as Company), // TODO
+    company: convertDtoToCompany(dto.internshipRequestDTO.employer), // TODO
     vacancy: dto.occupation,
     status: EMPLOYMENT_VARIANT_STATUS_MAP_FROM_DTO[dto.status],
-    comment: dto.comment ?? null,
+    comment: dto.internshipRequestDTO.comment ?? null,
   };
 }

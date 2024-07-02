@@ -43,4 +43,8 @@ export class StudentStoreFacade {
   loadInternshipDiaries(studentId: string): void {
     this.store.dispatch(studentActions.loadInternhsipDiaries({ studentId }));
   }
+
+  cancelEmployment(): void {
+    this.store.dispatch(studentActions.requestCancelEmployment());
+  }
 }

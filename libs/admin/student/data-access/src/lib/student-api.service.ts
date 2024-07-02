@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import {
+  EditEmploymentDto,
   EmploymentDto,
   StudentWithEmploymnetsDto,
 } from '@dp/admin/employment/dto';
@@ -25,11 +26,13 @@ export type StudentEmploymentHistoryApiResponse = Array<{
   };
   date: string;
 }>;
+
 export type StudentInternshipDiariesApiResponse =
   Array<InternshipDiaryStatementDto>;
 
-export interface DeleteNotificationApiRequest {
+export interface ChangeEmploymentStatusApiRequest {
   id: string;
+  payload: EditEmploymentDto;
 }
 
 @Injectable()
@@ -69,5 +72,12 @@ export class StudentApiService {
     return this.http.get<StudentInternshipDiariesApiResponse>(
       `${this.baseUrl}/InternshipDiaryRequest/everything/${studentId}`,
     );
+  }
+
+  changeEmploymentStatus({
+    id,
+    payload,
+  }: ChangeEmploymentStatusApiRequest): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/Employment/${id}`, payload);
   }
 }

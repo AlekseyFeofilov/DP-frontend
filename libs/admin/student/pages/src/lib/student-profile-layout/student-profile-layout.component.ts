@@ -19,6 +19,8 @@ import { TuiLoaderModule } from '@taiga-ui/core';
 import {
   TuiAutoColorModule,
   TuiAvatarModule,
+  TuiBadgeModule,
+  TuiButtonModule,
   TuiInitialsModule,
 } from '@taiga-ui/experimental';
 import { TuiTabsModule } from '@taiga-ui/kit';
@@ -36,6 +38,8 @@ import { TuiTabsModule } from '@taiga-ui/kit';
     TuiAutoColorModule,
     TuiTabsModule,
     RouterLink,
+    TuiButtonModule,
+    TuiBadgeModule,
   ],
   templateUrl: './student-profile-layout.component.html',
   styleUrl: './student-profile-layout.component.less',
@@ -61,5 +65,9 @@ export class StudentProfileLayoutComponent implements OnInit {
     }
 
     this.studentStoreFacade.loadById(studentId);
+  }
+
+  cancelEmployment(): void {
+    this.studentStoreFacade.cancelEmployment();
   }
 }

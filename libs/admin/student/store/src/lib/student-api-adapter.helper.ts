@@ -1,11 +1,15 @@
 import {
+  EMPLOYMENT_STATUS_MAP_TO_DTO,
+  Employment,
   EmploymentChain,
+  EmploymentStatus,
   StudentWithEmployments,
   convertDtoToEmployment,
   convertDtoToStudentWithEmployments,
 } from '@dp/admin/employment/types';
 import {
   AllStudentsApiResponse,
+  ChangeEmploymentStatusApiRequest,
   StudentByIdApiResponse,
   StudentEmploymentHistoryApiResponse,
   StudentInternshipDiariesApiResponse,
@@ -52,5 +56,19 @@ export namespace StudentApiAdapterHelper {
     apiResponse: StudentInternshipDiariesApiResponse,
   ): InternshipDiaryStatement[] {
     return apiResponse.map(convertDtoToInternshipDiaryStatement);
+  }
+
+  export function parseChangeEmploymentStatusApiRequest(
+    employment: Employment,
+    newStatus: EmploymentStatus,
+  ): ChangeEmploymentStatusApiRequest {
+    return {
+      id: employment.id,
+      payload: {
+        vacancy: employment.vacancy,
+        comment: employment.comment,
+        employmentStatus: EMPLOYMENT_STATUS_MAP_TO_DTO[newStatus],
+      },
+    };
   }
 }

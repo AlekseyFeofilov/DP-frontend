@@ -1,5 +1,5 @@
 export enum EmploymentStudentStatus {
-  Non = 'Нет',
+  None = 'Нет',
   CompaniesChose = 'Ищу компанию',
   PassedTheInterview = 'Прошел собеседование',
   GetAnOffer = 'Получил оффер',

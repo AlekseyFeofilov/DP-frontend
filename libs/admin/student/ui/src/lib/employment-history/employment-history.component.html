@@ -3,7 +3,14 @@
     <tui-accordion-item borders="top-bottom" [showArrow]="false">
       <div class="header">
         <div class="header_left">
-          <div class="date">{{ item.date }}</div>
+          <div class="date">
+            {{
+              (item.employment?.status | tuiMapper: isActive)
+                ? 'Начало'
+                : 'Окончание'
+            }}
+            прохождения стажировки: {{ item.date }}
+          </div>
           <div class="name">{{ item.employment?.companyName }}</div>
         </div>
         <div

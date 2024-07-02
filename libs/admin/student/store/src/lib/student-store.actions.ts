@@ -1,4 +1,5 @@
 import {
+  Employment,
   EmploymentChain,
   StudentWithEmployments,
 } from '@dp/admin/employment/types';
@@ -49,6 +50,17 @@ const loadInternhsipDiariesSuccess = createAction(
   }>(),
 );
 
+const requestCancelEmployment = createAction(
+  `[${STUDENT_STORE_FEATURE_KEY}] request for cancelling active employment`,
+);
+
+const cancelEmployment = createAction(
+  `[${STUDENT_STORE_FEATURE_KEY}] cancel active employment`,
+  props<{
+    readonly employment: Employment;
+  }>(),
+);
+
 export const studentActions = {
   loadAll,
   loadAllSuccess,
@@ -58,4 +70,6 @@ export const studentActions = {
   loadEmploymentHistorySuccess,
   loadInternhsipDiaries,
   loadInternhsipDiariesSuccess,
+  requestCancelEmployment,
+  cancelEmployment,
 };

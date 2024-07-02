@@ -3,12 +3,12 @@ import { StudentDto } from '@dp/shared/student/dto';
 import { EmploymentDto } from './employment-dto';
 
 export enum EmploymentStudentDtoStatus {
-  Non,
-  CompaniesChose,
-  PassedTheInterview,
-  GetAnOffer,
-  EmployedNotVerified,
-  Employed,
+  None = 'None',
+  CompaniesChose = 'CompaniesChose',
+  PassedTheInterview = 'PassedTheInterview',
+  GetAnOffer = 'GetAnOffer',
+  EmployedNotVerified = 'EmployedNotVerified',
+  Employed = 'Employed',
 }
 
 export interface StudentWithEmploymnetsDto extends StudentDto {

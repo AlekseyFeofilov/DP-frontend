@@ -13,10 +13,10 @@ export function isStudentEmploymentStatusMatchFilterType(
     case 'inProcess':
       return ![
         EmploymentStudentStatus.Employed,
-        EmploymentStudentStatus.Non,
+        EmploymentStudentStatus.None,
       ].includes(status);
     case 'noActivity':
-      return status === EmploymentStudentStatus.Non;
+      return status === EmploymentStudentStatus.None;
     case 'done':
       return status === EmploymentStudentStatus.Employed;
   }

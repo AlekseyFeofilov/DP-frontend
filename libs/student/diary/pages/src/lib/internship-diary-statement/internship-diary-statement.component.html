@@ -1,5 +1,17 @@
 <div class="title">
   <h1>Заявление по дневнику практики</h1>
+
+  <!-- TODO: вынести кнопку чата -->
+  <button
+    class="tui-space_right-2"
+    tuiIconButton
+    appearance="flat"
+    iconLeft="tuiIconMessageCircle"
+    size="l"
+    type="button"
+    class="tui-space_right-1"
+    (click)="openChat()"
+  ></button>
 </div>
 
 @if (isLoading$ | async) {

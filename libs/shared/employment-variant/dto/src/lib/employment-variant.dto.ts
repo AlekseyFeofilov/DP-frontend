@@ -1,4 +1,5 @@
 import { CompanyDto } from '@dp/shared/company/dto';
+import { InternshipCheckStatementDto } from '@dp/shared/statement/dto';
 
 export enum EmploymentVariantDtoStatus {
   NoInfo = 'NoInfo',
@@ -15,5 +16,5 @@ export interface EmploymentVariantDto {
   employer: CompanyDto;
   occupation: string;
   studentId: string;
-  comment?: string | null;
+  internshipRequestDTO: InternshipCheckStatementDto;
 }

@@ -12,7 +12,7 @@ export function convertDtoToEmploymentStudentCountFilter(
     inProcess: dto.reduce(
       (prev, curr) =>
         (prev += ![
-          EmploymentStudentDtoStatus.Non,
+          EmploymentStudentDtoStatus.None,
           EmploymentStudentDtoStatus.Employed,
         ].includes(curr.studentStatus)
           ? curr.count
@@ -22,7 +22,7 @@ export function convertDtoToEmploymentStudentCountFilter(
     noActivity: dto.reduce(
       (prev, curr) =>
         (prev +=
-          curr.studentStatus === EmploymentStudentDtoStatus.Non
+          curr.studentStatus === EmploymentStudentDtoStatus.None
             ? curr.count
             : 0),
       0,

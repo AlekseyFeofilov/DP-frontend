@@ -1,5 +1,10 @@
+import {
+  EmploymentStatus,
+  EmploymentStudentStatus,
+} from '@dp/admin/employment/types';
 import { StoreStateStatus } from '@dp/shared/types';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { TuiDay } from '@taiga-ui/cdk';
 import { StudentStoreState } from './student-store-state.interface';
 import { studentActions } from './student-store.actions';
 import { STUDENT_STORE_FEATURE_KEY } from './student-store.key';
@@ -67,6 +72,35 @@ const reducer = createReducer(
       status: StoreStateStatus.Loaded,
     }),
   ),
+
+  on(studentActions.cancelEmployment, state => ({
+    ...state,
+    profile: {
+      ...state.profile,
+      selectedStudent: state.profile.selectedStudent
+        ? {
+            ...state.profile.selectedStudent,
+            employment: null,
+            status: EmploymentStudentStatus.None,
+          }
+        : null,
+      employmentHistory: state.profile.employmentHistory.map(item => {
+        if (item.employment?.status === EmploymentStatus.Active) {
+          return {
+            ...item,
+            date: TuiDay.currentLocal(),
+            employment: {
+              ...item.employment,
+              status: EmploymentStatus.Inactive,
+            },
+          };
+        }
+
+        return item;
+      }),
+    },
+    status: StoreStateStatus.Loaded,
+  })),
 );
 
 export const studentStore = createFeature({

@@ -22,7 +22,8 @@ export const STATEMENT_CATEGORIES: Record<StatementType, StatementCategory> = {
   },
   internshipDiary: {
     name: 'Дневник практики',
-    description: '',
-    path: PATH_NAME.internshipDiary,
+    description:
+      'На основе этой заявки создается дневник практики за выбранный семестр, куда можно прикреплять файлы',
+    path: `/${PATH_NAME.internshipDiary}`,
   },
 };
