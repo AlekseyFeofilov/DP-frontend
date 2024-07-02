@@ -1,10 +1,7 @@
-import {
-  EmploymentStudentCountFilterType,
-  EmploymentStudentCountFilters,
-  StudentWithEmployments,
-} from '@dp/admin/employment/types';
+import { StudentWithEmployments } from '@dp/admin/employment/types';
 import { createAction, props } from '@ngrx/store';
 
+import { EmploymentFilters } from './employment-store-state.interface';
 import { EMPLOYMENT_STORE_FEATURE_KEY } from './employment-store.key';
 
 const loadDashboard = createAction(
@@ -16,19 +13,18 @@ const loadDashboardInfoSuccess = createAction(
   props<{ readonly dashboardInfo: ReadonlyArray<StudentWithEmployments> }>(),
 );
 
-const loadDashboardFiltersSuccess = createAction(
-  `[${EMPLOYMENT_STORE_FEATURE_KEY}] load dashboard filters success`,
-  props<{ readonly dashboardFilters: EmploymentStudentCountFilters }>(),
+const setFilters = createAction(
+  `[${EMPLOYMENT_STORE_FEATURE_KEY}] set filters`,
+  props<{
+    readonly filters: Partial<EmploymentFilters>;
+  }>(),
 );
 
-const setDashboardFilter = createAction(
-  `[${EMPLOYMENT_STORE_FEATURE_KEY}] set current dashboard filter`,
-  props<{ readonly filterType: EmploymentStudentCountFilterType }>(),
-);
+const init = createAction(`[${EMPLOYMENT_STORE_FEATURE_KEY}] init effects`);
 
 export const employmentActions = {
   loadDashboard,
   loadDashboardInfoSuccess,
-  loadDashboardFiltersSuccess,
-  setDashboardFilter,
+  setFilters,
+  init,
 };

@@ -2,7 +2,7 @@ export interface Company {
   id: string;
   name: string;
   contact: string | null;
-  vacancies: string[];
+  vacancies: string;
   vacanciesNumber: string | null;
   isPartner: boolean;
   tutor: string;

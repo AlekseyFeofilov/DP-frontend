@@ -1,6 +1,7 @@
 import { StoreStateStatus } from '@dp/shared/types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 
+import { InternshipCheckStatementStatus } from '@dp/shared/statement/type';
 import { StatementStoreState } from './statement-store-state.interface';
 import { statementActions } from './statement-store.actions';
 import { STATEMENT_STORE_FEATURE_KEY } from './statement-store.key';
@@ -40,14 +41,16 @@ const reducer = createReducer(
   ),
 
   // TODO
-  on(statementActions.createInternshipApply, state => ({
+  on(statementActions.createInternshipApply, (state, { baseStatement }) => ({
     ...state,
-    allInternshipApplyStatements: state.allInternshipApplyStatements.map(
+    allInternshipCheckStatements: state.allInternshipCheckStatements.map(
       statement => {
-        // if (
-        //   statement.id === baseStatement.id) {
-        //   return {...statement, }
-        // }
+        if (statement.id === baseStatement.id) {
+          return {
+            ...statement,
+            status: InternshipCheckStatementStatus.Unactual,
+          };
+        }
 
         return statement;
       },

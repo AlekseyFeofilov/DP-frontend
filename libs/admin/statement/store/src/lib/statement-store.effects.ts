@@ -67,12 +67,6 @@ export class StatementStoreEffects implements OnInitEffects {
               internshipCheckStatements,
             });
           }),
-
-          // catchError(() => {
-          //   this.analytics.sendNextPageLoaded(false);
-
-          //   return [driversListActions.loadItemsFailure()];
-          // }),
         ),
       ),
     ),
@@ -93,12 +87,6 @@ export class StatementStoreEffects implements OnInitEffects {
               internshipApplyStatements,
             });
           }),
-
-          // catchError(() => {
-          //   this.analytics.sendNextPageLoaded(false);
-
-          //   return [driversListActions.loadItemsFailure()];
-          // }),
         ),
       ),
     ),

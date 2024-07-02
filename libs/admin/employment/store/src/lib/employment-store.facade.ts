@@ -3,7 +3,7 @@ import { StoreStateStatus } from '@dp/shared/types';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs';
 
-import { EmploymentStudentCountFilterType } from '@dp/admin/employment/types';
+import { EmploymentFilters } from './employment-store-state.interface';
 import { employmentActions } from './employment-store.actions';
 import { fromEmploymentStore } from './employment-store.selectors';
 
@@ -14,8 +14,13 @@ export class EmploymentStoreFacade {
   readonly dashboardInfo$ = this.store.pipe(
     select(fromEmploymentStore.selectFilteredDashboardInfo),
   );
-  readonly dashboardFilters$ = this.store.pipe(
-    select(fromEmploymentStore.selectDashboardFilters),
+
+  readonly filters$ = this.store.pipe(
+    select(fromEmploymentStore.selectFilters),
+  );
+
+  readonly statusesCapacity$ = this.store.pipe(
+    select(fromEmploymentStore.selectDashboardStatusesCapacity),
   );
 
   readonly status$ = this.store.pipe(select(fromEmploymentStore.selectStatus));
@@ -27,7 +32,7 @@ export class EmploymentStoreFacade {
     this.store.dispatch(employmentActions.loadDashboard());
   }
 
-  setFilter(filterType: EmploymentStudentCountFilterType): void {
-    this.store.dispatch(employmentActions.setDashboardFilter({ filterType }));
+  setFilters(filters: Partial<EmploymentFilters>): void {
+    this.store.dispatch(employmentActions.setFilters({ filters }));
   }
 }

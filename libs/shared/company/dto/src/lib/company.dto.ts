@@ -6,6 +6,6 @@ export interface CompanyDto {
   contact?: string | null;
   comment?: string | null;
   isPartner: boolean;
-  tutor: string;
-  vacancy: string[];
+  authorizedDelegate: string;
+  vacancy: string;
 }

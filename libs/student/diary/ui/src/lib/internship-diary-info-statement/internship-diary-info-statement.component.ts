@@ -46,10 +46,8 @@ export class InternshipDiaryInfoStatementComponent {
     );
   }
 
-  createTemplate(
-    semester: number,
-    formValue: FormValue<NewInternshipDiaryTemplate>,
-  ): void {
-    this.diaryStoreFacade.createTemplate(semester, formValue.value);
+  // TODO: хардкодим 5 семестр для всех семестров. В целевом варианте у каждого должен быть свой щаблон и эндпоинт
+  createTemplate(formValue: FormValue<NewInternshipDiaryTemplate>): void {
+    this.diaryStoreFacade.createTemplate(5, formValue.value);
   }
 }

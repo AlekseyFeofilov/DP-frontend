@@ -5,9 +5,9 @@ export function convertDtoToCompany(companyDto: CompanyDto): Company {
   return {
     id: companyDto.id,
     name: companyDto.companyName,
-    tutor: companyDto.tutor,
+    tutor: companyDto.authorizedDelegate,
     contact: companyDto.contact ?? null,
-    vacancies: [], // TODO
+    vacancies: companyDto.vacancy,
     vacanciesNumber: companyDto.placesQuantity ?? null,
     isPartner: companyDto.isPartner,
     comment: companyDto.comment ?? null,

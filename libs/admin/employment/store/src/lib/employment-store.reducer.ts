@@ -1,14 +1,25 @@
 import { StoreStateStatus } from '@dp/shared/types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 
-import { EmploymentStoreState } from './employment-store-state.interface';
+import { EmploymentStudentStatus } from '@dp/admin/employment/types';
+import {
+  EmploymentFilters,
+  EmploymentStoreState,
+} from './employment-store-state.interface';
 import { employmentActions } from './employment-store.actions';
 import { EMPLOYMENT_STORE_FEATURE_KEY } from './employment-store.key';
 
+const initialFilters: EmploymentFilters = {
+  studentName: null,
+  groupIds: [],
+  companyName: null,
+  vacancyName: null,
+  statuses: Object.values(EmploymentStudentStatus),
+};
+
 const initalState: EmploymentStoreState = {
   dashboardInfo: [],
-  dashboardFilters: null,
-  currentFilter: 'all',
+  filters: initialFilters,
   status: StoreStateStatus.Initial,
 };
 
@@ -16,6 +27,7 @@ const reducer = createReducer(
   initalState,
   on(employmentActions.loadDashboard, state => ({
     ...state,
+    filters: initialFilters,
     status: StoreStateStatus.Loading,
   })),
   on(
@@ -23,18 +35,16 @@ const reducer = createReducer(
     (state, { dashboardInfo }) => ({
       ...state,
       dashboardInfo,
+      status: StoreStateStatus.Loaded,
     }),
   ),
-  on(
-    employmentActions.loadDashboardFiltersSuccess,
-    (state, { dashboardFilters }) => ({
-      ...state,
-      dashboardFilters,
-    }),
-  ),
-  on(employmentActions.setDashboardFilter, (state, { filterType }) => ({
+
+  on(employmentActions.setFilters, (state, { filters }) => ({
     ...state,
-    currentFilter: filterType,
+    filters: {
+      ...state.filters,
+      ...filters,
+    },
   })),
 );
 

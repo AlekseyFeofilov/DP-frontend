@@ -38,12 +38,6 @@ export class ChatStoreEffects {
                 messages,
               });
             }),
-
-            // catchError(() => {
-            //   this.analytics.sendNextPageLoaded(false);
-
-            //   return [driversListActions.loadItemsFailure()];
-            // }),
           ),
       ),
     ),

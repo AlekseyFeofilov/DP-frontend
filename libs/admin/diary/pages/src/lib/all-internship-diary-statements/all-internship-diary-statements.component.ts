@@ -6,7 +6,10 @@ import {
   inject,
 } from '@angular/core';
 import { DiaryStoreFacade } from '@dp/admin/diary/store';
-import { InternshipDiaryStatementsTableComponent } from '@dp/admin/diary/ui';
+import {
+  InternshipDiaryFiltersComponent,
+  InternshipDiaryStatementsTableComponent,
+} from '@dp/admin/diary/ui';
 import { TuiLoaderModule } from '@taiga-ui/core';
 
 @Component({
@@ -16,6 +19,7 @@ import { TuiLoaderModule } from '@taiga-ui/core';
     CommonModule,
     InternshipDiaryStatementsTableComponent,
     TuiLoaderModule,
+    InternshipDiaryFiltersComponent,
   ],
   templateUrl: './all-internship-diary-statements.component.html',
   styleUrl: './all-internship-diary-statements.component.less',

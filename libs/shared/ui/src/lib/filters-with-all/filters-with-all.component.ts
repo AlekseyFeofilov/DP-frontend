@@ -57,6 +57,7 @@ export class FiltersWithAllComponent extends AbstractTuiControl<string[]> {
   }
 
   toggleAll(): void {
+    this.value = this.filters;
     this.choosenFilters$.next(
       this.filters.length === this.choosenFilters$.value.length
         ? []

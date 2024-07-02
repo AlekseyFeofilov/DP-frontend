@@ -1,7 +1,4 @@
-import {
-  EmploymentsFiltersComponent,
-  EmploymentsTableComponent,
-} from '@dp/admin/employment/ui';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +6,11 @@ import {
   inject,
 } from '@angular/core';
 import { EmploymentStoreFacade } from '@dp/admin/employment/store';
-import { CommonModule } from '@angular/common';
+import {
+  EmploymentsFiltersComponent,
+  EmploymentsTableComponent,
+} from '@dp/admin/employment/ui';
+import { TuiLoaderModule } from '@taiga-ui/core';
 
 @Component({
   selector: 'dp-all-employments',
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     EmploymentsTableComponent,
     EmploymentsFiltersComponent,
+    TuiLoaderModule,
   ],
   templateUrl: './all-employments.component.html',
   styleUrl: './all-employments.component.less',
@@ -25,6 +27,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AllEmploymentsComponent implements OnInit {
   private readonly employmentStoreFacade = inject(EmploymentStoreFacade);
+
+  readonly isLoading$ = this.employmentStoreFacade.isLoading$;
 
   ngOnInit(): void {
     this.employmentStoreFacade.load();

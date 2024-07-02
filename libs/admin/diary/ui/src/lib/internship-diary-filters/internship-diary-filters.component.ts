@@ -6,24 +6,23 @@ import {
   inject,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { EmploymentStoreFacade } from '@dp/admin/employment/store';
-import { EmploymentStudentStatus } from '@dp/admin/employment/types';
 import { SEARCH_DEBOUNCE_TIME } from '@dp/shared/consts';
 import { Group } from '@dp/shared/group/types';
 import { GroupSelectComponent } from '@dp/shared/group/ui';
+import { InternshipDiaryStatementStatus } from '@dp/shared/statement/type';
 import { FiltersWithAllComponent } from '@dp/shared/ui';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
-import { TuiBadgeModule } from '@taiga-ui/experimental';
 import {
+  TuiBadgeModule,
   TuiInputModule,
   TuiTabsModule,
   tuiItemsHandlersProvider,
 } from '@taiga-ui/kit';
-import { debounceTime, map, takeUntil } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'dp-employments-filters',
+  selector: 'dp-internship-diary-filters',
   standalone: true,
   imports: [
     CommonModule,
@@ -41,31 +40,31 @@ import { debounceTime, map, takeUntil } from 'rxjs';
       stringify: (group: Group) => group.number.toString(),
     }),
   ],
-  templateUrl: './employments-filters.component.html',
-  styleUrl: './employments-filters.component.less',
+  templateUrl: './internship-diary-filters.component.html',
+  styleUrl: './internship-diary-filters.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmploymentsFiltersComponent implements OnInit {
-  private readonly employmentStoreFacade = inject(EmploymentStoreFacade);
+export class InternshipDiaryFiltersComponent implements OnInit {
+  // private readonly employmentStoreFacade = inject(EmploymentStoreFacade);
   private readonly destroy$ = inject(TuiDestroyService);
 
-  private readonly statusesControl = new FormControl<EmploymentStudentStatus[]>(
+  readonly statusesControl = new FormControl<InternshipDiaryStatementStatus[]>(
     [],
     {
       nonNullable: true,
     },
   );
 
-  readonly statusesControl$ = this.employmentStoreFacade.filters$.pipe(
-    map(({ statuses }) => {
-      this.statusesControl.setValue([...statuses], { emitEvent: false });
-      return this.statusesControl;
-    }),
-  );
+  // readonly statusesControl$ = this.employmentStoreFacade.filters$.pipe(
+  //   map(({ statuses }) => {
+  //     this.statusesControl.setValue([...statuses], { emitEvent: false });
+  //     return this.statusesControl;
+  //   }),
+  // );
 
-  readonly statusesCapacity$ = this.employmentStoreFacade.statusesCapacity$;
+  // readonly statusesCapacity$ = this.employmentStoreFacade.statusesCapacity$;
 
-  readonly statuses = Object.values(EmploymentStudentStatus);
+  readonly statuses = Object.values(InternshipDiaryStatementStatus);
 
   // TODO: убрать повторение этих фильтров в разных компонентах
   readonly studentNameControl = new FormControl<string | null>(null);
@@ -82,46 +81,50 @@ export class EmploymentsFiltersComponent implements OnInit {
   }
 
   private trackFiltersControlChanges(): void {
-    this.statusesControl.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(value => {
-        this.employmentStoreFacade.setFilters({
-          statuses: value,
-        });
-      });
+    this.statusesControl.valueChanges.pipe(takeUntil(this.destroy$));
+    // .subscribe(value => {
+    //   this.employmentStoreFacade.setFilters({
+    //     statuses: value,
+    //   });
+    // });
   }
 
   private trackStudentNameControlChanges(): void {
-    this.studentNameControl.valueChanges
-      .pipe(debounceTime(SEARCH_DEBOUNCE_TIME), takeUntil(this.destroy$))
-      .subscribe(value => {
-        this.employmentStoreFacade.setFilters({ studentName: value });
-      });
+    this.studentNameControl.valueChanges.pipe(
+      debounceTime(SEARCH_DEBOUNCE_TIME),
+      takeUntil(this.destroy$),
+    );
+    // .subscribe(value => {
+    //   this.employmentStoreFacade.setFilters({ studentName: value });
+    // });
   }
 
   private trackCompanyNameControlChanges(): void {
-    this.companyNameControl.valueChanges
-      .pipe(debounceTime(SEARCH_DEBOUNCE_TIME), takeUntil(this.destroy$))
-      .subscribe(value => {
-        this.employmentStoreFacade.setFilters({ companyName: value });
-      });
+    this.companyNameControl.valueChanges.pipe(
+      debounceTime(SEARCH_DEBOUNCE_TIME),
+      takeUntil(this.destroy$),
+    );
+    // .subscribe(value => {
+    //   this.employmentStoreFacade.setFilters({ companyName: value });
+    // });
   }
 
   private trackVacancyNameControlChanges(): void {
-    this.vacancyNameControl.valueChanges
-      .pipe(debounceTime(SEARCH_DEBOUNCE_TIME), takeUntil(this.destroy$))
-      .subscribe(value => {
-        this.employmentStoreFacade.setFilters({ vacancyName: value });
-      });
+    this.vacancyNameControl.valueChanges.pipe(
+      debounceTime(SEARCH_DEBOUNCE_TIME),
+      takeUntil(this.destroy$),
+    );
+    // .subscribe(value => {
+    //   this.employmentStoreFacade.setFilters({ vacancyName: value });
+    // });
   }
 
   private trackGroupsControlChanges(): void {
-    this.groupsControl.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(value => {
-        this.employmentStoreFacade.setFilters({
-          groupIds: value.map(item => item.id),
-        });
-      });
+    this.groupsControl.valueChanges.pipe(takeUntil(this.destroy$));
+    // .subscribe(value => {
+    //   this.employmentStoreFacade.setFilters({
+    //     groupIds: value.map(item => item.id),
+    //   });
+    // });
   }
 }

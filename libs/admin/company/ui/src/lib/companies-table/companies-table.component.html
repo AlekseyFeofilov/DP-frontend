@@ -62,12 +62,8 @@
 </ng-template>
 
 <ng-template dpTableColumn="vacancies" let-company>
-  @for (vacancy of company.vacancies; track $index) {
-    <tui-tag
-      class="tui-space_right-1"
-      [autoColor]="true"
-      [value]="vacancy"
-    ></tui-tag>
+  @if (company.vacancies) {
+    {{ company.vacancies }}
   }
 </ng-template>
 

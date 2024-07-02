@@ -49,12 +49,10 @@
       }
     </div>
 
-    @if (statement.semester === 5) {
-      <dp-internship-diary-template-form
-        [statementId]="statement.id"
-        (submitted)="createTemplate(statement.semester, $event)"
-      ></dp-internship-diary-template-form>
-    }
+    <dp-internship-diary-template-form
+      [statementId]="statement.id"
+      (submitted)="createTemplate($event)"
+    ></dp-internship-diary-template-form>
   </div>
 
   <dp-files-repository

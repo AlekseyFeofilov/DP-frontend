@@ -3,4 +3,9 @@
 </div>
 
 <dp-employments-filters class="tui-space_bottom-6"></dp-employments-filters>
-<dp-employments-table></dp-employments-table>
+
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-employments-table></dp-employments-table>
+}

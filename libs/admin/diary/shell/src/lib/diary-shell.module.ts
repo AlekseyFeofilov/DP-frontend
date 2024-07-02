@@ -7,12 +7,13 @@ import {
   DiaryStoreFacade,
 } from '@dp/admin/diary/store';
 import { provideFiles } from '@dp/shared/file/shell';
+import { GroupShellModule } from '@dp/shared/group/shell';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { DIARY_ROUTES } from './diary.routes';
 
 @NgModule({
-  imports: [RouterModule.forChild(DIARY_ROUTES)],
+  imports: [RouterModule.forChild(DIARY_ROUTES), GroupShellModule],
   providers: [
     provideFiles(),
     provideEffects(DiaryStoreEffects),

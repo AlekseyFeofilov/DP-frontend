@@ -63,7 +63,7 @@ export class CompanyFormComponent implements OnInit {
     }),
     contact: new FormControl<string>(''),
     communicationPlace: new FormControl<string>(''),
-    vacancies: new FormControl<string[]>([], {
+    vacancies: new FormControl<string>('', {
       nonNullable: true,
     }),
     vacanciesNumber: new FormControl<string>(''),
@@ -96,7 +96,7 @@ export class CompanyFormComponent implements OnInit {
         tutor: formValue.tutor,
         contact: formValue.contact,
         communicationPlace: formValue.communicationPlace,
-        vacancies: [],
+        vacancies: formValue.vacancies,
         vacanciesNumber: formValue.vacanciesNumber,
         isPartner: formValue.isPartner,
         comment: formValue.comment,

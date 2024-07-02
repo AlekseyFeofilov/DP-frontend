@@ -12,7 +12,7 @@ export function convertNewCompanyToDto(
     contact: newCompany.contact,
     comment: newCompany.comment,
     isPartner: newCompany.isPartner,
-    tutor: newCompany.tutor,
-    vacancy: '', // TODO
+    authorizedDelegate: newCompany.tutor,
+    vacancy: newCompany.vacancies,
   };
 }
