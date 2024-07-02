@@ -1,8 +1,24 @@
 import { EmploymentStatus } from '@dp/admin/employment/types';
+import { isStringIncluded } from '@dp/shared/utils';
 import { createSelector } from '@ngrx/store';
 import { studentStore } from './student-store.reducer';
 
-const { selectAllStudents, selectProfile, selectStatus } = studentStore;
+const { selectAllStudents, selectFilters, selectProfile, selectStatus } =
+  studentStore;
+
+export const selectFilteredStudents = createSelector(
+  selectAllStudents,
+  selectFilters,
+  (students, filters) =>
+    students.filter(student => {
+      const { studentName, groupIds } = filters;
+      const isMatch =
+        (studentName ? isStringIncluded(student.name, studentName) : true) &&
+        (student.group ? groupIds.includes(student.group.id) : false);
+
+      return isMatch;
+    }),
+);
 
 export const selectSelectedStudentInfo = createSelector(
   selectProfile,
@@ -28,10 +44,11 @@ export const selectIntenrshipDiaries = createSelector(selectProfile, profile =>
 );
 
 export const fromStudentStore = {
-  selectAllStudents,
+  selectFilteredStudents,
   selectProfile,
   selectSelectedStudentInfo,
   selectEmploymentHistory,
   selectIntenrshipDiaries,
   selectStatus,
+  selectFilters,
 };

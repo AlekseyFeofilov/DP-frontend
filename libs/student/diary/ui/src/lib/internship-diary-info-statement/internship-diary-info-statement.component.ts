@@ -34,7 +34,6 @@ export class InternshipDiaryInfoStatementComponent {
   readonly InternshipDiaryStatementStatus = InternshipDiaryStatementStatus;
 
   sendForReview(): void {
-    console.log(1);
     this.diaryStoreFacade.changeStatus(
       InternshipDiaryStatementStatus.OnVerification,
     );

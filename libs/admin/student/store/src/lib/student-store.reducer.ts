@@ -5,9 +5,17 @@ import {
 import { StoreStateStatus } from '@dp/shared/types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { TuiDay } from '@taiga-ui/cdk';
-import { StudentStoreState } from './student-store-state.interface';
+import {
+  StudentFilters,
+  StudentStoreState,
+} from './student-store-state.interface';
 import { studentActions } from './student-store.actions';
 import { STUDENT_STORE_FEATURE_KEY } from './student-store.key';
+
+const initialFilters: StudentFilters = {
+  studentName: null,
+  groupIds: [],
+};
 
 const initalState: StudentStoreState = {
   allStudents: [],
@@ -16,6 +24,7 @@ const initalState: StudentStoreState = {
     employmentHistory: [],
     internshipDiaries: [],
   },
+  filters: initialFilters,
   status: StoreStateStatus.Initial,
 };
 
@@ -23,6 +32,7 @@ const reducer = createReducer(
   initalState,
   on(studentActions.loadAll, state => ({
     ...state,
+    filters: initialFilters,
     status: StoreStateStatus.Loading,
   })),
   on(studentActions.loadAllSuccess, (state, { students }) => ({
@@ -100,6 +110,14 @@ const reducer = createReducer(
       }),
     },
     status: StoreStateStatus.Loaded,
+  })),
+
+  on(studentActions.setFilters, (state, { filters }) => ({
+    ...state,
+    filters: {
+      ...state.filters,
+      ...filters,
+    },
   })),
 );
 

@@ -1,0 +1,44 @@
+<table tuiTable [columns]="columnProperties" class="table" size="l">
+  <thead>
+    <tr tuiThGroup>
+      @for (column of columns; track column.property) {
+        <th *tuiHead="column.property" tuiTh [sorter]="column.sorter">
+          {{ column.title }}
+        </th>
+      }
+    </tr>
+  </thead>
+
+  <tbody
+    *tuiLet="(students | async) || [] | tuiTableSort as sortedStudents"
+    tuiTbody
+    [data]="sortedStudents"
+  >
+    @for (student of sortedStudents; track student.id) {
+      <tr tuiTr [routerLink]="student.id">
+        @for (column of columns; track column.property) {
+          <td *tuiCell="column.property" tuiTd>
+            <ng-container
+              *ngTemplateOutlet="
+                column | tuiMapper: getColumnTemplate;
+                context: { $implicit: student, index: $index }
+              "
+            ></ng-container>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+
+<ng-template dpTableColumn="name" let-student let-index="index">
+  {{ student.name }}
+</ng-template>
+
+<ng-template dpTableColumn="group" let-student>
+  {{ student.group.number }}
+</ng-template>
+
+<ng-template dpTableColumn="grade" let-student>
+  {{ student.group.grade }}
+</ng-template>

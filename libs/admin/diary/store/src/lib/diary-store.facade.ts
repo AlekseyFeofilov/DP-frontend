@@ -19,6 +19,10 @@ export class DiaryStoreFacade {
     fromDiaryStore.selectSelectedInternshipDiaryStatement,
   );
 
+  readonly statusesCapacity$ = this.store.select(
+    fromDiaryStore.selectInternshipDiaryStatementStatusesCapacity,
+  );
+
   readonly isFieldsDirty$ = combineLatest([
     this.store.select(
       fromDiaryStore.selectSelectedInternshipDiaryStatementNewStatus,

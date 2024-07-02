@@ -26,8 +26,9 @@
 </div>
 
 <dp-filters-with-all
+  [filtersCapacitiy]="statusesCapacity$ | async"
   [filters]="statuses"
   [formControl]="statusesControl"
 ></dp-filters-with-all>
-<!-- [filtersCapacitiy]="statusesCapacity$ | async" -->
+
 <!-- *ngIf="statusesControl$ | async as statusesControl" -->

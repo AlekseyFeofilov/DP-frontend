@@ -6,8 +6,9 @@ import {
   NOTIFICATION_TEXTS,
 } from '@dp/shared/consts';
 import { alertActions } from '@dp/shared/effects';
+import { GroupStoreFacade } from '@dp/shared/group/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { TuiDialogService } from '@taiga-ui/core';
 import { TUI_PROMPT } from '@taiga-ui/kit';
 import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs';
@@ -21,6 +22,27 @@ export class StudentStoreEffects {
   private readonly actions$ = inject(Actions);
   private readonly studentApiService = inject(StudentApiService);
   private readonly dialogService = inject(TuiDialogService);
+
+  private readonly groupStoreFacade = inject(GroupStoreFacade);
+
+  ngrxOnInitEffects(): Action {
+    return studentActions.init();
+  }
+
+  setFilters$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(studentActions.init),
+      switchMap(() =>
+        this.groupStoreFacade.groups$.pipe(
+          map(groups =>
+            studentActions.setFilters({
+              filters: { groupIds: groups.map(group => group.id) },
+            }),
+          ),
+        ),
+      ),
+    ),
+  );
 
   loadAll$ = createEffect(() =>
     this.actions$.pipe(

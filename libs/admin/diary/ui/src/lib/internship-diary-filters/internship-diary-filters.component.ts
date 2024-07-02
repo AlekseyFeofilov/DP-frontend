@@ -6,6 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { DiaryStoreFacade } from '@dp/admin/diary/store';
 import { SEARCH_DEBOUNCE_TIME } from '@dp/shared/consts';
 import { Group } from '@dp/shared/group/types';
 import { GroupSelectComponent } from '@dp/shared/group/ui';
@@ -45,7 +46,7 @@ import { debounceTime, takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InternshipDiaryFiltersComponent implements OnInit {
-  // private readonly employmentStoreFacade = inject(EmploymentStoreFacade);
+  private readonly diaryStoreFacade = inject(DiaryStoreFacade);
   private readonly destroy$ = inject(TuiDestroyService);
 
   readonly statusesControl = new FormControl<InternshipDiaryStatementStatus[]>(
@@ -62,7 +63,7 @@ export class InternshipDiaryFiltersComponent implements OnInit {
   //   }),
   // );
 
-  // readonly statusesCapacity$ = this.employmentStoreFacade.statusesCapacity$;
+  readonly statusesCapacity$ = this.diaryStoreFacade.statusesCapacity$;
 
   readonly statuses = Object.values(InternshipDiaryStatementStatus);
 

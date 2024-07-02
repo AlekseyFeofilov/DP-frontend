@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { StoreStateStatus } from '@dp/shared/types';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs';
+import { StudentFilters } from './student-store-state.interface';
 import { studentActions } from './student-store.actions';
 import { fromStudentStore } from './student-store.selectors';
 
@@ -9,7 +10,9 @@ import { fromStudentStore } from './student-store.selectors';
 export class StudentStoreFacade {
   private readonly store = inject(Store);
 
-  readonly students$ = this.store.select(fromStudentStore.selectAllStudents);
+  readonly students$ = this.store.select(
+    fromStudentStore.selectFilteredStudents,
+  );
 
   readonly selectedStudentInfo$ = this.store.select(
     fromStudentStore.selectSelectedStudentInfo,
@@ -22,6 +25,8 @@ export class StudentStoreFacade {
   readonly intersnhipDiaries$ = this.store.select(
     fromStudentStore.selectIntenrshipDiaries,
   );
+
+  readonly filters$ = this.store.pipe(select(fromStudentStore.selectFilters));
 
   readonly status$ = this.store.select(fromStudentStore.selectStatus);
   readonly isLoading$ = this.status$.pipe(
@@ -46,5 +51,9 @@ export class StudentStoreFacade {
 
   cancelEmployment(): void {
     this.store.dispatch(studentActions.requestCancelEmployment());
+  }
+
+  setFilters(filters: Partial<StudentFilters>): void {
+    this.store.dispatch(studentActions.setFilters({ filters }));
   }
 }

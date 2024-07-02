@@ -1,0 +1,11 @@
+<div class="title">
+  <h1>Все студенты</h1>
+</div>
+
+<dp-students-filters></dp-students-filters>
+
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <dp-students-table></dp-students-table>
+}

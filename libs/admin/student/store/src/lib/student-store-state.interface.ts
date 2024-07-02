@@ -5,6 +5,11 @@ import {
 import { InternshipDiaryStatement } from '@dp/shared/statement/type';
 import { StoreStateStatus } from '@dp/shared/types';
 
+export interface StudentFilters {
+  readonly studentName: string | null;
+  readonly groupIds: ReadonlyArray<string>;
+}
+
 export interface StudentStoreState {
   readonly allStudents: ReadonlyArray<StudentWithEmployments>;
   readonly profile: {
@@ -12,5 +17,6 @@ export interface StudentStoreState {
     readonly employmentHistory: ReadonlyArray<EmploymentChain>;
     readonly internshipDiaries: ReadonlyArray<InternshipDiaryStatement>;
   };
+  readonly filters: StudentFilters;
   readonly status: StoreStateStatus;
 }

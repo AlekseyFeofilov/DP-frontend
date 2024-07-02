@@ -3,6 +3,11 @@ import { PATH_NAME } from '@dp/admin/shared/consts';
 
 export const STUDENT_ROUTES: Route[] = [
   {
+    path: '',
+    loadComponent: () =>
+      import('@dp/admin/student/pages').then(m => m.AllStudentsComponent),
+  },
+  {
     path: PATH_NAME.studentId,
     pathMatch: 'full',
     redirectTo: `${PATH_NAME.studentId}/${PATH_NAME.employmentHistory}`,

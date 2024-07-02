@@ -7,12 +7,13 @@ import {
   studentStore,
 } from '@dp/admin/student/store';
 import { provideFiles } from '@dp/shared/file/shell';
+import { GroupShellModule } from '@dp/shared/group/shell';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { STUDENT_ROUTES } from './student.routes';
 
 @NgModule({
-  imports: [RouterModule.forChild(STUDENT_ROUTES)],
+  imports: [RouterModule.forChild(STUDENT_ROUTES), GroupShellModule],
   providers: [
     provideFiles(),
     provideEffects(StudentStoreEffects),

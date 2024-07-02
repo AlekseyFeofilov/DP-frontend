@@ -5,6 +5,7 @@ import {
 } from '@dp/admin/employment/types';
 import { InternshipDiaryStatement } from '@dp/shared/statement/type';
 import { createAction, props } from '@ngrx/store';
+import { StudentFilters } from './student-store-state.interface';
 import { STUDENT_STORE_FEATURE_KEY } from './student-store.key';
 
 const loadAll = createAction(
@@ -61,6 +62,15 @@ const cancelEmployment = createAction(
   }>(),
 );
 
+const setFilters = createAction(
+  `[${STUDENT_STORE_FEATURE_KEY}] set filters`,
+  props<{
+    readonly filters: Partial<StudentFilters>;
+  }>(),
+);
+
+const init = createAction(`[${STUDENT_STORE_FEATURE_KEY}] init effects`);
+
 export const studentActions = {
   loadAll,
   loadAllSuccess,
@@ -72,4 +82,6 @@ export const studentActions = {
   loadInternhsipDiariesSuccess,
   requestCancelEmployment,
   cancelEmployment,
+  setFilters,
+  init,
 };

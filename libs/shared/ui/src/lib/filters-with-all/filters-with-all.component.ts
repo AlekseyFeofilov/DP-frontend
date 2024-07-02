@@ -16,15 +16,17 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FiltersWithAllComponent extends AbstractTuiControl<string[]> {
-  @Input() filtersCapacitiy?: FiltersCapacity<string> | null;
+  @Input() set filtersCapacitiy(value: FiltersCapacity<string> | null) {
+    this.badgeHandler = item => value?.[item] ?? 0;
+  }
+
   @Input() filters: string[] = [];
 
   override focused = false;
 
   private readonly choosenFilters$ = new BehaviorSubject<readonly string[]>([]);
 
-  readonly badgeHandler: TuiHandler<string, number> = item =>
-    this.filtersCapacitiy?.[item] ?? 0;
+  badgeHandler!: TuiHandler<string, number>;
 
   @tuiPure
   get model$(): Observable<readonly string[]> {
