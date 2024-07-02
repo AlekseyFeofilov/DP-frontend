@@ -1,0 +1,15 @@
+@for (diary of intersnhipDiaries$ | async; track diary.id) {
+  <div>
+    <h2>{{ diary.semester }} семестр</h2>
+
+    <a
+      class="tui-space_right-2"
+      icon="tuiIconChevronLeft"
+      iconAlign="left"
+      tuiLink
+      [routerLink]="getDiaryPath(diary.id)"
+    >
+      Перейти к заявлению
+    </a>
+  </div>
+}

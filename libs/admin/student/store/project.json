@@ -1,0 +1,9 @@
+{
+  "name": "admin-student-store",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/admin/student/store/src",
+  "prefix": "dp",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

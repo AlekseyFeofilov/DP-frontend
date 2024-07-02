@@ -1,0 +1,39 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+.header {
+  font: var(--tui-font-text-l);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &_left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+.date {
+  font: var(--tui-font-text-xl);
+  text-align: center;
+  color: var(--tui-text-02);
+}
+
+.name {
+  .text-overflow();
+  margin-right: 1.5rem;
+  flex-grow: 1;
+  font: var(--tui-font-heading-6);
+}
+
+.status {
+  font: var(--tui-font-text-s);
+
+  &_success {
+    color: var(--tui-success-fill);
+  }
+
+  &_error {
+    color: var(--tui-error-fill);
+  }
+}

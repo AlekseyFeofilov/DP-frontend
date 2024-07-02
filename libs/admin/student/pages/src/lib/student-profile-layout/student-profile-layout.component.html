@@ -1,0 +1,44 @@
+<div class="title">
+  <h1>Профиль студента</h1>
+</div>
+
+@if (isLoading$ | async) {
+  <tui-loader></tui-loader>
+} @else {
+  <div class="profile" *ngIf="studentInfo$ | async as info">
+    <tui-avatar
+      [round]="false"
+      size="xxl"
+      [src]="info.name | tuiInitials"
+      [style.background]="info.name | tuiAutoColor"
+    ></tui-avatar>
+    <div class="profile_info">
+      <div class="profile_info_name">
+        {{ info.name }}
+      </div>
+      <div>Группа: {{ info.group?.number }}</div>
+      <div>Курс: {{ info.group?.grade }}</div>
+      <div>Трудоустройство: {{ info.employment?.companyName }}</div>
+      <div>Позиция: {{ info.employment?.vacancy }}</div>
+    </div>
+  </div>
+
+  <tui-tabs>
+    <a
+      tuiTab
+      [routerLink]="paths.employmentHistory"
+      routerLinkActive
+      [routerLinkActiveOptions]="{ exact: true }"
+      >История трудоустройства</a
+    >
+    <a
+      tuiTab
+      [routerLink]="paths.internshipDiary"
+      routerLinkActive
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Дневники практики</a
+    >
+  </tui-tabs>
+
+  <router-outlet></router-outlet>
+}

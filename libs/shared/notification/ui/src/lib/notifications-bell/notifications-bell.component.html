@@ -49,6 +49,13 @@
           ></button></a
       ></ng-template>
 
-      <ng-template #empty><tui-loader></tui-loader></ng-template>
-    </ng-template></button
-></ng-template>
+      <ng-template #empty>
+        @if (isLoading$ | async) {
+          <tui-loader></tui-loader>
+        } @else {
+          Нет уведомлений
+        }
+      </ng-template>
+    </ng-template>
+  </button></ng-template
+>

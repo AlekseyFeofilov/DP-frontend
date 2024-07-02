@@ -43,6 +43,7 @@ export class NotificationsBellComponent {
   readonly notifications$ = this.notificationStoreFacade.notifications$;
   readonly unreadNotificationsQuantity$ =
     this.notificationStoreFacade.unreadNotificationsQuantity$;
+  readonly isLoading$ = this.notificationStoreFacade.isLoading$;
 
   private readonly openSubject$ = new BehaviorSubject(false);
   readonly open$ = this.openSubject$.pipe(

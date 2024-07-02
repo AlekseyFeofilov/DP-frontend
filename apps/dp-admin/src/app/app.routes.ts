@@ -25,4 +25,9 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       import('@dp/admin/employment/shell').then(m => m.EmploymentShellModule),
   },
+  {
+    path: PATH_NAME.student,
+    loadChildren: () =>
+      import('@dp/admin/student/shell').then(m => m.StudentShellModule),
+  },
 ];

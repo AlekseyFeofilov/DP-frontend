@@ -1,0 +1,58 @@
+<tui-accordion [rounded]="false">
+  @for (item of employmentHistory$ | async; track $index) {
+    <tui-accordion-item borders="top-bottom" [showArrow]="false">
+      <div class="header">
+        <div class="header_left">
+          <div class="date">{{ item.date }}</div>
+          <div class="name">{{ item.employment?.companyName }}</div>
+        </div>
+        <div
+          class="status"
+          [class.status_success]="item.employment?.status | tuiMapper: isActive"
+          [class.status_error]="
+            !(item.employment?.status | tuiMapper: isActive)
+          "
+        >
+          {{ item.employment?.status }}
+        </div>
+      </div>
+      <ng-template tuiAccordionItemContent>
+        @if (item.internshipApplyStatement; as internshipApplyStatement) {
+          <div class="header">
+            <div class="header_left">
+              <div class="date">
+                Заявление на прохождение практики от
+                {{ internshipApplyStatement.createDate }}:
+              </div>
+              <a
+                tuiLink
+                [routerLink]="internshipApplyStatementPath"
+                [fragment]="internshipApplyStatement.id"
+              >
+                Перейти
+              </a>
+            </div>
+          </div>
+        }
+
+        @if (item.internshipCheckStatement; as internshipCheckStatement) {
+          <div class="header">
+            <div class="header_left">
+              <div class="date">
+                Заявление на трудоустройство от
+                {{ internshipCheckStatement.createDate }}:
+              </div>
+              <a
+                tuiLink
+                [routerLink]="internshipCheckStatementPath"
+                [fragment]="internshipCheckStatement.id"
+              >
+                Перейти
+              </a>
+            </div>
+          </div>
+        }
+      </ng-template>
+    </tui-accordion-item>
+  }
+</tui-accordion>

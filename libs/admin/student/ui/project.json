@@ -1,0 +1,9 @@
+{
+  "name": "admin-student-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/admin/student/ui/src",
+  "prefix": "dp",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}
